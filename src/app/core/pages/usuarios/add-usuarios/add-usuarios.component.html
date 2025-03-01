@@ -1,0 +1,248 @@
+<section>
+    <div class="header" style="background-color: #4F90AC; height: 68px;">
+        <h1 mat-dialog-title style="padding-left: 10px;">
+            <mat-icon *ngIf="acao=='adicao'">add</mat-icon>
+            <mat-icon *ngIf="acao=='edicao'">edit</mat-icon>
+            <mat-icon *ngIf="acao=='visualizar'">visibility</mat-icon>
+            
+            <span style="position: absolute; top: 9px; padding-left: 8px; font-size: 15px;">{{ titulo }}</span>
+        </h1>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-footer">
+        <button class="dialog-btn" mat-raised-button type="button" (click)="onNoClick()" style="margin-right: 5px;"><mat-icon class="tab-icon">cancel</mat-icon>Cancelar</button>
+        <button class="dialog-btn" mat-raised-button color="primary" type="button" (click)="editar()" *ngIf="acao=='edicao'"><mat-icon class="tab-icon">edit</mat-icon>Editar</button>
+        <button class="dialog-btn" mat-raised-button color="primary" type="button" (click)="create()" *ngIf="acao=='adicao'"><mat-icon class="tab-icon">task_alt</mat-icon>Salvar</button>
+    </div>
+    <div mat-dialog-content style="margin: 13px; margin-top: 90px;">
+        <p class="mat-body dialog-message break-line">
+        <div class="row">
+            <div class="col-md-4  mt-2">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Informe o nome do usuário" [value]="usuarioForm.nome"  [(ngModel)]="usuarioForm.nome"
+                            [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput placeholder="Informe o e-mail do usuário" [value]="usuarioForm.email"  [(ngModel)]="usuarioForm.email" [disabled]="disabled || usuario_id">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <mat-label align="end">Papel</mat-label>
+                    <mat-select placeholder="Selecione um papel" [(value)]="usuarioForm.papel"  
+                    [(ngModel)]="usuarioForm.papel" 
+                    [disabled]="papel_disabled || disabled">
+                        <mat-option [value]="papel.role" *ngFor="let papel of papeis">{{ papel.role }}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>CEP</mat-label>
+                        <input matInput placeholder="Informe o CEP" [(ngModel)]="usuarioForm.cep" [value]="usuarioForm.cep" (blur)="consultaCEP(usuarioForm.cep)"
+                            [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Endereço</mat-label>
+                        <input matInput [value]="usuarioForm.logradouro"  [(ngModel)]="usuarioForm.logradouro"  [disabled]="disabled">
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Número</mat-label>
+                        <input matInput [value]="usuarioForm.numero"  [(ngModel)]="usuarioForm.numero"  [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Complemento</mat-label>
+                        <input matInput [value]="usuarioForm.complemento"  [(ngModel)]="usuarioForm.complemento"  [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Bairro</mat-label>
+                        <input matInput [value]="usuarioForm.bairro"  [(ngModel)]="usuarioForm.bairro"  [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Telefone</mat-label>
+                        <input matInput [value]="usuarioForm.telefone"  [(ngModel)]="usuarioForm.telefone"  [disabled]="disabled" [patterns]="customPatterns"  mask="(00)00000-0000">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-floating mb-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Celular</mat-label>
+                        <input matInput [value]="usuarioForm.celular"  [(ngModel)]="usuarioForm.celular"  [disabled]="disabled" [patterns]="customPatterns" mask="(00)00000-0000">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-floating mb-4">
+                    <mat-form-field class="full-width">
+                        <mat-label>Cidade</mat-label>
+                        <input matInput [value]="usuarioForm.cidade"  [(ngModel)]="usuarioForm.cidade"  [readonly]="usuario?.papel != 'Administrador'" [disabled]="disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-floating mb-2">
+                    <mat-form-field class="full-width">
+                        <mat-label>Estado</mat-label>
+                        <input matInput [value]="usuarioForm.uf"  [(ngModel)]="usuarioForm.uf"  [readonly]="(usuario?.papel != 'Administrador')" [disabled]="disabled || papel_disabled">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+  <div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="{{ titulo }}">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" matInput [(ngModel)]="usuarioForm.nome"
+                            [disabled]="disabled" />
+                        <label for="floatingInput">Nome</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" matInput [(ngModel)]="usuarioForm.email"
+                            [disabled]="usuario_id"
+                            />
+                        <label for="floatingInput">E-mail</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <select id="papel" class="form-control" [(ngModel)]="usuarioForm.papel" ng-reflect-model="usuarioForm.papel" [disabled]="usuario?.papel.id != 1 || disabled">
+                            <option value="0">SELECIONE</option>
+                            <option [ngValue]="papel.id" *ngFor="let papel of papeis">
+                                {{ papel.nome.toUpperCase() }}
+                            </option>
+                        </select>
+                        <label for="floatingInput">Papel</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="usuarioForm.cep"
+                            matInput required #cep="ngModel" (blur)="consultaCEP(usuarioForm.cep)"
+                            [patterns]="customPatterns" mask="00.000-000" [disabled]="disabled">
+                        <label for="floatingInput">CEP</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="" id="address" matInput
+                            [(ngModel)]="usuarioForm.logradouro" [disabled]="disabled" />
+                        <label for="floatingInput">Endereço</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="address_number" matInput
+                            [(ngModel)]="usuarioForm.numero" [disabled]="disabled" />
+                        <label for="floatingInput">Número</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="address_complement" matInput
+                            [(ngModel)]="usuarioForm.complemento" [disabled]="disabled" />
+                        <label for="floatingInput">Complemento</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="bairro" matInput [(ngModel)]="usuarioForm.bairro"
+                            [disabled]="disabled" />
+                        <label for="floatingInput">Bairro</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phone" matInput [(ngModel)]="usuarioForm.telefone"
+                            [patterns]="customPatterns" mask="(00) 00000-0000" [disabled]="disabled" />
+                        <label for="floatingInput">Telefone</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="cell_phone" matInput
+                            [(ngModel)]="usuarioForm.celular" [patterns]="customPatterns" mask="(00) 0000-0000"
+                            [disabled]="disabled" />
+                        <label for="floatingInput">Celular</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" id="city_id" matInput [(ngModel)]="usuarioForm.cidade"
+                            [readonly]="usuario?.papel.id != 1"
+                            disabled [disabled]="disabled" />
+                        <label for="floatingInput">Cidade</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="cell_phone" matInput [(ngModel)]="usuarioForm.uf"
+                            [readonly]="usuario?.papel.id != 1"
+                            disabled [disabled]="disabled" />
+                        <label for="floatingInput">Estado</label>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 100%; text-align: right;">
+                <button mat-raised-button color="second" (click)="voltar()">Voltar</button>
+                <button mat-raised-button color="primary" (click)="create()" style="margin-left: 20px;"
+                    *ngIf="(acao == 'adicao')">Salvar</button>
+                <button mat-raised-button color="primary" (click)="editar()" style="margin-left: 20px;"
+                    *ngIf="(acao == 'editar')">Editar</button>
+            </div>
+        </app-card>
+    </div>
+</div>
+-->

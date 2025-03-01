@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+label {
+    color: #262b31 !important;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.area_botao {
+    border-top: 1px solid #EEF2F6 !important;
+    padding-top: 10px;
+}
+
+.break-line {
+    white-space: pre-wrap;
+}
+
+.header {
+    color: #FFFFFF;
+}
+
+.header mat-icon {
+    margin-top: 13px;
+}
+
+.mat-dialog-footer {
+    position: absolute;
+    height: 52px;
+    text-align: right;
+    background: #8F9FAC;
+    padding: 8px;
+    padding-right: 36px;
+    width: 100%;
+}
+
+.form {
+    min-width: 150px;
+    //max-width: 500px;
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+::ng-deep.mat-form-field-disabled .mat-form-field-underline {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 0.42) 33%, #c2c7cc 0) !important;
+    background-size: 1px 100% !important;
+    background-repeat: repeat-x !important;
+}
+
+::ng-deep.mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
+    font-weight: bold;
+    color: #212121 !important;
+}
+
+::ng-deep.mat-mdc-select-disabled .mat-mdc-select-trigger {
+    font-weight: bold;
+    color: #212121 !important;
+}
+
+::ng-deep.mat-mdc-dialog-surface {
+    min-width: max-content;
+}

@@ -1,0 +1,71 @@
+<form [formGroup]="formAuthAntigo" novalidate class="form" action="https://romildaalves.com.br/users/login" id="formAutenticarAuthAntigo" method="POST" style="display:none;">
+    <input type="hidden" name="_method" value="POST"/>
+    <input type="email" id="username" name="username" [formControl]="formControlAuthAntigo" formControlName="email">
+    <input type="password" id="password" name="password" [formControl]="formControlAuthAntigo" formControlName="password">
+</form>
+
+
+<div class="auth-main">
+  <div class="auth-wrapper v3">
+    <div class="auth-form">
+      <div class="card my-5">
+        <div class="card-body" style="background: #EAE6E0; border: 1px solid black;">
+          <a href="#" class="d-flex justify-content-center">
+            <img src="assets/images/{{ logo }}" />
+          </a>
+          <div class="row">
+            <div class="d-flex justify-content-center">
+              <div class="auth-header" *ngIf="!processando">
+                <h2 class="text-secondary mt-5"><b>Bem vindo</b></h2>
+                <p class="fs-4 mt-2">Informe suas credenciais para continuar</p>
+              </div>
+            </div>
+          </div>
+         
+          <div *ngIf="processando">
+            <br><br><br>
+            {{ texto_autenticacao }}
+            <mat-progress-bar mode="indeterminate" class="green-progress"></mat-progress-bar>
+          </div>
+          <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!processando">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="floatingInput" value="" formControlName="email"
+                cdkFocusInitial autofocus />
+              <label for="floatingInput">E-mail</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="password" value="" formControlName="password" />
+              <label for="password">Senha</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <ngx-recaptcha2 #captchaElem  (reset)="handleReset()" (expire)="handleExpire()"
+                (load)="handleLoad()" (success)="handleSuccess($event)" [useGlobalDomain]="false"
+                formControlName="recaptcha">
+              </ngx-recaptcha2>
+            </div>
+
+            <div class="d-flex mt-1 justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                <label class="form-check-label text-muted" for="customCheckc1">Lembrar usuário</label>
+              </div>
+              <h6 class="text-secondary">
+                <a href="javascript:" style="font: 400 1rem / 1.5rem Roboto,sans-serif">Esqueceu a senha?</a>
+              </h6>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-secondary">Entrar</button>
+            </div>
+          </form>
+          <hr *ngIf="!processando"/>
+          <!--
+          <h5 class="d-flex justify-content-center">
+            <a [routerLink]="['/guest/register']">Don't have an account?</a>
+          </h5>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

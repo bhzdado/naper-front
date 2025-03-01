@@ -1,0 +1,16 @@
+
+<div class="row">
+    <div class="col-sm-12">
+      <app-card cardTitle="{{titulo}}">
+        <div style="width: 100%; float: right; text-align: right;">
+          <button mat-button class="btn btn-three" (click)="fechar()"><mat-icon
+            class="tab-icon">disabled_by_default</mat-icon>Fechar</button>
+        </div>
+        <br><br>
+        <hr>
+        <mat-icon class="tab-icon" (click)="refresh_grid()" style="cursor: pointer;">rotate_right</mat-icon>
+        <app-grid [source]="source" [columns]="columns" [loading]="loading" [paging]="paging" [actions]="actions"
+          [getValueCell]="getValueCell"></app-grid>
+      </app-card>
+    </div>
+  </div>

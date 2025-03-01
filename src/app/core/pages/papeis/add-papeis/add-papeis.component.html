@@ -1,0 +1,26 @@
+<section>
+    <div class="header" style="background-color: #4F90AC; height: 68px;">
+        <h1 mat-dialog-title style="padding-left: 10px;">
+            <mat-icon *ngIf="acao=='adicao'">add</mat-icon>
+            <mat-icon *ngIf="acao=='edicao'">edit</mat-icon>
+            <span style="position: absolute; top: 9px; padding-left: 8px; font-size: 15px;">{{ titulo }}</span>
+        </h1>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-footer">
+        <button class="dialog-btn" mat-raised-button type="button" (click)="onNoClick()" style="margin-right: 5px;"><mat-icon class="tab-icon">cancel</mat-icon>Cancelar</button>
+        <button class="dialog-btn" mat-raised-button color="primary" type="button" (click)="editar()" *ngIf="acao=='edicao'"><mat-icon class="tab-icon">edit</mat-icon>Editar</button>
+        <button class="dialog-btn" mat-raised-button color="primary" type="button" (click)="create()" *ngIf="acao=='adicao'"><mat-icon class="tab-icon">task_alt</mat-icon>Salvar</button>
+    </div>
+    <div mat-dialog-content style="margin: 13px; margin-top: 90px;">
+        <p class="mat-body dialog-message break-line">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" matInput [(ngModel)]="papelForm.role"
+                        [disabled]="disabled"  (keydown.enter)="acao=='adicao' ? create() : editar()"/>
+                    <label for="floatingInput">Nome</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

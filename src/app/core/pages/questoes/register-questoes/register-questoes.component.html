@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Cadastrar Questão">
+            <app-breadcrumb></app-breadcrumb>
+            <div style="width: 100%; float: right; text-align: right;">
+                <button mat-button class="btn btn-three" (click)="voltar()"><mat-icon
+                        class="tab-icon">keyboard_return</mat-icon>Voltar</button>
+                <button mat-button class="btn btn-three" (click)="salvar()" *ngIf="!view"><mat-icon
+                        class="tab-icon">task_alt</mat-icon>Salvar</button>
+            </div>
+            <br><br>
+            <hr>
+            <p class="mat-body dialog-message break-line">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label>Categoria</mat-label>
+
+                            <mat-select [(ngModel)]="questaoForm.categoria" [disabled]="view">
+                                <mat-option></mat-option>
+                                @for (group of categorias; track group) {
+                                <mat-optgroup [label]="group.nome" *ngIf="group.parent"
+                                    style="font-weight: bold; font-style: italic; border-bottom: 1px solid black;">
+                                    @for (sub of group.subcategorias; track sub) {
+                                    <mat-option [value]="sub.id"
+                                        style="font-style: normal; background-color: #FFFFFF!important;"><span>{{
+                                            sub.nome }}</span></mat-option>
+                                    }
+                                </mat-optgroup>
+                                <mat-option [value]="group.id" *ngIf="!group.parent"
+                                    style="font-style: normal; background-color: #FFFFFF!important;"><span>{{group.nome
+                                        }}</span></mat-option>
+                                }
+                            </mat-select>
+
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <mat-form-field class="full-width">
+                            <mat-label align="end">Peso</mat-label>
+                            <input matInput type="number" [value]="questaoForm.peso_padrao"
+                                [(ngModel)]="questaoForm.peso_padrao" [disabled]="view">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                        <mat-checkbox class="example-margin" [checked]="1" [disabled]="view"
+                            [(ngModel)]="questaoForm.ativo">Ativo</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-tab-group>
+                        <mat-tab>
+                            <ng-template mat-tab-label class="mat-tab-label">
+                                <mat-icon class="tab-icon">cast_for_education</mat-icon>
+                                Questão
+                            </ng-template>
+                            <div class="form-floating mb-3 conteudo_tab">
+                                @if(!view){
+                                <ckeditor [editor]="Editor" [config]="defaultConfig" [(ngModel)]="questaoForm.enunciado"
+                                    (ready)="onReady($event)" (change)="onChange($event)"></ckeditor>
+                                } @else {
+                                <span [innerHTML]="questaoForm.enunciado"></span>
+                                }
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab [disabled]='!isTabAlternativasActive()'>
+                            <ng-template mat-tab-label>
+                                <mat-icon class="tab-icon">list_alt</mat-icon>
+                                Alternativas
+                            </ng-template>
+                            <div class="form-floating mb-3 conteudo_tab">
+                                <button mat-fab extended [disabled]="view"
+                                    (click)="adicionarAlternativa()"><mat-icon>playlist_add</mat-icon>Adicionar
+                                    Alternativa</button>
+                            </div>
+                            <div class="form-floating mb-3 conteudo_tab" style="border: 1px solid #F5F5F5;">
+                                <mat-radio-group [(ngModel)]="questaoForm.correta">
+                                    <div *ngFor="let item of alternativas; let i = index; even as isEven"
+                                        style="padding:10px; margin-top:2px; width: 100%;"
+                                        [ngStyle]="{ background: isEven ? '#F5F5F5' : 'white' }">
+                                        <mat-radio-button value="{{i}}" [disabled]="view"
+                                            [checked]="alternativaCorreta == i"
+                                            name="alternativa_{{i}}"></mat-radio-button>
+                                        <input id="yes" type="radio" class="custom-control-input" value="yes"
+                                            name="reportInjury" formControlName="reportInjury" checked="true"
+                                            style="display:none;">
+                                        <span>
+                                            <span style="width: 25px; float: right; cursor: pointer;"
+                                                (click)="removeAlternativa(i)" *ngIf="!view">
+                                                <mat-icon class="tab-icon">delete</mat-icon>
+                                            </span></span>
+                                        <span [innerHTML]="item" style="padding-left: 15px;"></span>
+                                    </div>
+                                </mat-radio-group>
+                            </div>
+                        </mat-tab>
+                        <!--
+                        <mat-tab [disabled]='!visualizarQuestaoAtivo()'>
+                            <ng-template mat-tab-label>
+                                <mat-icon class="tab-icon">task</mat-icon>
+                                Visualizar Questão
+                            </ng-template>
+                            <div class="form-floating mb-3 conteudo_tab" [innerHTML]="getQuestao()">
+
+
+                            </div>
+                        </mat-tab>
+-->
+                    </mat-tab-group>
+                </div>
+            </div>
+
+        </app-card>
+    </div>
+</div>
