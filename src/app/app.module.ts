@@ -38,6 +38,8 @@ import { CountdownModule } from 'ngx-countdown';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AreaAlunoLayoutComponent } from './area-aluno/layout/area-aluno-layout/area-aluno-layout.component';
 import { RouterModule } from '@angular/router';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 const materialModules = [
   MatButtonModule,
@@ -80,6 +82,7 @@ const materialModules = [
     materialModules,
     NgxMaskDirective, NgxMaskPipe,
     CountdownModule, 
+    CarouselModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',

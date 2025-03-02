@@ -1,23 +1,10 @@
-@import "../../../../assets/site-layout/css/bootstrap-grid.min.css";
-@import "../../../../assets/site-layout/css/style.css";
-@import "../../../../assets/site-layout/css/responsive.css";
-@import "../../../../assets/site-layout/css/colors1.css";
-@import "../../../../assets/site-layout/css/custom.css";
-@import "../../../../assets/site-layout/css/animate.css";
+@import url("https://fonts.googleapis.com");
+@import url("hthttps://fonts.gstatic.com");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
-/*
-@import 'scss/themes/components/components';
-
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<!-- Site css -->
-<link rel="stylesheet" href="css/style.css" />
-<!-- responsive css -->
-<link rel="stylesheet" href="css/responsive.css" />
-<!-- colors css -->
-<link rel="stylesheet" href="css/colors1.css" />
-<!-- custom css -->
-<link rel="stylesheet" href="css/custom.css" />
-<!-- wow Animation css -->
-<link rel="stylesheet" href="css/animate.css" />
-*/
+@import "../../../../assets/site-layout/assets/vendor/bootstrap/css/bootstrap.min.css";
+@import "../../../../assets/site-layout/assets/vendor/bootstrap-icons/bootstrap-icons.css";
+@import "../../../../assets/site-layout/assets/vendor/aos/aos.css";
+@import "../../../../assets/site-layout/assets/vendor/glightbox/css/glightbox.min.css";
+@import "../../../../assets/site-layout/assets/vendor/swiper/swiper-bundle.min.css";
+@import "../../../../assets/site-layout/assets/css/main.css";

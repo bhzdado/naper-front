@@ -44,41 +44,40 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    let scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/js/jquery.min.js");
+
+  }
+
+  ngAfterViewInit() {
+
+    let scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/bootstrap/js/bootstrap.bundle.min.js");
     scriptElement.onload = () => {
-      scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/js/bootstrap.js");
+      scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/php-email-form/validate.js");
       scriptElement.onload = () => {
-        scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/js/menumaker.js");
+        scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/site-layout/assets/vendor/aos/aos.js");
         scriptElement.onload = () => {
-          scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/js/wow.js");
+          scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/glightbox/js/glightbox.min.js");
           scriptElement.onload = () => {
-            scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/js/custom.js");
+            scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/waypoints/noframework.waypoints.js");
             scriptElement.onload = () => {
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/jquery.themepunch.tools.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/jquery.themepunch.revolution.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.actions.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.carousel.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.kenburn.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.layeranimation.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.migration.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.navigation.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.parallax.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.slideanims.min.js");
-              this.loadJsScript(this.renderer, "/assets/site-layout/revolution/js/revolution.extension.video.min.js");
+              scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/purecounter/purecounter_vanilla.js");
+              scriptElement.onload = () => {
+                scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/swiper/swiper-bundle.min.js");
+                scriptElement.onload = () => {
+                  scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js");
+                  scriptElement.onload = () => {
+                    scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/vendor/isotope-layout/isotope.pkgd.min.js");
+                    scriptElement.onload = () => {
+                      scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/main.js");
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
     }
 
-
-
-
-
-
-  }
-
-  ngAfterViewInit() {
     this.preloader = false;
   }
 

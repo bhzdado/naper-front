@@ -74,6 +74,7 @@
     "@rahou0/ckeditor5-video": "^38.1.2",
     "angular-countdown": "^1.2.1",
     "angular-ng-autocomplete": "^2.0.12",
+    "angular-responsive-carousel": "^2.1.2",
     "apexcharts": "^3.49.0",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
@@ -91,6 +92,7 @@
     "ngx-countdown-clock-workspace": "^1.0.0",
     "ngx-mask": "^16.4.2",
     "ngx-material-time-select": "^0.2.1",
+    "ngx-owl-carousel-o": "^19.0.0",
     "ngx-scrollbar": "^13.0.3",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^19.0.0",
@@ -101,7 +103,7 @@
     "rxjs": "~7.8.1",
     "sismoura-material": "^1.0.0",
     "style-loader": "^2.0.0",
-    "tslib": "^2.6.2",
+    "tslib": "^2.8.1",
     "zone.js": "~0.14.4"
   },
   "devDependencies": {

@@ -6,6 +6,7 @@ import { LogoutComponent } from './core/pages/authentication/logout/logout.compo
 import { AreaAlunoLayoutComponent } from './area-aluno/layout/area-aluno-layout/area-aluno-layout.component';
 import { CommonModule } from '@angular/common';
 import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 const routes: Routes = [
   {
