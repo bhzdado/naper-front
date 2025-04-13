@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angu
 import { SpinnerComponent } from 'src/app/theme/shared/components/spinner/spinner.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/dialog-modal.component';
-import { NgxCaptchaModule } from 'ngx-captcha'
+import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha'
 import { environment } from 'src/environments/environment';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -42,6 +42,12 @@ export default class LoginComponent implements OnInit {
   processando: boolean = false;
   public logo: string = environment.logo;
 
+  @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
+  kepceHidden: boolean = true;
+  siteKey: any = environment.recaptcha.siteKey;
+  recaptchaError: boolean = false;
+  recaptchaVerificado: boolean = false;
+
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
@@ -55,83 +61,111 @@ export default class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: [],
       password: [],
-      recaptcha: new FormControl("", Validators.required)
+      recaptcha: ['', Validators.required]
     });
   }
 
   ngOnInit() {
     this.formAuthAntigo = this.fb.group({
       email: new FormControl(''),
-      password: new FormControl('')
+      password: new FormControl(''),
     });
+
+    this.kepceHidden = false;
+    this.loginForm.get('recaptcha').setValidators(Validators.required);
   }
 
-  handleReset() { }
+  handleReset() {
+    this.recaptchaVerificado = false;
+  }
 
-  handleExpire() { }
+  handleError() {
+    this.recaptchaVerificado = false;
+  }
 
   handleLoad() { }
 
-  handleSuccess($event) { }
+  handleSuccess($event) {
+    this.recaptchaVerificado = true;
+  }
 
   onSubmit() {
     this.processando = true;
-    this.authService.signin(this.loginForm.value).subscribe(
-      (result) => {
-        localStorage.removeItem('usuario');
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('api_token');
+    this.recaptchaError = false;
 
-        localStorage.setItem('usuario', btoa(JSON.stringify(result.user)));
-        this.responseHandler(result);
+    if (!this.recaptchaVerificado) {
+      this.recaptchaError = true;
+      this.processando = false;
 
-        this.texto_autenticacao = "Credenciais validas.";
-      },
-      (error) => {
-        this.processando = false;
-        this.loginForm.reset();
-      },
-      () => {
-        this.authState.setAuthState(true);
+      this.kepceHidden = false;
+      this.loginForm.get('recaptcha').setValidators(Validators.required);
+      this.captchaElem.resetCaptcha();
 
-        this.formAuthAntigo.get('email').setValue(this.loginForm.value.email);
-        this.formAuthAntigo.get('password').setValue(this.loginForm.value.password);
+      return;
+    } else {
+      this.recaptchaVerificado = false;
+      this.authService.signin(this.loginForm.value).subscribe(
+        (result) => {
+          localStorage.removeItem('usuario');
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('api_token');
 
-        this.loginForm.reset();
+          localStorage.setItem('usuario', btoa(JSON.stringify(result.user)));
+          this.responseHandler(result);
 
-        this.texto_autenticacao = "Buscando suas permissões...";
+          this.texto_autenticacao = "Credenciais validas.";
+        },
+        (error) => {
+          this.processando = false;
+          this.kepceHidden = false;
+          this.loginForm.get('recaptcha').setValidators(Validators.required);
+          this.captchaElem.resetCaptcha();
+          this.loginForm.value.recaptcha = "";
+          this.recaptchaVerificado = false;
+          //this.loginForm.reset();
+        },
+        () => {
+          this.authState.setAuthState(true);
 
-        this.authService.loadAclUser(this.authService.getUser()?.id).subscribe(
-          (resultAcl) => {
-            if (resultAcl.status == 1) {
-              let acl = {
-                'role': resultAcl.dados.roles,
-                'permissions': resultAcl.dados.permissions
+          this.formAuthAntigo.get('email').setValue(this.loginForm.value.email);
+          this.formAuthAntigo.get('password').setValue(this.loginForm.value.password);
+
+          //this.loginForm.reset();
+
+          this.texto_autenticacao = "Buscando suas permissões...";
+
+          this.authService.loadAclUser(this.authService.getUser()?.id).subscribe(
+            (resultAcl) => {
+              if (resultAcl.status == 1) {
+                let acl = {
+                  'role': resultAcl.dados.roles,
+                  'permissions': resultAcl.dados.permissions
+                }
+
+                localStorage.setItem('usuarioAcl', btoa(JSON.stringify(acl)));
               }
 
-              localStorage.setItem('usuarioAcl', btoa(JSON.stringify(acl)));
-            }
+              const settimeoutErro = setTimeout(() => {
+                this.texto_autenticacao = "Seja bem-vindo...";
+                (<HTMLFormElement>document.getElementById('formAutenticarAuthAntigo')).submit();
 
-            const settimeoutErro = setTimeout(() => {
-              this.texto_autenticacao = "Seja bem-vindo...";
-              (<HTMLFormElement>document.getElementById('formAutenticarAuthAntigo')).submit();
+                // let rota = localStorage.getItem('rota');
+                // if (rota) {
+                //   try {
+                //     this.router.navigate([rota]);
+                //     localStorage.removeItem('rota');
+                //   } catch (e) {
+                //     this.router.navigate(["/"]);
+                //   }
+                // } else {
+                //   this.router.navigate(["/"]);
+                // }
+              }, 1000);
+            });
 
-              // let rota = localStorage.getItem('rota');
-              // if (rota) {
-              //   try {
-              //     this.router.navigate([rota]);
-              //     localStorage.removeItem('rota');
-              //   } catch (e) {
-              //     this.router.navigate(["/"]);
-              //   }
-              // } else {
-              //   this.router.navigate(["/"]);
-              // }
-            }, 1000);
-          });
-
-      }
-    );
+        }
+      );
+    }
   }
   // Handle response
   responseHandler(data: any) {

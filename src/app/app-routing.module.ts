@@ -7,6 +7,8 @@ import { AreaAlunoLayoutComponent } from './area-aluno/layout/area-aluno-layout/
 import { CommonModule } from '@angular/common';
 import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { RelImportacaoNFComponent } from './site/relatorio/rel-importacao-nf/rel-importacao-nf.component';
+import { HomeComponent } from './site/pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -160,7 +162,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./area-aluno/pages/home/home.component'),
+        loadComponent: () => HomeComponent,
         canActivate: [authGuard],
       },
       {
@@ -169,8 +171,12 @@ const routes: Routes = [
       },
     ]
   },
-
-];
+  {
+    path: 'relatorio/rel-importacao-nf',
+    component: RelImportacaoNFComponent,
+    canActivate: [authGuard],
+  },
+];  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), CommonModule,

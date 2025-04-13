@@ -4050,6 +4050,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/grecaptcha@^3.0.7":
+  version "3.0.9"
+  resolved "https://registry.npmjs.org/@types/grecaptcha/-/grecaptcha-3.0.9.tgz"
+  integrity sha512-fFxMtjAvXXMYTzDFK5NpcVB7WHnrHVLl00QzEGpuFxSAC789io6M+vjcn+g5FTEamIJtJr/IHkCDsqvJxeWDyw==
+
 "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.5"
   resolved "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.5.tgz"
@@ -7981,6 +7986,14 @@ ng-drag-drop@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/ng-drag-drop/-/ng-drag-drop-5.0.0.tgz"
   integrity sha512-r2M2QsFFRpbTbnysVJdhHStiggSHVtZ63R6gQ12Gtbja61fmveyOmPzdGNwkmszRc560l+Ij4X9VtFK4IsPuyw==
+
+ng-recaptcha@^13.2.1:
+  version "13.2.1"
+  resolved "https://registry.npmjs.org/ng-recaptcha/-/ng-recaptcha-13.2.1.tgz"
+  integrity sha512-aBOoFla9t6AfT9t5paykoXomCDKreBKouB16VUFxSZwn1RCfDsdcaTmSNJKYLFz5j0Cq/V+szY9f3mHLgzRw5Q==
+  dependencies:
+    "@types/grecaptcha" "^3.0.7"
+    tslib "^2.2.0"
 
 ngx-captcha@^13.0.0:
   version "13.0.0"

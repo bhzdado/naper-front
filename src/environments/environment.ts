@@ -9,7 +9,10 @@ export const environment = {
   production: false,
   logo: "logo_naper.png",
   urlApi: 'http://localhost:8000/v1/',
-  title: 'Painel Administrativo'
+  title: 'Painel Administrativo',
+  recaptcha: {
+    siteKey: '6LeIAv0qAAAAAF_kArvXsXMTVHk5Vnhhij17q11h',
+  }
 };
 
 /*

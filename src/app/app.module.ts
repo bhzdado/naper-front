@@ -40,6 +40,8 @@ import { AreaAlunoLayoutComponent } from './area-aluno/layout/area-aluno-layout/
 import { RouterModule } from '@angular/router';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
+import { SpinnerComponent } from './site/spinner/spinner.component';
 
 const materialModules = [
   MatButtonModule,
@@ -58,6 +60,8 @@ const materialModules = [
     AppComponent,
     AdminComponent,
     AreaAlunoLayoutComponent,
+    SiteLayoutComponent,
+    SpinnerComponent,
     NavBarComponent,
     NavLeftComponent,
     NavRightComponent,

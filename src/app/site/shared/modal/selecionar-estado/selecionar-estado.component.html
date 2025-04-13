@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Selecione o estado</h2>
+<mat-divider></mat-divider>
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <mat-dialog-content>
+        @for (estado of estados; track estado) {
+        <a (click)="selecionarEstado(estado.viewValue)" target="_blank" class="btn-section">{{ estado.value
+            }}</a>
+        }
+
+    </mat-dialog-content>
+    <!--
+    <mat-dialog-content>
+        <mat-form-field style="width: 100%;">
+            <mat-label>Selecione o Estado</mat-label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                [(ngModel)]="estados">
+                @for (estado of estados; track estado) {
+                <mat-radio-button class="example-radio-button"
+                    [value]="estado.viewValue">{{estado.value}}</mat-radio-button>
+                }
+            </mat-radio-group>
+        </mat-form-field>
+    </mat-dialog-content>
+    -->
+</form>
