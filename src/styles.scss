@@ -51,3 +51,47 @@ body {
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
     background: #fff url("https://www.dropbox.com/s/0czxq7wr862we98/texture.jpg?raw=1") repeat 0 0;
 }
+
+.input-error {
+	padding: 5px; 
+	font-size: 14px; 
+	color: firebrick;
+}
+
+input[type="text"],
+select {
+    width: 92%;
+    height: 35px;
+    padding: 0 20px;
+    border: 1px solid #999;
+    position: relative;
+    border-radius: 10px;
+}
+
+.default-btn {
+    padding: 8px 12px;
+    float: left;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.5s;
+    border-radius: 10px;
+    background: #2A3A55;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button {
+    margin-right: 8px;
+}
+
+.mat-mdc-dialog-content {
+    display: block;
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin: 0;
+    overflow: auto;
+    max-height: 65vh;
+    min-height: 15vh;
+}

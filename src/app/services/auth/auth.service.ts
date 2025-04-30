@@ -38,6 +38,10 @@ export class AuthService {
     return this.http.get(environment.urlApi + 'auth/me');
   }
 
+  enviaEmailRecuperarSenha(email: any): Observable<any> {
+    return this.http.post<any>(environment.urlApi + 'auth/enviaEmailRecuperarSenha', email);
+  }
+
   getUser(): any {
     return JSON.parse(atob(localStorage.getItem('usuario') ?? ""));
   }

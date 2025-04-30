@@ -21,6 +21,29 @@ re-captcha.is-invalid>div {
 	border-radius: 0.2rem;
 }
 
+
+
+.wrap-login100 {
+    width: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 4px 55px 37px 55px;
+    background: #289EBB;
+    background: linear-gradient(top, #7579ff, #b224ef);
+}
+
+.login100-form-logo {
+    font-size: 60px;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 128px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
 /*
 
 <!--===============================================================================================-->	
@@ -47,3 +70,4 @@ re-captcha.is-invalid>div {
 <!--=====================
 
     */
+

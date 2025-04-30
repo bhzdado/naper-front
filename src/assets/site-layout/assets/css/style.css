@@ -534,6 +534,7 @@ body {
 
 
 
+
 @media screen and (max-width: 400px) {
     .menu-principal {
         height: 134px;
@@ -543,4 +544,10 @@ body {
 .dropdown[_ngcontent-ng-c1688887997] .dropdown-menu[_ngcontent-ng-c1688887997] a[_ngcontent-ng-c1688887997]:hover {
     background: #39A6C0;
     color: #FFF;
+}
+
+.input-error {
+	padding: 5px; 
+	font-size: 14px; 
+	color: firebrick;
 }

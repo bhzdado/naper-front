@@ -8,12 +8,14 @@ import {
   MatDialog,
   MatDialogActions,
   MatDialogClose,
+  MatDialogContainer,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,6 +37,8 @@ interface estado {
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    MatDialogContainer, 
+    MatIconModule,
     MatDialogClose, ReactiveFormsModule, CommonModule, MatDividerModule, MatCardModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './selecionar-estado.component.html',

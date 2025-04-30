@@ -1,0 +1,23 @@
+<div mat-dialog-title class="dialog-title">
+    <h4 mat-dialog-title style="font-size: 18px!important;">Recupere sua senha</h4>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="recuperarSenha()">
+    <mat-dialog-content>
+        Digite no campo abaixo seu e-mail para redefinir sua senha.
+
+        <div class="wrap-input100 validate-input" data-validate="Entre com seu E-mail" style="margin-top: 15px;">
+            <input class="input100" type="text" name="email" placeholder="E-mail" value="" formControlName="email"
+                #email matNativeControl>
+            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <mat-error class="input-error" *ngIf="(form.get('email').invalid && (form.get('email').dirty || form.get('email').touched))">Informe seu e-mail</mat-error>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="default-btn" type="submit">Enviar</button>
+        <button class="default-btn" (click)="cancelar()">Cancelar</button>
+    </mat-dialog-actions>
+</form>

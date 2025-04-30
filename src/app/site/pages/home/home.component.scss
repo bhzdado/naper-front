@@ -334,15 +334,16 @@
 .topbar-fundo-transparente {
   background-color: #FFFFFF;
   background-repeat: repeat;
+  border-bottom: 1px solid #2A3A54;
   opacity: 0.7;
-  height: 320px;
+  height: 296px;
   z-index: 100;
   left: 0px;
 }
 
 .topbar-fundo-texto {
   height: 193px;
-  top: -275px;
+  top: -251px;
   z-index: 100;
   text-align: center;
   position: relative;
@@ -570,4 +571,14 @@ table th {
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width: 1412px!important;
+  }
+}
+
+.bg-light {
+  background: #FFFFFF !important;
 }

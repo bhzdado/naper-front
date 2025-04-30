@@ -17,17 +17,21 @@ export class VerificaAcessoComponent {
   constructor(private loadingService: LoaderService, private router: Router) {
     this.loadingService.setLoading(true);
 
-    this.usuario = JSON.parse(atob(localStorage.getItem('usuario')));
+    if (localStorage.getItem('usuario')) {
+      this.usuario = JSON.parse(atob(localStorage.getItem('usuario')));
+    }
 
     if (this.tokenService.isLoggedIn()) {
-      window.location.href = "http://romildaalves.com.br";
+      this.router.navigate(["/site"]);
+      //window.location.href = "http://romildaalves.com.br";
       // if(this.usuario.papel == 'Aluno'){
       //   this.router.navigate(["/areaAluno"]);
       // } else {
       //   this.router.navigate(["/menu"]);
       // }
     } else {
-      router.navigate(['/auth/login']);
+      this.router.navigate(["/site"]);
+      //router.navigate(['/auth/login']);
     }
   }
 }

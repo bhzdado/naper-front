@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,6 +16,7 @@ import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/d
 import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha'
 import { environment } from 'src/environments/environment';
 import { LoaderService } from 'src/app/services/loader.service';
+import { EsqueciSenhaComponent } from 'src/app/site/shared/modal/esqueci-senha/esqueci-senha.component';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ import { LoaderService } from 'src/app/services/loader.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export default class LoginComponent implements OnInit {
+export default class LoginComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
 
   public texto_autenticacao = "Validando informações...";
@@ -42,11 +43,15 @@ export default class LoginComponent implements OnInit {
   processando: boolean = false;
   public logo: string = environment.logo;
 
+  @ViewChild('email') inputEmail!: ElementRef;
+  @ViewChild('password') inputPassword!: ElementRef;
+
   @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
   kepceHidden: boolean = true;
   siteKey: any = environment.recaptcha.siteKey;
   recaptchaError: boolean = false;
   recaptchaVerificado: boolean = false;
+  submited: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -58,21 +63,40 @@ export default class LoginComponent implements OnInit {
     private loadingService: LoaderService,
   ) {
     this.loadingService.setLoading(false);
+
+    let fiscal3_usuario_email = localStorage.getItem('fiscal3.usuario.email');
+    let user_email = '';
+
+    if (fiscal3_usuario_email) {
+      user_email = atob(fiscal3_usuario_email);
+    }
+
     this.loginForm = this.fb.group({
-      email: [],
-      password: [],
-      recaptcha: ['', Validators.required]
+      email: [user_email, Validators.required],
+      password: ['', Validators.required],
+      recaptcha: ['', Validators.required],
+      remember: [user_email ? true : false]
     });
+  }
+
+  ngAfterViewInit() {
+    let fiscal3_usuario_email = localStorage.getItem('fiscal3.usuario.email');
+    this.inputEmail?.nativeElement.focus();
+    if (fiscal3_usuario_email) {
+      this.inputPassword?.nativeElement.focus();
+    }
   }
 
   ngOnInit() {
     this.formAuthAntigo = this.fb.group({
       email: new FormControl(''),
       password: new FormControl(''),
+      remember: new FormControl(''),
     });
 
     this.kepceHidden = false;
     this.loginForm.get('recaptcha').setValidators(Validators.required);
+
   }
 
   handleReset() {
@@ -89,7 +113,17 @@ export default class LoginComponent implements OnInit {
     this.recaptchaVerificado = true;
   }
 
+  esqueciSenha() {
+    let dialogRef = this.dialog.open(EsqueciSenhaComponent, {
+      width: '35vw',
+      maxWidth: '55vw',
+      height: '25vw',
+    });
+  }
+
   onSubmit() {
+    this.submited = true;
+
     this.processando = true;
     this.recaptchaError = false;
 
@@ -104,6 +138,7 @@ export default class LoginComponent implements OnInit {
       return;
     } else {
       this.recaptchaVerificado = false;
+
       this.authService.signin(this.loginForm.value).subscribe(
         (result) => {
           localStorage.removeItem('usuario');
@@ -114,6 +149,10 @@ export default class LoginComponent implements OnInit {
           this.responseHandler(result);
 
           this.texto_autenticacao = "Credenciais validas.";
+
+          if (this.loginForm.value.remember) {
+            localStorage.setItem('fiscal3.usuario.email', btoa(result.user.email));
+          }
         },
         (error) => {
           this.processando = false;

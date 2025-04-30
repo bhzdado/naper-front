@@ -28,7 +28,7 @@ export class Interceptor implements HttpInterceptor {
     ) { }
 
     getCabecalho(request: HttpRequest<any>) {
-        if (request.url.indexOf('viacep') < 0 && request.url.indexOf('auth/login') < 0) {
+        if (request.url.indexOf('viacep') < 0 && request.url.indexOf('auth/login') < 0  && request.url.indexOf('password') < 0) {
             request = request.clone({
                 setHeaders: {
                     Authorization: 'Bearer ' + localStorage.getItem('access_token'),
@@ -69,7 +69,7 @@ export class Interceptor implements HttpInterceptor {
                 retry(0),
                 map((event: HttpEvent<any>) => {
                     if (event instanceof HttpResponse) {
-
+console.log(event);
                     }
                     return event;
                 }),

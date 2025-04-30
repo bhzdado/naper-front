@@ -104,7 +104,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             //this.router.navigate(["erro-servidor"]);
 
-            const error = err.error?.message || err.statusText;
+            const error = err.error?.message || err?.statusText;
             return throwError(() => error);
         }))
     }

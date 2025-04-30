@@ -3,7 +3,10 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: true,
-  urlApi: 'https://api.rnldo.com.br/v1/',
-  logo: "logo_cdc.webp",
-  title: 'Painel Administrativo'
+  logo: "logo_naper.png",
+  urlApi: 'https://api.teste.com.br/v1/',
+  title: 'Painel Administrativo',
+  recaptcha: {
+    siteKey: '6LeIAv0qAAAAAF_kArvXsXMTVHk5Vnhhij17q11h',
+  }
 };
