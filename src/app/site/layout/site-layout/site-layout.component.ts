@@ -1,40 +1,14 @@
 import { AsyncPipe, CommonModule, DOCUMENT, NgFor } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Inject, inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { SharedModule } from 'primeng/api';
-import { AngularMaterialModule } from 'src/app/angular-material.module';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ProvaLiberada } from 'src/app/core/pages/provas/prova-liberada';
-import { AreaAlunoService } from 'src/app/core/pages/provas/area-aluno.service';
-import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/dialog-modal.component';
-import { MatDialog } from '@angular/material/dialog';
-import Utils from 'src/app/shared/utils';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
-import { MatRadioChange } from '@angular/material/radio';
-import { SafeHtmlPipe } from 'src/app/shared/pipes/SafeHtml.pipe';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import * as $ from 'jquery';
 import { LoaderService } from '../../services/loader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MobileSubmenuComponent } from '../mobile-submenu/mobile-submenu.component';
 
 @Component({
   selector: 'app-site-layout',
-  //standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './site-layout.component.html',
   styleUrl: './site-layout.component.scss',
-  // providers: [{ provide: MatStepperIntl }],
-  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   animations: [
     trigger('hamburguerX', [
       /*

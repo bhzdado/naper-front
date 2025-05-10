@@ -4,7 +4,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MobileSubmenuComponent } from '../../layout/mobile-submenu/mobile-submenu.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { SelecionarEstadoComponent } from '../../shared/modal/selecionar-estado/selecionar-estado.component';
@@ -20,7 +19,7 @@ interface Imposto {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTabsModule, MobileSubmenuComponent, MatListModule, MatDividerModule],
+  imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTabsModule, MatListModule, MatDividerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

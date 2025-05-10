@@ -141,6 +141,22 @@ const routes: Routes = [
         loadComponent: () => import('./core/default/default.component').then((c) => c.DefaultComponent),
         //canActivate: [authGuard]
       },
+      {
+        path: 'menus',
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./core/pages/menus/all-menus/all-menus.component'),
+            canActivate: [authGuard],
+          },
+          {
+            path: 'configurar',
+            loadComponent: () => import('./core/pages/menus/configurar-menu/configurar-menu.component'),
+            canActivate: [authGuard],
+          },
+        ]
+      },
+
     ]
   },
   ////AREA ALUNO

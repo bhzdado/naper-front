@@ -17,12 +17,12 @@ export class VerificaAcessoComponent {
   constructor(private loadingService: LoaderService, private router: Router) {
     this.loadingService.setLoading(true);
 
-    if (localStorage.getItem('usuario')) {
-      this.usuario = JSON.parse(atob(localStorage.getItem('usuario')));
-    }
-
     if (this.tokenService.isLoggedIn()) {
-      this.router.navigate(["/site"]);
+      if (localStorage.getItem('usuario')) {
+        this.usuario = JSON.parse(atob(localStorage.getItem('usuario')));
+      }
+  
+      this.router.navigate(["/admin/menus/configurar"]);
       //window.location.href = "http://romildaalves.com.br";
       // if(this.usuario.papel == 'Aluno'){
       //   this.router.navigate(["/areaAluno"]);
@@ -30,8 +30,8 @@ export class VerificaAcessoComponent {
       //   this.router.navigate(["/menu"]);
       // }
     } else {
-      this.router.navigate(["/site"]);
-      //router.navigate(['/auth/login']);
+      //this.router.navigate(["/admin/menus"]);
+      router.navigate(['/auth/login']);
     }
   }
 }

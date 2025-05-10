@@ -42,6 +42,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
 import { SpinnerComponent } from './site/spinner/spinner.component';
+import { MenuPrincipalComponent } from './site/layout/menu/menu-principal/menu-principal.component';
 
 const materialModules = [
   MatButtonModule,
@@ -72,7 +73,8 @@ const materialModules = [
     NavItemComponent,
     NavCollapseComponent,
     ConfigurationComponent,
-    DialogModalComponent
+    DialogModalComponent,
+    MenuPrincipalComponent
   ],
   imports: [
     CommonModule,  

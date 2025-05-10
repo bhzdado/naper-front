@@ -3,7 +3,7 @@ import packageInfo from '../../package.json';
 export const environment = {
   appVersion: packageInfo.version,
   production: false,
-  logo: "logo_naper.png",
+  logo: "logo_transparente.png",
   urlApi: 'http://localhost:8000/v1/',
   title: 'Painel Administrativo',
   recaptcha: {

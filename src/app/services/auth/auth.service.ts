@@ -43,6 +43,9 @@ export class AuthService {
   }
 
   getUser(): any {
+    if(!localStorage.getItem('usuario')){
+      return null;
+    }
     return JSON.parse(atob(localStorage.getItem('usuario') ?? ""));
   }
 
