@@ -5,6 +5,7 @@ export const environment = {
   production: false,
   logo: "logo_transparente.png",
   urlApi: 'http://localhost:8000/v1/',
+  urlSite: 'http://localhost:4200/site/',
   title: 'Painel Administrativo',
   recaptcha: {
     siteKey: '6LeIAv0qAAAAAF_kArvXsXMTVHk5Vnhhij17q11h',

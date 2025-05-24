@@ -31,8 +31,8 @@ export class Interceptor implements HttpInterceptor {
         if (request.url.indexOf('viacep') < 0 && request.url.indexOf('auth/login') < 0  && request.url.indexOf('password') < 0) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-                    API_TOKEN: localStorage.getItem('api_token'),
+                    Authorization: 'Bearer ' + (localStorage.getItem('access_token')??''),
+                    API_TOKEN: localStorage.getItem('api_token')??'',
                     "Cache-Control": "no-cache",
                     Pragma: "no-cache",
                     Accept: "application/json",
@@ -69,7 +69,7 @@ export class Interceptor implements HttpInterceptor {
                 retry(0),
                 map((event: HttpEvent<any>) => {
                     if (event instanceof HttpResponse) {
-console.log(event);
+
                     }
                     return event;
                 }),

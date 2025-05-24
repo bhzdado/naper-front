@@ -18,7 +18,7 @@ export class CategoriaService {
   public dataResponse: any = null;
 
   constructor(private httpClient: HttpClient, private dialog: MatDialog, private toastr: ToastrService, private loadingService: LoaderService,
-    private respose: ResponseService
+    private response: ResponseService
   ) {
 
   }
@@ -34,11 +34,11 @@ export class CategoriaService {
           if (typeof callback === 'function') {
             callback(response);
           }
-          //this.respose.treatResponse(response, "Categoria criada com sucesso.");
+          //this.response.treatResponse(response, "Categoria criada com sucesso.");
         },
         (error) => {
           
-          this.respose.treatResponseError(error, callback);
+          this.response.treatResponseError(error, callback);
           return false;
         });
     } else {
@@ -49,7 +49,7 @@ export class CategoriaService {
           }
         },
         (error) => {
-          this.respose.treatResponseError(error, callback);
+          this.response.treatResponseError(error, callback);
           return false;
         });
     }
@@ -59,10 +59,10 @@ export class CategoriaService {
   createCategory(payload: Categoria) {
     return this.httpClient.post<Categoria>(environment.urlApi + 'categorias', payload).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Categoria criada com sucesso.");
+        this.response.treatResponse(response, "Categoria criada com sucesso.");
       },
       (error) => {
-        this.respose.treatResponseError(error);
+        this.response.treatResponseError(error);
         return false;
       });
   }
@@ -70,10 +70,10 @@ export class CategoriaService {
   createSubCategory(categoria_id: any, payload: Subcategoria) {
     return this.httpClient.post<Subcategoria>(environment.urlApi + 'subcategorias/' + categoria_id, payload).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Subcategoria criada com sucesso.");
+        this.response.treatResponse(response, "Subcategoria criada com sucesso.");
       },
       (error) => {
-        this.respose.treatResponseError(error);
+        this.response.treatResponseError(error);
         return false;
       });
   }
@@ -81,11 +81,11 @@ export class CategoriaService {
   updateCategory(categoria_id: number, payload: Categoria) {
     return this.httpClient.put<Categoria>(environment.urlApi + 'categorias/' + categoria_id, payload).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Categoria alterada com sucesso.");
+        this.response.treatResponse(response, "Categoria alterada com sucesso.");
         return true;
       },
       (error) => {
-        this.respose.treatResponseError(error);
+        this.response.treatResponseError(error);
         return false;
       });
   }
@@ -93,13 +93,13 @@ export class CategoriaService {
   updateSubcategory(subcategoria_id: number, payload: Subcategoria, callback: Function = null) {
     return this.httpClient.put<Subcategoria>(environment.urlApi + 'subcategorias/' + subcategoria_id, payload).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Subcategoria alterada com sucesso.");
+        this.response.treatResponse(response, "Subcategoria alterada com sucesso.");
         if (typeof callback === 'function') {
           callback(response);
         }
       },
       (error) => {
-        this.respose.treatResponseError(error, callback);
+        this.response.treatResponseError(error, callback);
         return false;
       });
   }
@@ -107,13 +107,13 @@ export class CategoriaService {
   changeCategory(subcategoria_id: number, payload: Subcategoria, callback: Function = null) {
     return this.httpClient.put<Subcategoria>(environment.urlApi + 'subcategorias/change/' + subcategoria_id, payload).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Subcategoria alterada com sucesso.");
+        this.response.treatResponse(response, "Subcategoria alterada com sucesso.");
         if (typeof callback === 'function') {
           callback(response);
         }
       },
       (error) => {
-        this.respose.treatResponseError(error, callback);
+        this.response.treatResponseError(error, callback);
         return false;
       });
   }
@@ -121,26 +121,26 @@ export class CategoriaService {
   excluirCategoria(id: number, callback: Function) {
     this.httpClient.delete<Categoria>(environment.urlApi + 'categorias/' + id).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Categoria removida com sucesso.");
+        this.response.treatResponse(response, "Categoria removida com sucesso.");
         if (typeof callback === 'function') {
           callback(response);
         }
       },
       (error) => {
-        this.respose.treatResponseError(error, callback);
+        this.response.treatResponseError(error, callback);
       });
   }
 
   async excluirSubcategoria(id: number, callback: Function) {
     this.httpClient.delete<Categoria>(environment.urlApi + 'subcategorias/' + id).subscribe(
       (response: any) => {
-        this.respose.treatResponse(response, "Exclusão de subcategoria finalizada com sucesso.");
+        this.response.treatResponse(response, "Exclusão de subcategoria finalizada com sucesso.");
         if (typeof callback === 'function') {
           callback(response);
         }
       },
       (error) => {
-        this.respose.treatResponseError(error, callback);
+        this.response.treatResponseError(error, callback);
       });
     return this.dataResponse;
   }

@@ -98,7 +98,7 @@ export class ResponseService {
   // })
 
 
-    if (error.message) {
+    if (error && error.message) {
       const dialogRef = this.dialog.open(DialogModalComponent, {
         width: '400px',
         data: {

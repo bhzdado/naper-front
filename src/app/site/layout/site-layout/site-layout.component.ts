@@ -3,6 +3,9 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, C
 import * as $ from 'jquery';
 import { LoaderService } from '../../services/loader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { interval } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-site-layout',
@@ -50,20 +53,38 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class SiteLayoutComponent implements OnInit, AfterViewInit {
   loading: boolean;
   isMenuOpen = false;
-
+  usuarioLogado = null;
+  public cumprimento: string = 'Bom dia';
+  public environment = environment;
 
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
     private loadingService: LoaderService,
     private changeDetectorRef: ChangeDetectorRef,
+    private authService: AuthService,
     private elementRef: ElementRef<HTMLElement>
   ) {
     this.loading = true;
+    this.usuarioLogado = authService.getUser();
+
+    interval(1000)
+      .subscribe({
+        next: (value) => {
+          this.cumprimento = this.setCumprimento(new Date().getHours());
+        }
+      })
   }
 
   isHamburguer = true;
   isHamburguer_menu = true;
+
+  private setCumprimento(hora: number): string {
+    if (hora >= 0 && hora < 12) return 'Bom dia'
+    if (hora >= 12 && hora < 18) return 'Boa tarde'
+    return 'Boa noite'
+  }
+
   mostra_telefone() {
     if (!this.isHamburguer_menu) {
       this.mostra_menu();
@@ -117,6 +138,10 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
       }
     }
 
+
+  }
+
+  navegar(url) {
 
   }
 

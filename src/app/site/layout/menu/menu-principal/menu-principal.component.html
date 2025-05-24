@@ -1,87 +1,71 @@
 <ul class="exo-menu">
-    <li><a class="active" href="#"><i class="fa fa-home"></i> Home</a></li>
-    <li class="drop-down"><a href="#"><i class="fa fa-cogs"></i> Flyout</a>
-        <!--Drop Down-->
-        <ul class="drop-down-ul animated fadeIn">
-            <li class="flyout-right"><a href="#">Flyout Right</a><!--Flyout Right-->
-                <ul class="animated fadeIn">
-                    <li><a href="#">Mobile</a></li>
-                    <li><a href="#">Computer</a></li>
-                    <li><a href="#">Watch</a></li>
-                </ul>
-            </li>
+    <li><a class="active" href="#"> <span class="menu-titulo"> Home </span></a></li>
 
-            <li class="flyout-left"><a href="#">Flyout Left</a><!--Flyout Left-->
-                <ul class="animated fadeIn">
-                    <li><a href="#">Mobile</a></li>
-                    <li><a href="#">Computer</a></li>
-                    <li><a href="#">Watch</a></li>
-                </ul>
-            </li>
+    <li *ngFor="let data of dataSource; let iMenu = index;"
+        [ngClass]="{'drop-down': data.classe == 'drop-down', 'mega-drop-down' : data.classe == 'mega' }">
+        <a [routerLink]="data.link ? [data.link] : []">
+            <span class="menu-titulo"> {{ data.titulo }} </span>
+        </a>
+        @if (data.submenus) {
+            @switch (data.classe) {
+                @case ("drop-down") {
+                    <ul class="drop-down-ul animated fadeIn">
+                        <li [ngClass]="{'flyout-left': submenu.submenuItens.length > 0 }"
+                            *ngFor="let submenu of data.submenus; let iSubmenu = index;">
+                            <a [routerLink]="submenu.link ? [submenu.link] : []">{{ submenu.titulo }}</a>
 
-            <li><a href="#">No Flyout</a></li>
+                            @if (submenu.submenuItens.length > 0) {
+                                <ul class="animated fadeIn" *ngFor="let submenuItem of submenu.submenuItens; let iSubmenuItem = index;">
+                                    <li><a [routerLink]="submenuItem.link ? [submenuItem.link] : []"> {{ submenuItem.titulo }}</a></li>
+                                </ul>
+                            }
+                        </li>
+                    </ul>
+                }
 
-        </ul>
-        <!--//End drop down-->
+                @case ("mega") {
+                    <div class="animated fadeIn mega-menu">
+                        <div class="mega-menu-wrap">
+                            <div class="row">
+                                <div class="col-md-3" *ngFor="let submenu of data.submenus; let iSubmenu = index;">
+                                    <h4 class="row mega-title"> {{ submenu.titulo }}</h4>
 
+                                    <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='stander'">
+                                        <li *ngFor="let submenuItem of submenu.submenuItens; let iSubmenuItem = index;">
+                                            <a [routerLink]="submenuItem.link ? [submenuItem.link] : []" style="line-height:23px!important;">
+                                                {{ submenuItem.titulo }}
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='description'">
+                                        <li *ngFor="let submenuItem of submenu.submenuItens; let iSubmenuItem = index;">
+                                            <a [routerLink]="submenuItem.link ? [submenuItem.link] : []" >
+                                                {{ submenuItem.titulo }}
+                                            </a>
+                                            <span>{{ submenuItem.descricao }}</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='icon-des'">
+                                        <li *ngFor="let submenuItem of submenu.submenuItens; let iSubmenuItem = index;">
+                                            <a [routerLink]="submenuItem.link ? [submenuItem.link] : []" style="line-height:36px!important;">
+                                                <i class="fa fa-globe"></i>{{ submenuItem.titulo }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
     </li>
-    <li><a href="#"><i class="fa fa-cogs"></i> Services</a></li>
-    <li><a href="#"><i class="fa fa-briefcase"></i> Portfolio</a></li>
-    <li class="mega-drop-down"><a href="#"><i class="fa fa-list"></i> Mega Menu</a>
-        <div class="animated fadeIn mega-menu">
-            <div class="mega-menu-wrap">
-                <div class="row">
-                    <div class="col-md-2">
-                        <h4 class="row mega-title">Standers</h4>
-                        <ul class="stander">
-                            <li><a href="#">Mobile</a></li>
-                            <li><a href="#">Computer</a></li>
-                            <li><a href="#">Watch</a></li>
-                            <li><a href="#">laptop</a></li>
-                            <li><a href="#">Camera</a></li>
-                            <li><a href="#">I pad</a></li>
-                            <li><a class="view-more btn- btn-sm" href="#">View more</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h4 class="row mega-title">Description</h4>
-                        <ul class="description">
-                            <li><a href="#">Women</a>
-                                <span>Description of Women</span>
-                            </li>
-                            <li><a href="#">Men</a>
-                                <span>Description of men Cloths</span>
-                            </li>
-                            <li><a href="#">Kids</a>
-                                <span>Description of Kids Cloths</span>
-                            </li>
-                            <li><a href="#">Others</a>
-                                <span>Description of Others Cloths</span>
-                            </li>
-                            <li>
-                                <a class="view-more btn btn-sm " href="#">View more</a>
 
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h4 class="row mega-title">Icon + Description</h4>
-                        <ul class="icon-des">
-                            <li><a href="#"><i class="fa fa-globe"></i>Web</a></li>
-                            <li><a href="#"><i class="fa fa-mobile"></i>Mobile</a></li>
-                            <li><a href="#"><i class="fa fa-arrows-h"></i>Responsive</a></li>
-                            <li><a href="#"><i class="fa fa-desktop"></i>Desktop</a></li>
-                            <li><a href="#"><i class="fa fa-paint-brush"></i>UI/UX</a></li>
-                        </ul>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </li>
-    <li>
+    <li *ngIf="!usuarioLogado">
         <a class="blink-soft visit-my-blog" [routerLink]="['/auth/login']">
-            <i class="fa fa-sign-in"></i> Acesse Aqui</a>
+            <i class="fa fa-sign-in"></i> Área do Cliente</a>
         <div class="contact"></div>
     </li>
 </ul>

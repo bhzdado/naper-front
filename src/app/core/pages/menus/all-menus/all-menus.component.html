@@ -1,1 +1,52 @@
-<p>all-menus works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Questões">
+            <div style="width: 100%; float: right; text-align: right;">
+                <button mat-button class="btn btn-three" (click)="criarNovoMenu()" style="width: 140px;">Novo
+                    Menu</button>
+            </div>
+            <br><br>
+            <hr>
+
+            <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" cdkDropList
+                (cdkDropListDropped)="drop($event)" cdkDropListData="dataSource">
+                <!-- ordem Column -->
+                <ng-container matColumnDef="ordem" sticky>
+                    <mat-header-cell *matHeaderCellDef> Ordem </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-icon class="example-drag-cursor">reorder</mat-icon>
+                        <span>{{element.ordem}}</span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- titulo Column -->
+                <ng-container matColumnDef="titulo">
+                    <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.titulo}} </mat-cell>
+                </ng-container>
+
+                <!-- classe Column -->
+                <ng-container matColumnDef="classe">
+                    <mat-header-cell *matHeaderCellDef> Classe </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.classe}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="acao">
+                    <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button (click)="editarMenu(element.id)">
+                          <mat-icon>edit</mat-icon>        
+                        </button>
+                        <button mat-icon-button (click)="removerMenu(element.id)">
+                          <mat-icon color="warn">delete</mat-icon>
+                        </button>
+                      </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></mat-row>
+            </mat-table>
+
+        </app-card>
+    </div>
+</div>

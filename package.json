@@ -94,6 +94,7 @@
     "ngx-mask": "^16.4.2",
     "ngx-material-time-select": "^0.2.1",
     "ngx-owl-carousel-o": "^19.0.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-scrollbar": "^13.0.3",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^19.0.0",

@@ -22,7 +22,8 @@ export class VerificaAcessoComponent {
         this.usuario = JSON.parse(atob(localStorage.getItem('usuario')));
       }
   
-      this.router.navigate(["/admin/menus/configurar"]);
+      //this.router.navigate(["/admin/menus/configurar"]);
+      router.navigate(["/site"]);
       //window.location.href = "http://romildaalves.com.br";
       // if(this.usuario.papel == 'Aluno'){
       //   this.router.navigate(["/areaAluno"]);

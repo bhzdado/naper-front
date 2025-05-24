@@ -4,20 +4,20 @@
     margin-left: -235px;">
         <div class="row g-4">
             <div class="col-lg-1 col-xl-1 mt-0">
-                teste
+                
             </div>
         </div>
     </div>
 </div>
 <!-- Features End -->
 <div class="div-text-direito-mobile">
-    <img src="/assets/site-layout/images/banner.gif" class="img-fluid rounded img-zoomin w-100" alt="">
+    <a href="https://wa.me/message/BCKAA6WEHTY3C1"><img src="/assets/site-layout/images/banner.gif" class="img-fluid rounded img-zoomin w-100" alt=""></a>
 </div>
 <div class="topbar-fundo">
     <div class="topbar-fundo-container">
         <div class="topbar-top d-flex justify-content-between flex-lg-wrap topbar-fundo-transparente"></div>
         <div class="topbar-top topbar-fundo-texto">
-            <img src="/assets/site-layout/images/banner_site.png" class="">
+            <a href="https://wa.me/message/BCKAA6WEHTY3C1" target="_blank"><img src="/assets/site-layout/images/banner_site.png" class=""></a>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
 <div class="container-fluid py-5 conteudo-inicial">
     <div class="container py-5">
         <div class="row g-4">
-            <div class="col-lg-7 col-xl-8 mt-0" style="background: white;">
+            <div class="col-lg-7 col-xl-8 mt-0" style="background: white; border: 1px solid #E9E9E9;">
                 <div class="position-relative overflow-hidden rounded">
                     <mat-tab-group color="primary" backgroundColor="accent">
                         <mat-tab class="my-mat-tab" label="ICMS" aria-label="primary">
@@ -44,22 +44,22 @@
                                 ICMS</a>
                         </mat-tab>
                         <mat-tab class="my-mat-tab" label="IPI">
-                            <a  (click)="abrirSelecaoEstado()" target="_blank" class="btn-section">Alíquota do ISS</a>
-                            <a  (click)="abrirSelecaoEstado()" target="_blank" class="btn-section">Legislação e Regulamento do
-                                ISS</a>
-                        </mat-tab>
-                        <mat-tab class="my-mat-tab" label="ISS">
                             <a  (click)="abrirSelecaoEstado()" target="_blank" class="btn-section">TIPI – Tabela do IPI </a>
                             <a  (click)="abrirSelecaoEstado()" target="_blank" class="btn-section">Legislação e Regulamento do
-                                ICMSISS</a>
+                                IPI</a>
+                        </mat-tab>
+                        <mat-tab class="my-mat-tab" label="ISS">
+                            <a  (click)="abrirSelecaoEstado()" target="_blank" class="btn-section">Alíquota do ISS</a>
+                            <a  (click)="navegar.abrirConteudo('m', '1444')" target="_blank" class="btn-section">Legislação e Regulamento do
+                                ISS</a>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
                 <hr>
+                <!--
                 <div class="border-bottom py-3">
                     <a href="#" class="display-7 text-dark mb-0 link-hover">Atualização</a>
                 </div>
-                <!--
                 <p class="mt-3 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
                     printer took a galley standard dummy text ever since the 1500s, when an unknown printer took a
@@ -67,11 +67,11 @@
                 </p>
             -->
                 <div class="bg-light p-4 rounded">
-                    <p class="h3">Legislação </p>
+                    <p class="h3">Atualização </p>
                     <div class="tab">
                         <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Federal</button>
-                        <button class="tablinks" onclick="openCity(event, 'Paris')">Estadual</button>
-                        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Municipal</button>
+                        <button class="tablinks" onclick="openCity(event, 'Paris')">ICMS</button>
+                        <button class="tablinks" onclick="openCity(event, 'Tokyo')">ISS</button>
                     </div>
 
                     <div id="London" class="tabcontent">
@@ -187,7 +187,7 @@
                 </div>
             </div>
             <div class="col-lg-5 col-xl-4">
-                <div class="bg-light rounded p-4 pt-0">
+                <div class="bg-light rounded p-4 pt-0" style="border: 1px solid #E9E9E9; padding-top: 42px!important;">
                     <div class="row g-4">
                         <div class="col-12">
                             <div class="d-flex flex-column">
@@ -224,22 +224,22 @@
 
                                 <div class="col-12">
                                     <div class="features-content d-flex flex-column">
-                                        <span class="h3">ICMS</span>
+                                        <span class="h3">CURSOS</span>
                                         <div aria-hidden="true" style="padding: 10px;">
                                             <img src="/assets/site-layout/images/seta.png" style="width:16px">
-                                            <span style="padding-left: 15px;">Mercadoria sem similar no Brasil</span>
+                                            <span style="padding-left: 15px;">Telepresencial</span>
                                         </div>
                                         <div aria-hidden="true" style="padding: 10px;">
                                             <img src="/assets/site-layout/images/seta.png" style="width:16px">
-                                            <span style="padding-left: 15px;">CFOP</span>
+                                            <span style="padding-left: 15px;">Videoaulas</span>
                                         </div>
                                         <div aria-hidden="true" style="padding: 10px;">
                                             <img src="/assets/site-layout/images/seta.png" style="width:16px">
-                                            <span style="padding-left: 15px;">CST</span>
+                                            <span style="padding-left: 15px;">Presenciais</span>
                                         </div>
                                         <div aria-hidden="true" style="padding: 10px;">
                                             <img src="/assets/site-layout/images/seta.png" style="width:16px">
-                                            <span style="padding-left: 15px;">CSOSN</span>
+                                            <span style="padding-left: 15px;">In Company</span>
                                         </div>
                                     </div>
                                 </div>

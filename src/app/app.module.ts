@@ -43,6 +43,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
 import { SpinnerComponent } from './site/spinner/spinner.component';
 import { MenuPrincipalComponent } from './site/layout/menu/menu-principal/menu-principal.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 const materialModules = [
   MatButtonModule,
@@ -89,6 +90,7 @@ const materialModules = [
     NgxMaskDirective, NgxMaskPipe,
     CountdownModule, 
     CarouselModule,
+    MatButtonModule, MatMenuModule, MatIconModule, 
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',

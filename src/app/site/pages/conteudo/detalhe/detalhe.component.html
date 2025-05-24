@@ -1,0 +1,36 @@
+<div class="conteudo_actions">
+    <div class="menu-icone-document" id="print-pdf">
+        <div class="icon-button">
+            <i class="fa fa-print" aria-hidden="true"></i>
+        </div>
+        <h4 class="imprimir-pdf">Imprimir</h4>
+    </div>
+    <div class="menu-icone-document" id="visualizar-tela-cheia">
+        <div class="icon-button">
+            <i class="fa fa-expand" aria-hidden="true"></i>
+        </div>
+        <h4>Visualizar em Tela Cheia</h4>
+    </div>
+</div>
+
+<div class="container-fluid py-5 conteudo-inicial">
+    <div class="container py-5" style="margin-top: 90px;">
+        <div class="row g-4">
+
+
+            <div class="titulo-superior">
+                <div [innerHTML]="titulo">
+                    <div class="social-share">
+                        <div id="shareRoundIcons" class="round-shares">
+                            <div id="share"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3 style="font-style: italic; margin-top: 10px;">Atualizado em {{ ultima_atualizacao }}</h3>
+            </div>
+            <div class="complete">
+                <p [innerHTML]="conteudo"></p>
+            </div>
+        </div>
+    </div>
+</div>

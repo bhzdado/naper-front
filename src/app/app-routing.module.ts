@@ -9,6 +9,8 @@ import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.compo
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { RelImportacaoNFComponent } from './site/relatorio/rel-importacao-nf/rel-importacao-nf.component';
 import { HomeComponent } from './site/pages/home/home.component';
+import { ConteudoComponent } from './site/pages/conteudo/conteudo/conteudo.component';
+import { DetalheComponent } from './site/pages/conteudo/detalhe/detalhe.component';
 
 const routes: Routes = [
   {
@@ -29,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
+    redirectTo: '/site', pathMatch: 'full' 
+    //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
     //canActivate: [authGuard]
   },
   {
@@ -154,6 +157,11 @@ const routes: Routes = [
             loadComponent: () => import('./core/pages/menus/configurar-menu/configurar-menu.component'),
             canActivate: [authGuard],
           },
+          {
+            path: 'configurar/:id',
+            loadComponent: () => import('./core/pages/menus/configurar-menu/configurar-menu.component'),
+            canActivate: [authGuard],
+          },
         ]
       },
 
@@ -188,6 +196,17 @@ const routes: Routes = [
       {
         path: 'avaliacao/:prova_liberada_id',
         loadComponent: () => import('./area-aluno/pages/avaliacao/avaliacao.component'),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'conteudo/:target/:id',
+        loadComponent: () => ConteudoComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'conteudo-detalhe/:id',
+        loadComponent: () => DetalheComponent,
+        canActivate: [authGuard],
       },
     ]
   },

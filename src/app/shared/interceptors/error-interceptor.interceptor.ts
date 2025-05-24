@@ -51,16 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.loaderService.setLoading(false);
                 return throwError(() => error);
             } else if ([404].includes(err.status)) {
-                const dialogRef = this.dialog.open(DialogModalComponent, {
-                    width: '400px',
-                    data: {
-                        titulo: 'ERRO',
-                        conteudo: err.error.mensagem,
-                        tipo: "erro"
-                    },
-                });
-                // this.router.navigate(["pagina-nao-encontrada"]);
-                return throwError(() => error);
+                msg = err.error.mensagem;
             } else if ([412].includes(err.status)) {
                 if (request.url.indexOf('avaliacoes-liberadas') < 0) {
                     if (typeof err.error.errors === 'object') {
