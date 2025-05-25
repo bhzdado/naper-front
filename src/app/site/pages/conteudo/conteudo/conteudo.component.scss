@@ -2348,6 +2348,7 @@ p#vtip #vtipArrow {
   max-width: 1220px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 34px;
 }
 
 
@@ -2435,4 +2436,8 @@ p#vtip #vtipArrow {
   background-size: 16px;
   background-position-x: 14px;
   background-position-y: center;
+}
+
+.mat-accent.mat-mdc-fab, .mat-accent.mat-mdc-mini-fab {
+  --mdc-fab-small-container-color: #A9C92F;
 }

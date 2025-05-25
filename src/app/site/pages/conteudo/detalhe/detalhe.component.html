@@ -1,4 +1,10 @@
 <div class="conteudo_actions">
+    <div class="menu-icone-document" id="print-pdf" (click)="voltar()">
+        <div class="icon-button">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+        </div>
+        <h4 class="imprimir-pdf">Voltar</h4>
+    </div>
     <div class="menu-icone-document" id="print-pdf">
         <div class="icon-button">
             <i class="fa fa-print" aria-hidden="true"></i>
@@ -29,7 +35,7 @@
                 <h3 style="font-style: italic; margin-top: 10px;">Atualizado em {{ ultima_atualizacao }}</h3>
             </div>
             <div class="complete">
-                <p [innerHTML]="conteudo"></p>
+                <p [innerHTML]="conteudo | safeHtml"></p>
             </div>
         </div>
     </div>

@@ -18,12 +18,12 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "rxjs-compat", 
+              "rxjs-compat",
               "rxjs",
               "@haifahrul/ckeditor5-build-rich",
               "bryntum-gantt/gantt.lite.umd.js",
               "ckeditor",
-              "apexcharts", 
+              "apexcharts",
               "lodash"
             ],
             "outputPath": "dist",
@@ -41,10 +41,8 @@
               "node_modules/ngx-spinner/animations/ball-clip-rotate-multiple.css",
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css"
-            ],
-            "scripts": [ 
-              
-             ]
+                        ],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -108,13 +106,21 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/ngx-extended-pdf-viewer/assets/pdf.js",
+              "node_modules/ngx-extended-pdf-viewer/assets/viewer.js"
+            ]
           }
         }
       }

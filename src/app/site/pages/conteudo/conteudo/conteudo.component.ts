@@ -21,8 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavegarService } from 'src/app/site/services/navegar.service';
+import { LeitorPdfComponent } from 'src/app/site/shared/modal/leitor-pdf/leitor-pdf.component';
 
 export interface listagem {
   id: number;
@@ -52,6 +53,13 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
   totalPages = 10;
   carregando: boolean= false;
 
+  textoBusca: string = '';
+
+  error: boolean = false;
+  mensagem_erro: string = "";
+
+  private modalElement: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
@@ -60,6 +68,7 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
     public cdr: ChangeDetectorRef,
     private loadingService: LoaderService,
     public navegar: NavegarService,
+    private modalService: NgbModal,
     public conteudoService: ConteudoService
   ) {
     this.target = this.activatedRoute.snapshot.paramMap.get('target') ?? "";
@@ -69,12 +78,20 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    
 
   }
 
   ngAfterViewInit() {
 
   }
+ openModal() {
+    this.modalService.open(LeitorPdfComponent, {ariaLabelledBy: 'modal-basic-title', size: 'lg', windowClass : "myCustomModalClass"}).result.then((result) => {
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+ }
 
   getPages() {
     let pages = [];
@@ -85,15 +102,31 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
     return pages;
   }
 
-  listar(currentPage) {
+  buscar() {
+    this.listar(1, this.textoBusca);
+  }
+
+  listar(currentPage, texto = "") {
     this.carregando = true;
     switch (this.target) {
       case 'm':
-        this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage}, (response) => {
-          this.titulo = response.dados.modulo;
-          this.dataSource = response.dados.conteudos.data;
-          this.currentPage = response.dados.conteudos.current_page;
-          this.totalPages = response.dados.conteudos.last_page;
+        this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto}, (response) => {
+          this.error = false;
+          
+
+          if(response.status){
+            this.titulo = response.dados.modulo;
+            this.dataSource = response.dados.conteudos.data;
+            this.currentPage = response.dados.conteudos.current_page;
+            this.totalPages = response.dados.conteudos.last_page;
+          } else {
+            this.mensagem_erro = response.mensagem;
+            this.error = true;
+            this.titulo = "";
+            this.dataSource = [];
+            this.currentPage = 1;
+            this.totalPages = 0;
+          }
           this.carregando = false;
           this.cdr.detectChanges();
         });
