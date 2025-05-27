@@ -1,13 +1,9 @@
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthStateService } from '../services/auth/auth-state.service';
-import { Component, Input, OnDestroy, Inject, ViewEncapsulation } from '@angular/core';
 import { TokenService } from '../services/auth/token.service';
-import { Injectable } from '@angular/core';
-import { take, map } from 'rxjs/operators';
-import { AuthService } from '../services/auth/auth.service';
 import { inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogModalComponent } from './dialog-modal/dialog-modal/dialog-modal.component';
+import { AutenticarComponent } from '../site/shared/modal/autenticar/autenticar.component';
+import * as myJsFunctions from '../../assets/site-layout/assets/js/snap-dialog.min.js';
 
 export const authGuard: CanActivateFn = (
   next: ActivatedRouteSnapshot,
@@ -19,18 +15,13 @@ export const authGuard: CanActivateFn = (
 
   if (!tokenService.isLoggedIn()) {
     if (router.url != '/') {
-      const dialogRef = dialog.open(DialogModalComponent, {
-        width: '400px',
-        data: {
-          titulo: 'ACESSO NEGADO',
-          conteudo: 'Para acessar essa área há a necessidade de está autenticado.',
-          tipo: "erro"
-        },
+      const dialogRef = dialog.open(AutenticarComponent, {
+        width: '350px',
       });
       dialogRef.afterClosed().toPromise()
         .then(result => {
           //router.navigate(['/auth/login']);
-          router.navigate(['/site']);
+          router.navigate(['/site']); 
           return Promise.resolve(result);
         });
     } else {

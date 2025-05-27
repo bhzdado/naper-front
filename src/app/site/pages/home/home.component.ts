@@ -30,9 +30,9 @@ export class HomeComponent {
   selectedValue: string;
 
   impostos: Imposto[] = [
-    {value: 'icms', viewValue: 'ICMS'},
-    {value: 'ipi', viewValue: 'IPI'},
-    {value: 'iss', viewValue: 'ISS'},
+    { value: 'icms', viewValue: 'ICMS' },
+    { value: 'ipi', viewValue: 'IPI' },
+    { value: 'iss', viewValue: 'ISS' },
   ];
 
   constructor(public dialog: MatDialog, public navegar: NavegarService) { }
@@ -40,12 +40,15 @@ export class HomeComponent {
   abrirSelecaoEstado() {
     let dialogRef = this.dialog.open(SelecionarEstadoComponent, {
       width: '55vw',
-        maxWidth: '55vw',
+      maxWidth: '55vw',
     });
     dialogRef.afterClosed().subscribe(result => {
       alert('chosen colors: ' + JSON.stringify(result.selectedColors));
     });
   }
 
-  
+  abrirConteudo(target, id) {
+    this.navegar.navigateTo('site/conteudo/' + target + '/' + id);
+  }
+
 }

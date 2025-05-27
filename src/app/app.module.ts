@@ -44,6 +44,7 @@ import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.compo
 import { SpinnerComponent } from './site/spinner/spinner.component';
 import { MenuPrincipalComponent } from './site/layout/menu/menu-principal/menu-principal.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 const materialModules = [
   MatButtonModule,
@@ -97,6 +98,7 @@ const materialModules = [
       preventDuplicates: true,
       progressBar: true
     }),
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     NavigationItem, provideNgxMask(), 

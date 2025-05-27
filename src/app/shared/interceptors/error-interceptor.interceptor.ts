@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal/dialog-modal.component';
 import { AuthStateService } from 'src/app/services/auth/auth-state.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -21,31 +22,30 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.loaderService.setLoading(false);
 
                 this.router.navigate(["/auth/logout"]);
-
-                const dialogRef = this.dialog.open(DialogModalComponent, {
-                    width: '400px',
-                    data: {
-                        titulo: 'ERRO',
-                        conteudo: err.error.message,
-                        tipo: "erro"
-                    },
-                });
-
-                dialogRef.afterClosed().subscribe(result => {
+                Swal.fire({
+                    icon: "error",
+                    text: err.error.message,
+                    draggable: true,
+                    confirmButtonColor: "#A9C92F",
+                    cancelButtonColor: "#d33",
+                    //title: "Oops...",
+                    //footer: '<a href="#">Why do I have this issue?</a>'
+                }).then((result) => {
                     this.router.navigate(["/auth/logout"]);
-                });
+                  });
 
                 return throwError(() => error);
             } else if ([403].includes(err.status)) {
                 console.log(err);
                 let mensagem = (err.error.mensagem) ? err.error.mensagem : err.error.message;
-                const dialogRef = this.dialog.open(DialogModalComponent, {
-                    width: '400px',
-                    data: {
-                        titulo: 'ERRO',
-                        conteudo: mensagem,
-                        tipo: "erro"
-                    },
+                Swal.fire({
+                    icon: "error",
+                    text: mensagem,
+                    draggable: true,
+                    confirmButtonColor: "#A9C92F",
+                    cancelButtonColor: "#d33",
+                    //title: "Oops...",
+                    //footer: '<a href="#">Why do I have this issue?</a>'
                 });
 
                 this.loaderService.setLoading(false);
@@ -77,23 +77,19 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
 
             if (msg != '') {
-                const dialogRef = this.dialog.open(DialogModalComponent, {
-                    width: '400px',
-                    data: {
-                        titulo: 'ERRO',
-                        conteudo: msg,
-                        tipo: "erro"
-                    },
+                Swal.fire({
+                    icon: "error",
+                    text: msg,
+                    draggable: true,
+                    confirmButtonColor: "#A9C92F",
+                    cancelButtonColor: "#d33",
+                    //title: "Oops...",
+                    //footer: '<a href="#">Why do I have this issue?</a>'
                 });
 
                 this.loaderService.setLoading(false);
                 this.authState.setAuthState(false);
-
-                dialogRef.afterClosed().subscribe(result => {
-                    //this.router.navigate(["/"]);
-                });
             }
-            //this.router.navigate(["erro-servidor"]);
 
             const error = err.error?.message || err?.statusText;
             return throwError(() => error);

@@ -59,71 +59,72 @@ export class MenuPrincipalComponent {
   }
 
   carregarMenus() {
-    this.menuService.getTodosMenus((response) => {
-      let data = [];
-
-      response.dados.forEach((x: any, i: number) => {
-        data.push({
-          id: x.id,
-          titulo: x.titulo,
-          ordem: Number(i) + 1,
-          classe: x.classe
-        })
-      });
-
-      this.dataSource = data;
-      this.cdr.detectChanges();
-      //this.loadingService.setLoading(false);
-    });
-
-
     // this.menuService.getTodosMenus((response) => {
     //   let data = [];
-    //   console.log(response);
 
-    //   if (response.status == 0) {
+    //   response.dados.forEach((x: any, i: number) => {
+    //     data.push({
+    //       id: x.id,
+    //       titulo: x.titulo,
+    //       ordem: Number(i) + 1,
+    //       classe: x.classe
+    //     })
+    //   });
 
-    //   } else {
-    //     response.dados.forEach((menu: any, iMenu: number) => {
-    //       let submenus = [];
-    //       if (menu.submenus) {
-    //         menu.submenus.forEach((submenu: any, iSubmenu: number) => {
-    //           let submenuItens = [];
-    //           if (submenu.submenuItens) {
-    //             submenu.submenuItens.forEach((submenuItem: any, iSubmenuItem: number) => {
-    //               submenuItens.push({
-    //                 id: submenuItem.id,
-    //                 titulo: submenuItem.titulo,
-    //                 descricao: submenuItem.descricao,
-    //                 ordem: Number(iSubmenuItem) + 1,
-    //                 link: submenuItem.link,
-    //                 icone: submenuItem.icone
-    //               });
-    //             });
-    //           }
-    //           submenus.push({
-    //             id: submenu.id,
-    //             titulo: submenu.titulo,
-    //             ordem: Number(iSubmenu) + 1,
-    //             tipo: submenu.tipo,
-    //             link: submenu.link,
-    //             submenuItens: submenuItens
-    //           });
-    //         });
-    //       }
-    //       data.push({
-    //         id: menu.id,
-    //         titulo: menu.titulo,
-    //         ordem: Number(iMenu) + 1,
-    //         classe: menu.classe,
-    //         link: menu.link,
-    //         submenus: submenus
-    //       })
-    //     });
-
-    //     this.dataSource = data;
-    //     this.loadingService.hide();
-    //   }
+    //   this.dataSource = data;
+    //   this.cdr.detectChanges();
+    //   //this.loadingService.setLoading(false);
     // });
+
+
+    this.menuService.getTodosMenus((response) => {
+      let data = [];
+      console.log(response);
+
+      if (response.status == 0) {
+
+      } else {
+        response.dados.forEach((menu: any, iMenu: number) => {
+          let submenus = [];
+          if (menu.submenus) {
+            menu.submenus.forEach((submenu: any, iSubmenu: number) => {
+              let submenuItens = [];
+              if (submenu.submenuItens) {
+                submenu.submenuItens.forEach((submenuItem: any, iSubmenuItem: number) => {
+                  submenuItens.push({
+                    id: submenuItem.id,
+                    titulo: submenuItem.titulo,
+                    descricao: submenuItem.descricao,
+                    ordem: Number(iSubmenuItem) + 1,
+                    link: submenuItem.link,
+                    icone: submenuItem.icone
+                  });
+                });
+              }
+              submenus.push({
+                id: submenu.id,
+                titulo: submenu.titulo,
+                ordem: Number(iSubmenu) + 1,
+                tipo: submenu.tipo,
+                link: submenu.link,
+                submenuItens: submenuItens
+              });
+            });
+          }
+          data.push({
+            id: menu.id,
+            titulo: menu.titulo,
+            ordem: Number(iMenu) + 1,
+            classe: menu.classe,
+            link: menu.link,
+            submenus: submenus
+          })
+        });
+
+        this.dataSource = data;
+        this.loadingService.hide();
+        this.cdr.detectChanges();
+      }
+    });
   }
 }

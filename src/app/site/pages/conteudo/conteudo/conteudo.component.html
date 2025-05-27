@@ -18,9 +18,9 @@
 
                     <div class="task__list">
 
-                        
+                        <!--
                         <button (click)="openModal()">Open PDF</button>
-
+-->
 
                         <div style="padding-left: 30px;">
                             <input matInput type="search" [(ngModel)]="textoBusca" (keyup.enter)="buscar()"
@@ -69,10 +69,10 @@
                                 </div>
                                 <ul class="responsive-table">
                                     <li class="table-row icon-seta" *ngFor="let item of dataSource; let i = index"
-                                        [innerHTML]="item.titulo" (click)="navegar.abrirDetalhe(item.id);">
+                                        [innerHTML]="item.titulo" (click)="abrirDetalhe(item.id);">
                                     </li>
                                 </ul>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>

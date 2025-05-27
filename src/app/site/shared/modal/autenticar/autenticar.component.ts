@@ -1,68 +1,48 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha';
 import { AuthStateService } from 'src/app/services/auth/auth-state.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { TokenService } from 'src/app/services/auth/token.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from 'src/app/services/auth/auth.interceptor.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { SpinnerComponent } from 'src/app/theme/shared/components/spinner/spinner.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/dialog-modal.component';
-import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha'
 import { environment } from 'src/environments/environment';
-import { LoaderService } from 'src/app/services/loader.service';
-import { EsqueciSenhaComponent } from 'src/app/site/shared/modal/esqueci-senha/esqueci-senha.component';
+import { EsqueciSenhaComponent } from '../esqueci-senha/esqueci-senha.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-autenticar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, HttpClientModule, MatProgressBarModule, NgxCaptchaModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  imports: [NgxCaptchaModule, CommonModule, FormsModule, ReactiveFormsModule, MatProgressBarModule],
+  templateUrl: './autenticar.component.html',
+  styleUrl: './autenticar.component.scss'
 })
-export default class LoginComponent implements OnInit, AfterViewInit {
-  loginForm: FormGroup;
-
-  public texto_autenticacao = "Validando informações...";
-  public formAuthAntigo: any;
-  public formControlAuthAntigo = new FormControl();
-
-  processando: boolean = false;
-  public logo: string = environment.logo;
-
-  @ViewChild('email') inputEmail!: ElementRef;
-  @ViewChild('password') inputPassword!: ElementRef;
-
+export class AutenticarComponent implements OnInit {
   @ViewChild('captchaElem', { static: false }) captchaElem: ReCaptcha2Component;
   kepceHidden: boolean = true;
   siteKey: any = environment.recaptcha.siteKey;
   recaptchaError: boolean = false;
   recaptchaVerificado: boolean = false;
+
+  public formControlAuthAntigo = new FormControl();
+
+  public texto_autenticacao = "Validando informações...";
+  processando: boolean = false;
   submited: boolean = false;
+
+  public formAuthAntigo: any;
+
+  loginForm: FormGroup;
 
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
     private authState: AuthStateService,
     private token: TokenService,
-    private dialog: MatDialog,
     private router: Router,
-    private loadingService: LoaderService,
+    private dialog: MatDialog
   ) {
-    this.loadingService.setLoading(false);
 
     let fiscal3_usuario_email = localStorage.getItem('fiscal3.usuario.email');
     let user_email = '';
@@ -79,14 +59,6 @@ export default class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    let fiscal3_usuario_email = localStorage.getItem('fiscal3.usuario.email');
-    this.inputEmail?.nativeElement.focus();
-    if (fiscal3_usuario_email) {
-      this.inputPassword?.nativeElement.focus();
-    }
-  }
-
   ngOnInit() {
     this.formAuthAntigo = this.fb.group({
       email: new FormControl(''),
@@ -99,20 +71,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
 
   }
 
-  handleReset() {
-    this.recaptchaVerificado = false;
-  }
-
-  handleError() {
-    this.recaptchaVerificado = false;
-  }
-
-  handleLoad() { }
-
-  handleSuccess($event) {
-    this.recaptchaVerificado = true;
-  }
-
+  
   esqueciSenha() {
     let dialogRef = this.dialog.open(EsqueciSenhaComponent, {
       width: '35vw',
@@ -127,16 +86,16 @@ export default class LoginComponent implements OnInit, AfterViewInit {
     this.processando = true;
     this.recaptchaError = false;
 
-    if (!this.recaptchaVerificado) {
-      this.recaptchaError = true;
-      this.processando = false;
+    // if (!this.recaptchaVerificado) {
+    //   this.recaptchaError = true;
+    //   this.processando = false;
 
-      this.kepceHidden = false;
-      this.loginForm.get('recaptcha').setValidators(Validators.required);
-      this.captchaElem.resetCaptcha();
+    //   this.kepceHidden = false;
+    //   this.loginForm.get('recaptcha').setValidators(Validators.required);
+    //   this.captchaElem.resetCaptcha();
 
-      return;
-    } else {
+    //   return;
+    // } else {
       this.recaptchaVerificado = false;
 
       this.authService.signin(this.loginForm.value).subscribe(
@@ -204,7 +163,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
 
         }
       );
-    }
+    // }
   }
   // Handle response
   responseHandler(data: any) {
@@ -212,4 +171,17 @@ export default class LoginComponent implements OnInit, AfterViewInit {
     localStorage.setItem('api_token', data.authorization.api_token);
   }
 
+  handleReset() {
+    this.recaptchaVerificado = false;
+  }
+
+  handleError() {
+    this.recaptchaVerificado = false;
+  }
+
+  handleLoad() { }
+
+  handleSuccess($event) {
+    this.recaptchaVerificado = true;
+  }
 }

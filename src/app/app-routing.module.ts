@@ -29,12 +29,33 @@ const routes: Routes = [
     path: 'esqueci-senha',
     component: LogoutComponent,
   },
+  // {
+  //   path: '',
+  //   redirectTo: 'site', pathMatch: 'full' 
+  //   //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
+  //   //canActivate: [authGuard]
+  // },
   {
     path: '',
-    redirectTo: '/site', pathMatch: 'full' 
-    //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
-    //canActivate: [authGuard]
+    component: SiteLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () => HomeComponent,
+        //canActivate: [authGuard],
+      },
+    ]
   },
+  // { path: '**', 
+  //   component: SiteLayoutComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadComponent: () => HomeComponent,
+  //       //canActivate: [authGuard],
+  //     },
+  //   ]
+  //  },
   {
     path: 'menu',
     loadComponent: () => import('./core/pages/authentication/grid-menu/grid-menu.component').then((c) => c.GridMenuComponent),
@@ -215,7 +236,7 @@ const routes: Routes = [
     component: RelImportacaoNFComponent,
     //canActivate: [authGuard],
   },
-];  
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), CommonModule,

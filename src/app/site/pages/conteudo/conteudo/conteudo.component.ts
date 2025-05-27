@@ -133,4 +133,8 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
         break;
     }
   }
+
+  abrirDetalhe(id){
+    this.navegar.navigateTo('site/conteudo-detalhe/' +id);
+  }
 }

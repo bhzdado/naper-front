@@ -27,7 +27,7 @@
                     <div class="animated fadeIn mega-menu">
                         <div class="mega-menu-wrap">
                             <div class="row">
-                                <div class="col-md-3" *ngFor="let submenu of data.submenus; let iSubmenu = index;">
+                                <div class="col-md-3" *ngFor="let submenu of data.submenus; let iSubmenu = index;" style="width: 265px;">
                                     <h4 class="row mega-title"> {{ submenu.titulo }}</h4>
 
                                     <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='stander'">
