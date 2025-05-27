@@ -9,11 +9,12 @@ export class NavegarService {
   constructor(private router: Router) {}
 
   navigateTo(route: string) {
+    localStorage.setItem('rota', route);
     this.router.navigate([route]);
   }
 
   navigateToWithParams(route: string, params: any) {
-    console.log(route);
+    localStorage.setItem('rota', route);
      this.router.navigate([route, params]);
   }
 

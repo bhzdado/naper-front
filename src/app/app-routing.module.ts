@@ -29,23 +29,23 @@ const routes: Routes = [
     path: 'esqueci-senha',
     component: LogoutComponent,
   },
-  // {
-  //   path: '',
-  //   redirectTo: 'site', pathMatch: 'full' 
-  //   //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
-  //   //canActivate: [authGuard]
-  // },
   {
     path: '',
-    component: SiteLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadComponent: () => HomeComponent,
-        //canActivate: [authGuard],
-      },
-    ]
+    redirectTo: 'site', pathMatch: 'full' 
+    //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
+    //canActivate: [authGuard]
   },
+  // {
+  //   path: '',
+  //   component: SiteLayoutComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadComponent: () => HomeComponent,
+  //       //canActivate: [authGuard],
+  //     },
+  //   ]
+  // },
   // { path: '**', 
   //   component: SiteLayoutComponent,
   //   children: [

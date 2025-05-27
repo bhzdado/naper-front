@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha';
 import { AuthStateService } from 'src/app/services/auth/auth-state.service';
@@ -41,6 +41,7 @@ export class AutenticarComponent implements OnInit {
     private authState: AuthStateService,
     private token: TokenService,
     private router: Router,
+    public dialogRef: MatDialogRef<AutenticarComponent>,
     private dialog: MatDialog
   ) {
 
@@ -147,16 +148,21 @@ export class AutenticarComponent implements OnInit {
                 this.texto_autenticacao = "Seja bem-vindo...";
                 //(<HTMLFormElement>document.getElementById('formAutenticarAuthAntigo')).submit();
 
+                this.dialogRef.close(false);
+                //window.location.href = "/auth/login";
                 let rota = localStorage.getItem('rota');
+                
                 if (rota) {
-                  try {
-                    this.router.navigate([rota]);
-                    localStorage.removeItem('rota');
-                  } catch (e) {
-                    this.router.navigate(["/"]);
-                  }
+                  window.location.href = environment.urlSite + rota;
+                  // try {
+                  //   this.router.navigate([rota]);
+                  //   localStorage.removeItem('rota');
+                  // } catch (e) {
+                  //   this.router.navigate(["/"]);
+                  // }
                 } else {
-                  this.router.navigate(["/"]);
+                  window.location.href = environment.urlSite;
+                  //this.router.navigate(["/"]);
                 }
               }, 1000);
             });
