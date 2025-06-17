@@ -1,0 +1,30 @@
+<div style="width: 100%; float: right; text-align: right; margin-bottom: 17px; margin-bottom: 20px;">
+</div>
+<div
+    style="width: 100%; float: right; text-align: right; margin-bottom: 17px; border-bottom: 1px solid #2A3A54; padding-bottom: 12px;">
+
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+    <!--
+    <button mat-button class="btn btn-three" (click)="fechar()" style="padding-top: 5px;"><mat-icon
+            class="tab-icon">close</mat-icon></button>
+            -->
+</div>
+<div class="pdf-viewer-container">
+    <div *ngIf="loadingPdf"
+        style="width: 100%; float: right; text-align: center; margin-bottom: 17px; padding-top: 12px;">
+        <img src="/assets/site-layout/images/logos/logo_animado.gif" alt="">
+    </div>
+    <div *ngIf="tipoConteudo=='pdf'"  style="overflow: hidden;">
+        <ng-container *ngIf="url">
+            <ngx-extended-pdf-viewer [base64Src]="url" [height]="'80vh'" [textLayer]="true" [listenToURL]="true"
+                [showHandToolButton]="true">
+            </ngx-extended-pdf-viewer>
+        </ng-container>
+        <ng-template *ngIf="!loadingPdf || errorTemplate">
+            <p>Falha ao carregar o PDF. Por favor tente novamente mais tarde.</p>
+        </ng-template>
+    </div>
+    <div *ngIf="tipoConteudo=='html'" [innerHtml]="conteudo"  style="overflow: auto; padding: 20px;"></div>
+</div>
