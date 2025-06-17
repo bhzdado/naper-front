@@ -37,7 +37,7 @@ import { ErrorInterceptor } from './shared/interceptors/error-interceptor.interc
 import { CountdownModule } from 'ngx-countdown';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AreaAlunoLayoutComponent } from './area-aluno/layout/area-aluno-layout/area-aluno-layout.component';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SiteLayoutComponent } from './site/layout/site-layout/site-layout.component';
@@ -91,6 +91,9 @@ const materialModules = [
     NgxMaskDirective, NgxMaskPipe,
     CountdownModule, 
     CarouselModule,
+    RouterOutlet, 
+    RouterLink, 
+    RouterLinkActive,
     MatButtonModule, MatMenuModule, MatIconModule, 
     ToastrModule.forRoot({
       timeOut: 5000,

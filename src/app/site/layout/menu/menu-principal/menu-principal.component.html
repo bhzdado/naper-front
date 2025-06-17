@@ -1,6 +1,59 @@
-<ul class="exo-menu">
-    <li><a class="active" href="#"> <span class="menu-titulo"> Home </span></a></li>
+<nav>
+    <div class="wrapper">
+        <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li *ngFor="let data of dataSource; let iMenu = index;">
+                @if (data.link) {
+                    <a (click)="abrirConteudo(data.link)"  routerLinkActive="active" class="desktop-item">
+                        <span class="menu-titulo"> {{ data.titulo }} </span>
+                    </a>
+                } @else {
+                    <a (click)="abrirConteudo('')"  routerLinkActive="active" class="desktop-item">
+                        <span class="menu-titulo"> {{ data.titulo }} </span>
+                    </a>
+                }
+                
 
+                @if (data.submenus) {
+                    @switch (data.classe) {
+                        @case ("drop-down") {
+                            <ul class="drop-menu drop-down-menu">
+                              <li *ngFor="let submenu of data.submenus; let iSubmenu = index;"><a (click)="abrirConteudo(submenu.link)"  routerLinkActive="active">{{ submenu.titulo }}</a></li>
+                            </ul>
+                        }
+
+                        @case ("mega") {
+                        <input type="checkbox" id="showMega">
+                        <label for="showMega" class="mobile-item">{{ data.titulo }} </label>
+                        <div class="mega-box">
+                            <div class="content">
+                                <div class="row" *ngFor="let submenu of data.submenus; let iSubmenu = index;">
+                                    <ul class="mega-links">
+                                        <header style="height: 50px; padding-left: 24px;">{{ submenu.titulo }}</header>
+                                        @if (submenu.submenuItens.length > 0) {
+                                        <li *ngFor="let submenuItem of submenu.submenuItens; let iSubmenuItem = index;">
+                                            <a (click)="abrirConteudo(submenuItem.link)"  routerLinkActive="active">
+                                                <img _ngcontent-ng-c3501793233="" src="/assets/site-layout/images/seta.png"
+                                                    style="width: 16px; padding-right: 10px;">
+                                                {{ submenuItem.titulo }}
+                                            </a>
+                                        </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    }
+                }
+            </li>
+        </ul>
+        <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+</nav>
+
+<!--
+<ul class="exo-menu">
     <li *ngFor="let data of dataSource; let iMenu = index;"
         [ngClass]="{'drop-down': data.classe == 'drop-down', 'mega-drop-down' : data.classe == 'mega' }">
         <a [routerLink]="data.link ? [data.link] : []">
@@ -27,7 +80,7 @@
                     <div class="animated fadeIn mega-menu">
                         <div class="mega-menu-wrap">
                             <div class="row">
-                                <div class="col-md-3" *ngFor="let submenu of data.submenus; let iSubmenu = index;" style="width: 265px;">
+                                <div class="col-md-3" *ngFor="let submenu of data.submenus; let iSubmenu = index;" style="width: 33%;">
                                     <h4 class="row mega-title"> {{ submenu.titulo }}</h4>
 
                                     <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='stander'">
@@ -43,7 +96,7 @@
                                             <a [routerLink]="submenuItem.link ? [submenuItem.link] : []" >
                                                 {{ submenuItem.titulo }}
                                             </a>
-                                            <span>{{ submenuItem.descricao }}</span>
+                                            <span>{{ submenuItem.descricao }}teste</span>
                                         </li>
                                     </ul>
                                     <ul class="{{ submenu.tipo }}" *ngIf="submenu.tipo=='icon-des'">
@@ -61,11 +114,6 @@
             }
         }
     </li>
-
-
-    <li *ngIf="!usuarioLogado">
-        <a class="blink-soft visit-my-blog" [routerLink]="['/auth/login']">
-            <i class="fa fa-sign-in"></i> Área do Cliente</a>
-        <div class="contact"></div>
-    </li>
 </ul>
+
+-->

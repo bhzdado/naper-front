@@ -36,7 +36,7 @@
           <span class="focus-input100" data-placeholder="&#xf191;"></span>
         </div>
         <mat-error class="input-error" *ngIf="(loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)) && submited">Informe sua senha</mat-error>
-
+<!--
         <div class="wrap-input100 validate-input" style="padding: 10px;">
           <ngx-recaptcha2 #captchaElem [hidden]="kepceHidden" [siteKey]="siteKey" [useGlobalDomain]="false"
             (success)="handleSuccess($event)" (error)="handleError()" formControlName="recaptcha">
@@ -44,7 +44,7 @@
           <div *ngIf="recaptchaError" style="padding: 5px; font-size: 14px; color: firebrick;">A verificação do captcha
             é necessária.<br>Clique em 'Não sou um robô' e tente acessar novamente.</div>
         </div>
-
+-->
         <div class="contact100-form-checkbox">
           <div>
             <input class="input-checkbox100"  type="checkbox" name="remember-me" id="remember-me" formControlName="remember">

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentFactoryResolver, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
@@ -22,8 +22,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/services/loader.service';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavegarService } from 'src/app/site/services/navegar.service';
-import { LeitorPdfComponent } from 'src/app/site/shared/modal/leitor-pdf/leitor-pdf.component';
+import { NavegacaoService } from 'src/app/site/services/navegacao.service';
+import { LeitorComponent } from 'src/app/site/shared/modal/leitor/leitor.component';
+import { MediaService } from 'src/app/services/media.service';
+import Swal from 'sweetalert2';
 
 export interface listagem {
   id: number;
@@ -42,7 +44,7 @@ export interface listagem {
   templateUrl: './conteudo.component.html',
   styleUrl: './conteudo.component.scss'
 })
-export class ConteudoComponent implements OnInit, AfterViewInit {
+export class ConteudoComponent {
   public target: any = "";
   public id: number = 0;
 
@@ -51,7 +53,7 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
 
   currentPage = 1;
   totalPages = 10;
-  carregando: boolean= false;
+  carregando: boolean = false;
 
   textoBusca: string = '';
 
@@ -60,42 +62,25 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
 
   private modalElement: any;
 
+  pdfUrl = '';
+  @ViewChild(LeitorComponent) pdfModal!: LeitorComponent;
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private router: Router,
     public authService: AuthService,
     public cdr: ChangeDetectorRef,
-    private loadingService: LoaderService,
-    public navegar: NavegarService,
-    private modalService: NgbModal,
+    public navegacaoService: NavegacaoService,
     public conteudoService: ConteudoService
   ) {
     this.target = this.activatedRoute.snapshot.paramMap.get('target') ?? "";
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id')) ?? 0;
-
+alert(this.id);
     this.listar(this.currentPage);
   }
 
-  ngOnInit() {
-    
-
-  }
-
-  ngAfterViewInit() {
-
-  }
- openModal() {
-    this.modalService.open(LeitorPdfComponent, {ariaLabelledBy: 'modal-basic-title', size: 'lg', windowClass : "myCustomModalClass"}).result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
- }
-
   getPages() {
     let pages = [];
-    for(let i=1; i<=this.totalPages; i++){
+    for (let i = 1; i <= this.totalPages; i++) {
       pages.push(i);
     }
 
@@ -110,19 +95,27 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
     this.carregando = true;
     switch (this.target) {
       case 'm':
-        this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto}, (response) => {
+        this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto }, (response) => {
           this.error = false;
-          
 
-          if(response.status){
+
+          if (response.status) {
             this.titulo = response.dados.modulo;
-            this.dataSource = response.dados.conteudos.data;
+            this.dataSource = response.dados.conteudos;
             this.currentPage = response.dados.conteudos.current_page;
             this.totalPages = response.dados.conteudos.last_page;
           } else {
-            this.mensagem_erro = response.mensagem;
+            Swal.fire({
+              icon: "error",
+              text: response.mensagem,
+              draggable: true,
+              confirmButtonColor: "#A9C92F",
+              cancelButtonColor: "#d33",
+              //title: "Oops...",
+              //footer: '<a href="#">Why do I have this issue?</a>'
+          });
+
             this.error = true;
-            this.titulo = "";
             this.dataSource = [];
             this.currentPage = 1;
             this.totalPages = 0;
@@ -134,7 +127,12 @@ export class ConteudoComponent implements OnInit, AfterViewInit {
     }
   }
 
-  abrirDetalhe(id){
-    this.navegar.navigateTo('site/conteudo-detalhe/' +id);
+  abrirDetalhe(item) {
+    if (item.pdf) {
+      this.navegacaoService.abrirPdf(item.pdf_url);
+    } else {
+      this.navegacaoService.navigateTo('conteudo-detalhe/' + item.id);
+    }
   }
+
 }

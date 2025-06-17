@@ -2,14 +2,6 @@
     padding-top: 120px !important;
     width: 86%;
 }
-
-body {
-    font-family: "Inter", sans-serif;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
    
   .default-btn,
   .btn-table {
@@ -1924,3 +1916,8 @@ td {
   transition: all 300ms;
 }
 
+.conteudo-inicial a {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1))!important;
+  text-decoration: none;
+  cursor: pointer;
+}

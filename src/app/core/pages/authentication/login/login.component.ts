@@ -127,16 +127,16 @@ export default class LoginComponent implements OnInit, AfterViewInit {
     this.processando = true;
     this.recaptchaError = false;
 
-    if (!this.recaptchaVerificado) {
-      this.recaptchaError = true;
-      this.processando = false;
+    // if (!this.recaptchaVerificado) {
+    //   this.recaptchaError = true;
+    //   this.processando = false;
 
-      this.kepceHidden = false;
-      this.loginForm.get('recaptcha').setValidators(Validators.required);
-      this.captchaElem.resetCaptcha();
+    //   this.kepceHidden = false;
+    //   this.loginForm.get('recaptcha').setValidators(Validators.required);
+    //   this.captchaElem.resetCaptcha();
 
-      return;
-    } else {
+    //   return;
+    // } else {
       this.recaptchaVerificado = false;
 
       this.authService.signin(this.loginForm.value).subscribe(
@@ -204,7 +204,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
 
         }
       );
-    }
+    // }
   }
   // Handle response
   responseHandler(data: any) {

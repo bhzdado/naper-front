@@ -9,7 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { SelecionarEstadoComponent } from '../../shared/modal/selecionar-estado/selecionar-estado.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { NavegarService } from '../../services/navegar.service';
+import { NavegacaoService } from '../../services/navegacao.service';
 
 
 interface Imposto {
@@ -35,7 +35,7 @@ export class HomeComponent {
     { value: 'iss', viewValue: 'ISS' },
   ];
 
-  constructor(public dialog: MatDialog, public navegar: NavegarService) { }
+  constructor(public dialog: MatDialog, public navegacaoService: NavegacaoService) { }
 
   abrirSelecaoEstado() {
     let dialogRef = this.dialog.open(SelecionarEstadoComponent, {
@@ -48,7 +48,7 @@ export class HomeComponent {
   }
 
   abrirConteudo(target, id) {
-    this.navegar.navigateTo('site/conteudo/' + target + '/' + id);
+    this.navegacaoService.navigateTo('conteudo/' + target + '/' + id);
   }
 
 }

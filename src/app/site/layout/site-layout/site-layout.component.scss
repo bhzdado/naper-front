@@ -100,8 +100,8 @@ $open: 'Open Sans', sans-serif;
 }
 
 .container {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-left: 0.25rem!important;
+  padding-right: 0.25rem!important;
   margin-left: auto;
   margin-right: auto;
 }
@@ -313,7 +313,7 @@ $open: 'Open Sans', sans-serif;
 }
 
 .text-primary {
-  color: #41A6BD !important;
+  color: #2A3A54 !important;
 }
 
 .navbar-toggler {
@@ -666,7 +666,6 @@ $open: 'Open Sans', sans-serif;
 }
 
 .menu-superior-botao {
-  width: 50%;
   text-align: center;
 }
 
@@ -1085,7 +1084,7 @@ $open: 'Open Sans', sans-serif;
 }
 
 .circle-button {
-  top: -6px;
+  top: 2px;
   position: relative;
   right: 0px;
 }
@@ -1153,17 +1152,18 @@ li>a:focus {
   min-width: 95% !important;
   */
   z-index: 9999999999;
-  font-weight: bold;
+  letter-spacing: 0px;
 }
 
 
 .btn-icon {
-  background-color: #78bac9;
+  background-color: #A9C92F;
   border: none;
   color: currentcolor;
   padding: 10px 16px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 10px 10px 0px 0px;
   margin-left: 5px;
 }
 
@@ -1184,13 +1184,16 @@ li>a:focus {
 }
 
 .contato-texto {
-  color: #2A3A54;
-  padding-top: 19px;
+  color: #A9C92F;
+  padding-top: 4px;
 }
 
 
-@media (max-width: 1400px) {
+@media (max-width: 500px) {
   .contato {
+    display: none !important;
+  }
+  .menu-superior-botao{
     display: none !important;
   }
 }
@@ -1226,5 +1229,21 @@ li>a:focus {
 
   .swal2-container {
     z-index: 999999999999999999;
+  }
+}
+
+.topbar {
+  padding: 0px!important;
+}
+
+.botoes {
+  position: relative; 
+ top: -23px; 
+}
+
+@media (max-width: 500px) {
+  .botoes {
+    position: relative; 
+   top: -14px; 
   }
 }

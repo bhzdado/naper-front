@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { authGuard } from './shared/auth.guard';
 import { LogoutComponent } from './core/pages/authentication/logout/logout.component';
@@ -11,6 +11,11 @@ import { RelImportacaoNFComponent } from './site/relatorio/rel-importacao-nf/rel
 import { HomeComponent } from './site/pages/home/home.component';
 import { ConteudoComponent } from './site/pages/conteudo/conteudo/conteudo.component';
 import { DetalheComponent } from './site/pages/conteudo/detalhe/detalhe.component';
+
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  // outras opções aqui
+};
 
 const routes: Routes = [
   {
@@ -31,21 +36,30 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'site', pathMatch: 'full' 
-    //loadComponent: () => import('./core/pages/authentication/verifica-acesso/verifica-acesso.component').then((c) => c.VerificaAcessoComponent),
-    //canActivate: [authGuard]
+    component: SiteLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadComponent: () => HomeComponent,
+        //canActivate: [authGuard],
+      },
+      {
+        path: 'avaliacao/:prova_liberada_id',
+        loadComponent: () => import('./area-aluno/pages/avaliacao/avaliacao.component'),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'conteudo/:target/:id',
+        loadComponent: () => ConteudoComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'conteudo-detalhe/:id',
+        loadComponent: () => DetalheComponent,
+        canActivate: [authGuard],
+      },
+    ]
   },
-  // {
-  //   path: '',
-  //   component: SiteLayoutComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadComponent: () => HomeComponent,
-  //       //canActivate: [authGuard],
-  //     },
-  //   ]
-  // },
   // { path: '**', 
   //   component: SiteLayoutComponent,
   //   children: [
@@ -204,33 +218,6 @@ const routes: Routes = [
       },
     ]
   },
-  ////CALCULADORA
-  {
-    path: 'site',
-    component: SiteLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadComponent: () => HomeComponent,
-        //canActivate: [authGuard],
-      },
-      {
-        path: 'avaliacao/:prova_liberada_id',
-        loadComponent: () => import('./area-aluno/pages/avaliacao/avaliacao.component'),
-        canActivate: [authGuard],
-      },
-      {
-        path: 'conteudo/:target/:id',
-        loadComponent: () => ConteudoComponent,
-        canActivate: [authGuard],
-      },
-      {
-        path: 'conteudo-detalhe/:id',
-        loadComponent: () => DetalheComponent,
-        canActivate: [authGuard],
-      },
-    ]
-  },
   {
     path: 'relatorio/rel-importacao-nf',
     component: RelImportacaoNFComponent,
@@ -239,7 +226,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), CommonModule,
+  imports: [RouterModule.forRoot(routes, routerOptions), CommonModule,
     RouterModule],
   exports: [RouterModule]
 })

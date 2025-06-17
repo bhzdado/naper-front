@@ -5,6 +5,7 @@ import { MenuService } from 'src/app/core/pages/menus/menu.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ResponseService } from 'src/app/services/response.service';
 import { LoaderService } from 'src/app/site/services/loader.service';
+import { NavegacaoService } from 'src/app/site/services/navegacao.service';
 
 export interface SubmenuItem {
   id: number;
@@ -48,6 +49,7 @@ export class MenuPrincipalComponent {
     private dialog: MatDialog, private authService: AuthService, private activatedRoute: ActivatedRoute,
     private response: ResponseService,
     public cdr: ChangeDetectorRef,
+    public navegacaoService: NavegacaoService,
     private menuService: MenuService
   ) {
     this.usuarioLogado = authService.getUser();
@@ -58,28 +60,19 @@ export class MenuPrincipalComponent {
     this.carregarMenus();
   }
 
+  abrirConteudo(url) {
+    if (url) {
+      this.navegacaoService.navigateTo(url);
+      this.cdr.detectChanges();
+    }
+  }
+
   carregarMenus() {
-    // this.menuService.getTodosMenus((response) => {
-    //   let data = [];
-
-    //   response.dados.forEach((x: any, i: number) => {
-    //     data.push({
-    //       id: x.id,
-    //       titulo: x.titulo,
-    //       ordem: Number(i) + 1,
-    //       classe: x.classe
-    //     })
-    //   });
-
-    //   this.dataSource = data;
-    //   this.cdr.detectChanges();
-    //   //this.loadingService.setLoading(false);
-    // });
-
+    this.loadingService.show();
+    this.cdr.detectChanges();
 
     this.menuService.getTodosMenus((response) => {
       let data = [];
-      console.log(response);
 
       if (response.status == 0) {
 

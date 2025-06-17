@@ -1,3 +1,8 @@
+@import "https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined";
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@100;600;800&display=swap";
+@import "https://use.fontawesome.com/releases/v5.15.4/css/all.css";
+
+
 .task__list {
   width: 100%;
   padding-top: 20px;
@@ -133,7 +138,7 @@ body {
 
 body {
   scrollbar-width: thin;
-  /* "auto" or "thin" */
+  /* "auto" or "thin" 
   scrollbar-color: blue orange;
   /* scroll thumb and track */
 }
@@ -2440,4 +2445,9 @@ p#vtip #vtipArrow {
 
 .mat-accent.mat-mdc-fab, .mat-accent.mat-mdc-mini-fab {
   --mdc-fab-small-container-color: #A9C92F;
+}
+
+.cdk-overlay-pane.mat-mdc-dialog-panel {
+  max-width: 80vw!important;
+  min-width: var(--mat-dialog-container-min-width, 0);
 }

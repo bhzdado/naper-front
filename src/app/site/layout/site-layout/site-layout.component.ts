@@ -60,7 +60,6 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
-    private loadingService: LoaderService,
     private changeDetectorRef: ChangeDetectorRef,
     private authService: AuthService,
     private elementRef: ElementRef<HTMLElement>
@@ -141,7 +140,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
 
   }
 
-  navegar(url) {
+  navegacaoService(url) {
 
   }
 

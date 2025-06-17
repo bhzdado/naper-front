@@ -10,12 +10,10 @@ export class LoaderService {
   loadingObs: Observable<boolean> = this.isLoading.asObservable();
 
   show() {
-    console.log('show');
     this.isLoading.next(true);
     this.loadingObs.subscribe();
   }
   hide() {
-    console.log('hide');
     this.isLoading.next(false);
   }
 }

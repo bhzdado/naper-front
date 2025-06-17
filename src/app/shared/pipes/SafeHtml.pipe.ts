@@ -9,8 +9,6 @@ import { DomSanitizer } from "@angular/platform-browser";
     constructor(private sanitizer: DomSanitizer) {}
   
     transform(html) {
-        console.log(html);
-        console.log(this.sanitizer.bypassSecurityTrustHtml(html));
       return this.sanitizer.bypassSecurityTrustHtml(html);
     }
   }

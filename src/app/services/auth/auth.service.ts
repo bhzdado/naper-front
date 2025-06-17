@@ -46,7 +46,15 @@ export class AuthService {
     if(!localStorage.getItem('usuario')){
       return null;
     }
-    return JSON.parse(atob(localStorage.getItem('usuario') ?? ""));
+
+    if(localStorage.getItem('usuario')){
+      let usuario = localStorage.getItem('usuario') ?? "";
+      if(usuario){
+        return JSON.parse(atob(usuario));
+      }
+    }
+
+    return {};
   }
 
   getUserAcl(): any {

@@ -138,6 +138,23 @@ const NavigationItems = [
       */
     ]
   },
+  {
+    id: 'configura_site',
+    title: 'Configuração Site',
+    type: 'group',
+    icon: 'icon-navigation',
+    children: [
+      {
+        id: 'menu',
+        title: 'Menus',
+        type: 'item',
+        url: '/admin/menus',
+        classes: 'nav-item',
+        icon: 'ti ti-users',
+        breadcrumbs: true
+      }
+    ]
+  },
   // {
   //   id: 'other',
   //   title: 'Relátorios',

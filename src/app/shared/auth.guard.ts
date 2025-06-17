@@ -14,20 +14,20 @@ export const authGuard: CanActivateFn = (
   const dialog: MatDialog = inject(MatDialog);
 
   if (!tokenService.isLoggedIn()) {
-    if (router.url != '/') {
+    // if (router.url != '/') {
       const dialogRef = dialog.open(AutenticarComponent, {
         width: '350px',
       });
       dialogRef.afterClosed().toPromise()
         .then(result => {
-          //router.navigate(['/auth/login']);
-          router.navigate(['/site']); 
+          router.navigate(['/auth/login']);
+          //router.navigate(['/site']); 
           return Promise.resolve(result);
         });
-    } else {
-      //router.navigate(['/auth/login']);
-      router.navigate(['/site']);
-    }
+    // } else {
+    //   router.navigate(['/auth/login']);
+    //   //router.navigate(['/site']);
+    // }
     return false;
     //
   }

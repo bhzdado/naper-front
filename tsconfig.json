@@ -23,6 +23,7 @@
     "lib": [
       "ES2022",
       "dom",
+      "ES2015"
     ],
   },
   "angularCompilerOptions": {
