@@ -18,17 +18,12 @@
 
                     <div class="task__list">
 
-                        <div style="padding-left: 30px;">
-                            <input matInput type="search" [(ngModel)]="textoBusca" (search)="buscar()"
-                                [disabled]="carregando" style="width: 272px;
-                                margin-right: 15px;
-                                margin-bottom: 12px; border-radius: 5px;
-                                border: 1px solid #A9C92F;
-                                height: 37px;
-                                position: static;" autofocus>
-                            <button mat-mini-fab (click)="buscar();" [disabled]="carregando">
-                                <mat-icon>search</mat-icon>
-                            </button>
+                        <div style="padding-left: 30px; padding-bottom: 30px;">
+                            <div class="search-box cf">
+                                <input matInput type="search" [(ngModel)]="textoBusca" class="campo-busca" placeholder="Pesquise aqui..." (search)="buscar()"  [disabled]="carregando" >
+                                <button clas="botao-busca" (click)="buscar();"  [disabled]="carregando">Pesquisar</button>
+                            </div>
+                    
                         </div>
                         <div class="pagination-container" *ngIf="!carregando && getPages()?.length > 1">
                             <a class="pagination-link" *ngIf="currentPage > 1" (click)="listar(currentPage - 1)"><i

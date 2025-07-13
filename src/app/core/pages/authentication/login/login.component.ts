@@ -42,6 +42,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
 
   processando: boolean = false;
   public logo: string = environment.logo;
+  public urlSite: string = environment.urlSite;
 
   @ViewChild('email') inputEmail!: ElementRef;
   @ViewChild('password') inputPassword!: ElementRef;

@@ -47,8 +47,8 @@ export class HomeComponent {
     });
   }
 
-  abrirConteudo(target, id) {
-    this.navegacaoService.navigateTo('conteudo/' + target + '/' + id);
+  abrirConteudo(id) {
+    this.navegacaoService.navigateTo('conteudo/' + id);
   }
 
 }

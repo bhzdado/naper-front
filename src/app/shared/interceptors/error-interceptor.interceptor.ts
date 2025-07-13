@@ -72,6 +72,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         msg += valor + "\n";
                     });
                 } else {
+                    console.log(err);
                     msg = err.error.message;
                 }
             }
@@ -83,12 +84,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                     draggable: true,
                     confirmButtonColor: "#A9C92F",
                     cancelButtonColor: "#d33",
-                    //title: "Oops...",
+                    title: "Oops...",
                     //footer: '<a href="#">Why do I have this issue?</a>'
                 });
 
-                this.loaderService.setLoading(false);
                 this.authState.setAuthState(false);
+                this.loaderService.setLoading(false);
             }
 
             const error = err.error?.message || err?.statusText;

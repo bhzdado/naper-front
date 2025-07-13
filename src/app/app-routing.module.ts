@@ -49,12 +49,12 @@ const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'conteudo/:target/:id',
+        path: 'conteudo/:id',
         loadComponent: () => ConteudoComponent,
         canActivate: [authGuard],
       },
       {
-        path: 'conteudo-detalhe/:id',
+        path: 'conteudo/detalhe/:id',
         loadComponent: () => DetalheComponent,
         canActivate: [authGuard],
       },

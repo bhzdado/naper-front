@@ -45,6 +45,8 @@ import { SpinnerComponent } from './site/spinner/spinner.component';
 import { MenuPrincipalComponent } from './site/layout/menu/menu-principal/menu-principal.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const materialModules = [
   MatButtonModule,
@@ -57,6 +59,7 @@ const materialModules = [
   MatPaginatorModule,
   MatSortModule,
 ];
+
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ const materialModules = [
     DialogModalComponent,
     MenuPrincipalComponent
   ],
+  exports: [FlexLayoutModule, MatListModule, ],
   imports: [
     CommonModule,  
     BrowserModule, 
@@ -94,6 +98,7 @@ const materialModules = [
     RouterOutlet, 
     RouterLink, 
     RouterLinkActive,
+    FlexLayoutModule, MatListModule, 
     MatButtonModule, MatMenuModule, MatIconModule, 
     ToastrModule.forRoot({
       timeOut: 5000,

@@ -14,8 +14,8 @@ export class MediaService {
 
   }
 
-  getPdf(urlPdf: any, callback: Function = null) {
-    return this.httpClient.get<any>(environment.urlApi + 'getPdf/' + btoa(urlPdf)).subscribe(
+  isExternalPdf(urlPdf: any, callback: Function = null) {
+    return this.httpClient.get<any>(environment.urlApi + 'isExternalPdf?url=' + btoa(urlPdf)).subscribe(
         (response: any) => {
           if (typeof callback === 'function') {
             callback(response);

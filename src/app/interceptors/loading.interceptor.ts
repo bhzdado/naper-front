@@ -16,15 +16,16 @@ export class RequestInterceptor implements HttpInterceptor {
   private totalRequests = 0;
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private loadingService: LoaderService,
   ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.totalRequests++;
+    this.loadingService.setLoading(true);
 
     return next.handle(request).pipe(
       finalize(() => {
-       
+        this.loadingService.setLoading(false);
       })
     );
   }

@@ -9,6 +9,7 @@
 
         <div class="container-fluid sticky-top px-0" style="top: -20px;">
             <div class="container-fluid bg-light menu-principal">
+                
                 <div class="container px-0">
                     <nav class="navbar navbar-light navbar-expand-xl">
                         <a href="{{ environment.urlSite }}" class="navbar-brand mt-3">
@@ -17,6 +18,8 @@
                             </p>
                         </a>
 
+                        <app-menu-principal></app-menu-principal>
+                        
                         <button (click)="mostra_telefone()" class="btn {{ !isHamburguer ? 'focus' : ''}}"
                             id="button-telefone">
                             <mat-icon id="mat-icon-phone" style="font-size: 32px;
@@ -73,11 +76,6 @@
                                 </nav>
                             </div>
                         </div>
-
-
-                            <app-menu-principal></app-menu-principal>
-
-                       
                     </nav>
                 </div>
             </div>

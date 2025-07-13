@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { LeitorComponent } from '../shared/modal/leitor/leitor.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,12 +12,12 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 export class NavegacaoService {
 
   constructor(private router: Router, private dialog: MatDialog, public mediaService: MediaService,
-    private loadingService: LoaderService
   ) { }
 
   navigateTo(route: string) {
     localStorage.setItem('rota', route);
-    this.router.navigate([route]);
+    let arrRoute = route.split('/');
+    this.router.navigate(arrRoute);
   }
 
   navigateToWithParams(route: string, params: any) {
@@ -53,12 +53,12 @@ export class NavegacaoService {
   }
 
   abrirPdf(pdf_url) {
-    const dialogSpinner = this.dialog.open(SpinnerComponent, {
+    // const dialogSpinner = this.dialog.open(SpinnerComponent, {
       
-    });
+    // });
 
-    this.mediaService.getPdf(pdf_url, (response) => {
-      if (response.status) {
+    this.mediaService.isExternalPdf(pdf_url, (response) => {
+      if (response.isExternalPdf) {
         const dialogRef = this.dialog.open(LeitorComponent, {
           maxWidth: '100vw',
           maxHeight: '100vh',
@@ -66,18 +66,13 @@ export class NavegacaoService {
           width: '95%',
           panelClass: 'full-screen-modal',
           data: {
-            url: response.pdf,
-            tipoConteudo: 'pdf'
+            url: pdf_url,
+            tipo_conteudo: 'pdf'
           },
         });
-    
-        // dialogRef.afterClosed().subscribe(result => {
-        //   if (result && result.status == 0) {
-        //     this.navigateToExternalUrl(pdf_url);
-        //   }
-        // });
+
+        // dialogRef.close();
       } else {
-        dialogSpinner.close();
         this.navigateToExternalUrl(pdf_url);
       }
     });

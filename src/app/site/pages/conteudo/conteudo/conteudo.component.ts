@@ -26,6 +26,7 @@ import { NavegacaoService } from 'src/app/site/services/navegacao.service';
 import { LeitorComponent } from 'src/app/site/shared/modal/leitor/leitor.component';
 import { MediaService } from 'src/app/services/media.service';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 export interface listagem {
   id: number;
@@ -44,7 +45,7 @@ export interface listagem {
   templateUrl: './conteudo.component.html',
   styleUrl: './conteudo.component.scss'
 })
-export class ConteudoComponent {
+export class ConteudoComponent implements AfterViewInit, OnInit {
   public target: any = "";
   public id: number = 0;
 
@@ -60,6 +61,8 @@ export class ConteudoComponent {
   error: boolean = false;
   mensagem_erro: string = "";
 
+  params: any = null;
+
   private modalElement: any;
 
   pdfUrl = '';
@@ -72,10 +75,31 @@ export class ConteudoComponent {
     public navegacaoService: NavegacaoService,
     public conteudoService: ConteudoService
   ) {
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  ngOnDestroy() {
+    this.params.unsubscribe();
+  }
+
+  ngAfterViewInit() {
     this.target = this.activatedRoute.snapshot.paramMap.get('target') ?? "";
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id')) ?? 0;
-alert(this.id);
-    this.listar(this.currentPage);
+
+    this.params = this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+      
+      this.listar(1);
+    });
+
+
+    // let container = document.getElementById('container');
+    // let elements = this.myDivRef.nativeElement.getElementsByTagName('a');
+    // console.log(elements.length);
   }
 
   getPages() {
@@ -93,45 +117,51 @@ alert(this.id);
 
   listar(currentPage, texto = "") {
     this.carregando = true;
-    switch (this.target) {
-      case 'm':
-        this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto }, (response) => {
-          this.error = false;
+    this.cdr.detectChanges();
+    // switch (this.target) {
+    //   case 'm':
+    this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto }, (response) => {
+      this.error = false;
 
-
-          if (response.status) {
-            this.titulo = response.dados.modulo;
-            this.dataSource = response.dados.conteudos;
-            this.currentPage = response.dados.conteudos.current_page;
-            this.totalPages = response.dados.conteudos.last_page;
-          } else {
-            Swal.fire({
-              icon: "error",
-              text: response.mensagem,
-              draggable: true,
-              confirmButtonColor: "#A9C92F",
-              cancelButtonColor: "#d33",
-              //title: "Oops...",
-              //footer: '<a href="#">Why do I have this issue?</a>'
-          });
-
-            this.error = true;
-            this.dataSource = [];
-            this.currentPage = 1;
-            this.totalPages = 0;
-          }
-          this.carregando = false;
-          this.cdr.detectChanges();
+      if (response.status) {
+        if (response.dados.conteudos) {
+          this.titulo = response.dados.modulo;
+          this.dataSource = response.dados.conteudos;
+          this.currentPage = response.dados.conteudos.current_page;
+          this.totalPages = response.dados.conteudos.last_page;
+        } else {
+          this.abrirDetalhe(response.dados, true);
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: response.mensagem,
+          draggable: true,
+          confirmButtonColor: "#A9C92F",
+          cancelButtonColor: "#d33",
         });
-        break;
-    }
+
+        this.error = true;
+        this.dataSource = [];
+        this.currentPage = 1;
+        this.totalPages = 0;
+      }
+      this.carregando = false;
+      this.cdr.detectChanges();
+    });
+    //     break;
+    // }
   }
 
-  abrirDetalhe(item) {
+  abrirDetalhe(item, modulo = false) {
     if (item.pdf) {
       this.navegacaoService.abrirPdf(item.pdf_url);
     } else {
-      this.navegacaoService.navigateTo('conteudo-detalhe/' + item.id);
+      if(modulo){
+        window.location.href = environment.urlSite + 'conteudo/detalhe/m-' + item.id;
+      } else {
+        this.navegacaoService.navigateTo('conteudo/detalhe/' + item.id);
+      }
     }
   }
 

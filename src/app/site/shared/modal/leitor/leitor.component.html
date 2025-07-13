@@ -18,7 +18,7 @@
     </div>
     <div *ngIf="tipoConteudo=='pdf'"  style="overflow: hidden;">
         <ng-container *ngIf="url">
-            <ngx-extended-pdf-viewer [base64Src]="url" [height]="'80vh'" [textLayer]="true" [listenToURL]="true"
+            <ngx-extended-pdf-viewer [src]="url" [height]="'80vh'" [textLayer]="true" [listenToURL]="true"
                 [showHandToolButton]="true">
             </ngx-extended-pdf-viewer>
         </ng-container>

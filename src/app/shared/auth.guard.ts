@@ -20,8 +20,10 @@ export const authGuard: CanActivateFn = (
       });
       dialogRef.afterClosed().toPromise()
         .then(result => {
-          router.navigate(['/auth/login']);
+          if(result){
+            router.navigate(['/auth/login']);
           //router.navigate(['/site']); 
+          }
           return Promise.resolve(result);
         });
     // } else {

@@ -35,8 +35,8 @@ export class ConteudoService {
       });
   }
 
-  getConteudo(conteudo_id: number, callback: Function = null) {
-    return this.httpClient.get<any>(environment.urlApi + 'conteudo/' + conteudo_id).subscribe(
+  getConteudo(conteudo_id: number, params: string, callback: Function = null) {
+    return this.httpClient.get<any>(environment.urlApi + 'conteudo/' + conteudo_id + params).subscribe(
       (response: any) => {
         if (typeof callback === 'function') {
           callback(response);

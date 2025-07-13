@@ -38,24 +38,24 @@ export class LeitorComponent {
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: ModalData) {
 
-    this.loadingPdf = true;
+    //this.loadingPdf = true;
     this.tipoConteudo = data.tipoConteudo;
-
-    if (this.tipoConteudo == 'pdf') {
-      this.mediaService.getPdf(data.url, (response) => {
-        if (response.status) {
-          this.url = response.pdf;
-          this.loadingPdf = false;
-        } else {
-          this.dialogRef.close({
-            status: 0
-          });
-        }
-      });
-    } else {
-      this.conteudo = data.conteudo;
-      this.loadingPdf = false;
-    }
+    this.conteudo = data.conteudo;
+    // if (this.tipoConteudo == 'pdf') {
+    //   this.mediaService.getPdf(data.url, (response) => {
+    //     if (response.status) {
+    //       this.url = response.pdf;
+    //       this.loadingPdf = false;
+    //     } else {
+    //       this.dialogRef.close({
+    //         status: 0
+    //       });
+    //     }
+    //   });
+    // } else {
+    //   this.conteudo = data.conteudo;
+    //   this.loadingPdf = false;
+    // }
   }
 
   fechar() {
