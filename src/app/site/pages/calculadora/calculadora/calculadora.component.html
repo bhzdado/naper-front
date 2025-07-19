@@ -1,0 +1,165 @@
+<div class="conteudo_actions">
+    <div class="menu-icone-document" id="print-pdf" (click)="voltar()">
+        <div class="icon-button">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+        </div>
+        <h4 class="imprimir-pdf">Voltar</h4>
+    </div>
+    <div class="menu-icone-document" id="visualizar-tela-cheia" (click)="telaCheia()">
+        <div class="icon-button">
+            <i class="fa fa-expand" aria-hidden="true"></i>
+        </div>
+        <h4>Visualizar em Tela Cheia</h4>
+    </div>
+</div>
+
+<div class="container-fluid py-5 conteudo-inicial">
+    <div class="container py-5" style="margin-top: 90px;">
+        <div action="?" class="search-box cf">
+        </div>
+
+        <div class="row g-4" id="element-to-print">
+            <div class="titulo-superior">
+                <div [innerHTML]="titulo"></div>
+            </div>
+            <form [formGroup]="calculadoraFormulario" (submit)="onSubmit()" *ngIf="liberar_calculadora">
+                <div class="complete">
+                    <div class="registration-container">
+                        <div class="registration-body">
+                            <div class="registration-box">
+                                <div class="col-md-12">
+                                    <div class="row ">
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">Nota Fiscal</mat-label>
+                                                <input matInput id="nota_fiscal" class="input-field" type="text"
+                                                    formControlName="nota_fiscal">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">Ocorrência (Mês e Ano)</mat-label>
+                                                <input matInput id="ocorrencia" class="input-field" type="text"
+                                                    mask="00/00/0000" formControlName="ocorrencia"
+                                                    placeholder="__/__/___" style="width:175px!important;"
+                                                    maxlength="10">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">Data de emissão</mat-label>
+                                                <input matInput id="emissao" class="input-field" type="text"
+                                                    formControlName="emissao" placeholder="__/__/___" mask="00/00/0000"
+                                                    style="width:175px!important;" maxlength="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration-box">
+                                <div class="col-md-12">
+                                    <div class="row ">
+                                        <div class="col-md-3">
+                                            <div class="-3">
+                                                <mat-label>UF do Remetente</mat-label>
+                                                <select id="estado" name="estado" formControlName="remetente"
+                                                    class="input-field">
+                                                    <option *ngFor="let estado of estados" [value]="estado.sigla">
+                                                        {{ estado.nome }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label>UF do Destinatário</mat-label>
+                                                <select id="estado" name="estado" formControlName="destinatario"
+                                                    class="input-field">
+                                                    <option *ngFor="let estado of estados" [value]="estado.sigla">
+                                                        {{ estado.nome }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">Remetente (CNPJ)</mat-label>
+                                                <input matInput id="remetente_cnpj" class="input-field" type="text"
+                                                    mask="00.000.000/0000-00" formControlName="remetente_cnpj">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">Destinatário (CNPJ)</mat-label>
+                                                <input matInput id="destinatario_cnpj" class="input-field" type="text"
+                                                    mask="00.000.000/0000-00" formControlName="destinatario_cnpj">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="registration-box">
+                                <div class="col-md-12">
+                                    <div class="row ">
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">NCM</mat-label>
+                                                <input matInput id="ncm" class="input-field" type="text"
+                                                    mask="0000.00.00" formControlName="ncm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-floating mb-3">
+                                                <mat-label align="end">CEST</mat-label>
+                                                <input matInput id="cest" class="input-field" type="text"
+                                                    mask="00.000.00" formControlName="cest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="registration-container">
+                            <div class="registration-body">
+                                <div class="registration-box">
+                                    <div class="col-md-12">
+                                        <div class="row ">
+                                            <div class="col-md-12">
+                                                <div class="form-floating mb-12">
+                                                    <table>
+                                                        <tbody>
+                                                          <tr  *ngFor="let item of calculadoraItens; let i = index" >
+                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:center; width:50px;"> {{ i + 1 }}</td>
+                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left" [innerHTML]="item.label"></td>
+                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left; width:180px;">
+                                                                @if (item.somente_leitura == 1) {
+                                                                    <span id="{{item.alias}}" class="input-field"  mask="0*.00" style="font-weight: bold;">0,00</span>
+                                                                } @else {
+                                                                    <input matInput id="{{item.alias}}" class="input-field item-calculadora input-field-right" type="text" (blur)="calcular($event)" mask="0*.00">
+                                                                }
+                                                            </td>   
+                                                          </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td class="equacao" data-label="" style="text-align:right!important;" [innerHTML]="equacaoGeral?.label" colspan="2"></td>
+                                                                <td class="equacao" data-label="" style="text-align: right; width: 180px; padding: 14px; padding-right: 28px;">
+                                                                    <span id="equacaoGeral"  mask="0*.00" style="font-weight: bold; text-align:right;">0,00</span>
+                                                                </td>
+                                                              </tr>
+                                                        </tfoot>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-register" type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

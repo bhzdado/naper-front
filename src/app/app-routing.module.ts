@@ -11,6 +11,7 @@ import { RelImportacaoNFComponent } from './site/relatorio/rel-importacao-nf/rel
 import { HomeComponent } from './site/pages/home/home.component';
 import { ConteudoComponent } from './site/pages/conteudo/conteudo/conteudo.component';
 import { DetalheComponent } from './site/pages/conteudo/detalhe/detalhe.component';
+import { CalculadoraComponent } from './site/pages/calculadora/calculadora/calculadora.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -56,6 +57,11 @@ const routes: Routes = [
       {
         path: 'conteudo/detalhe/:id',
         loadComponent: () => DetalheComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'calculadora/:id',
+        loadComponent: () => CalculadoraComponent,
         canActivate: [authGuard],
       },
     ]
