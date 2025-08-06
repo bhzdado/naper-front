@@ -324,17 +324,21 @@
 }
 
 .topbar-fundo {
+  /*
   background-image: url(/assets/site-layout/assets/img/bg.jpg);
   background-color: #008BA9;
   background-repeat: repeat;
+  */
   height: 296px;
   z-index: 99;
 }
 
 .topbar-fundo-transparente {
+  /*
   background-color: #FFFFFF;
   background-repeat: repeat;
   border-bottom: 1px solid #2A3A54;
+  */
   opacity: 0.7;
   height: 296px;
   z-index: 100;
