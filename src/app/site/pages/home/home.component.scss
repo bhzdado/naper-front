@@ -328,8 +328,8 @@
   background-image: url(/assets/site-layout/assets/img/bg.jpg);
   background-color: #008BA9;
   background-repeat: repeat;
-  */
   height: 296px;
+  */
   z-index: 99;
 }
 
@@ -343,6 +343,40 @@
   height: 296px;
   z-index: 100;
   left: 0px;
+}
+
+.container-inicial {
+  max-width: 89rem;
+  padding-left: 0.5rem;
+  padding-right: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.banner-inicial {
+  position: relative;
+  background-image: url(/assets/site-layout/images/banner_site.png);
+  padding-top: calc(100% / (1313 / 208));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 46px;
+  border-radius: 1rem;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .banner-inicial {
+      background-image: url(/assets/site-layout/images/banner-site-mobile.png);
+      padding-top: 70%;
+  }
+}
+
+@media (max-width: 780px) {
+  .container-inicial {
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
 }
 
 .topbar-fundo-texto {
