@@ -133,9 +133,9 @@
                                                             <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left" [innerHTML]="item.label"></td>
                                                             <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left; width:180px;">
                                                                 @if (item.somente_leitura == 1) {
-                                                                    <span id="{{item.alias}}" class="input-field"  mask="0*.00" style="font-weight: bold;">0,00</span>
+                                                                    <span id="{{item.alias}}" class="input-field"  style="font-weight: bold;">0,00</span>
                                                                 } @else {
-                                                                    <input matInput id="{{item.alias}}" class="input-field item-calculadora input-field-right" type="text" (blur)="calcular($event)" mask="0*.00">
+                                                                    <input matInput id="{{item.alias}}" class="input-field item-calculadora input-field-right" type="text" (blur)="calcular($event)" mask="separator.2" thousandSeparator="" decimalMarker="," reverse="true">
                                                                 }
                                                             </td>   
                                                           </tr>
@@ -144,7 +144,7 @@
                                                             <tr>
                                                                 <td class="equacao" data-label="" style="text-align:right!important;" [innerHTML]="equacaoGeral?.label" colspan="2"></td>
                                                                 <td class="equacao" data-label="" style="text-align: right; width: 180px; padding: 14px; padding-right: 28px;">
-                                                                    <span id="equacaoGeral"  mask="0*.00" style="font-weight: bold; text-align:right;">0,00</span>
+                                                                    <span id="equacaoGeral"  style="font-weight: bold; text-align:right;">0,00</span>
                                                                 </td>
                                                               </tr>
                                                         </tfoot>

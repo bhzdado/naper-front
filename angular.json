@@ -26,6 +26,7 @@
               "apexcharts",
               "lodash"
             ],
+            "outputHashing": "all",
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",

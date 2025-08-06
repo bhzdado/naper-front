@@ -12,6 +12,7 @@ import { HomeComponent } from './site/pages/home/home.component';
 import { ConteudoComponent } from './site/pages/conteudo/conteudo/conteudo.component';
 import { DetalheComponent } from './site/pages/conteudo/detalhe/detalhe.component';
 import { CalculadoraComponent } from './site/pages/calculadora/calculadora/calculadora.component';
+import Error404Component from './core/default/erros/error404/error404.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -229,6 +230,7 @@ const routes: Routes = [
     component: RelImportacaoNFComponent,
     //canActivate: [authGuard],
   },
+  { path: '**', component: Error404Component }
 ];
 
 @NgModule({

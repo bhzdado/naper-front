@@ -17,7 +17,7 @@
 
       <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!processando">
         <span class="login100-form-logo">
-          <a [routerLink]="urlSite"><img src="/assets/site-layout/images/logos/logo_fundo_escuro.png" style="width: 360px;"></a>
+          <a href="{{urlSite}}"><img src="/assets/site-layout/images/logos/logo_fundo_escuro.png" style="width: 360px;"></a>
         </span>
 
         <span class="login100-form-title p-b-34 p-t-27">

@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { CalculadoraService } from '../calculadora.service';
-import { NgxMaskDirective } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
@@ -65,6 +65,9 @@ const Estados = [
     MatTableResponsiveModule,
     MatButtonModule,
     MatIconModule,
+  ],
+  providers: [
+    provideNgxMask(), // Provide the service
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None,

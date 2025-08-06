@@ -356,11 +356,12 @@
 }
 
 a.btn-section {
-  background-image: url(/assets/site-layout/images/seta_dentro.png);
+  background-image: url(/assets/site-layout/images/seta.png);
   background-repeat: no-repeat;
   background-size: 27px;
-  background-position-x: right;
+  background-position-x: left;
   background-color: white;
+  background-position-y: center;
   color: black;
   border: 1px solid #e3e6e9;
   padding: 10px 20px;
@@ -374,6 +375,7 @@ a.btn-section {
   font: 11px "Inter", sans-serif;
   padding: 18px;
   cursor: pointer;
+  padding-left: 36px;
 }
 
 a.btn-section:hover,
