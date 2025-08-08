@@ -39,11 +39,11 @@ export class HomeComponent {
 
   abrirSelecaoEstado() {
     let dialogRef = this.dialog.open(SelecionarEstadoComponent, {
-      width: '55vw',
-      maxWidth: '55vw',
+      width: '60vw',
+      maxWidth: '35vw',
     });
     dialogRef.afterClosed().subscribe(result => {
-      alert('chosen colors: ' + JSON.stringify(result.selectedColors));
+      //alert('chosen colors: ' + JSON.stringify(result.selectedColors));
     });
   }
 

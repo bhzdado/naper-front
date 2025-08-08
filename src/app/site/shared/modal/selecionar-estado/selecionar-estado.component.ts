@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, inject, model, OnInit, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, Inject, inject, model, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -46,41 +46,41 @@ interface estado {
 })
 
 
-export class SelecionarEstadoComponent implements OnInit {
+export class SelecionarEstadoComponent implements OnInit, AfterViewInit {
 
   form: FormGroup;
   allColors: string[];
   defaultSelections: string[];
-  selectedValue: string;
+  estadoSelecionado: string;
 
   estados: estado[] = [
-    { value: "Acre", viewValue: "AC" },
-    { value: "Alagoas", viewValue: "AL" },
-    { value: "Amapá", viewValue: "AP" },
-    { value: "Amazonas", viewValue: "AM" },
-    { value: "Bahia", viewValue: "BA" },
-    { value: "Ceará", viewValue: "CE" },
-    { value: "Distrito Federal", viewValue: "DF" },
-    { value: "Espírito Santo", viewValue: "ES" },
-    { value: "Goiás", viewValue: "GO" },
-    { value: "Maranhão", viewValue: "MA" },
-    { value: "Mato Grosso", viewValue: "MT" },
-    { value: "Mato Grosso do Sul", viewValue: "MS" },
-    { value: "Minas Gerais", viewValue: "MG" },
-    { value: "Pará", viewValue: "PA" },
-    { value: "Paraíba", viewValue: "PB" },
-    { value: "Paraná", viewValue: "PR" },
-    { value: "Pernambuco", viewValue: "PE" },
-    { value: "Piauí", viewValue: "PI" },
-    { value: "Rio de Janeiro", viewValue: "RJ" },
-    { value: "Rio Grande do Norte", viewValue: "RN" },
-    { value: "Rio Grande do Sul", viewValue: "RS" },
-    { value: "Rondônia", viewValue: "RO" },
-    { value: "Roraima", viewValue: "RR" },
-    { value: "Santa Catarina", viewValue: "SC" },
-    { value: "São Paulo", viewValue: "SP" },
-    { value: "Sergipe", viewValue: "SE" },
-    { value: "Tocantins", viewValue: "TO" }
+    { value: "Acre", viewValue: "acre" },
+    { value: "Alagoas", viewValue: "alagoas" },
+    { value: "Amapá", viewValue: "amapa" },
+    { value: "Amazonas", viewValue: "amazonas" },
+    { value: "Bahia", viewValue: "bahia" },
+    { value: "Ceará", viewValue: "ceara" },
+    { value: "Distrito Federal", viewValue: "distritofederal" },
+    { value: "Espírito Santo", viewValue: "espiritosanto" },
+    { value: "Goiás", viewValue: "goias" },
+    { value: "Maranhão", viewValue: "maranhao" },
+    { value: "Mato Grosso", viewValue: "matogrosso" },
+    { value: "Mato Grosso do Sul", viewValue: "matogrossodosul" },
+    { value: "Minas Gerais", viewValue: "minasgerais" },
+    { value: "Pará", viewValue: "para" },
+    { value: "Paraíba", viewValue: "paraiba" },
+    { value: "Paraná", viewValue: "parana" },
+    { value: "Pernambuco", viewValue: "pernambuco" },
+    { value: "Piauí", viewValue: "piaui" },
+    { value: "Rio de Janeiro", viewValue: "riodejaneiro" },
+    { value: "Rio Grande do Norte", viewValue: "riograndedonorte" },
+    { value: "Rio Grande do Sul", viewValue: "riograndedosul" },
+    { value: "Rondônia", viewValue: "rondonia" },
+    { value: "Roraima", viewValue: "roraima" },
+    { value: "Santa Catarina", viewValue: "santacatarina" },
+    { value: "São Paulo", viewValue: "saopaulo" },
+    { value: "Sergipe", viewValue: "sergipe" },
+    { value: "Tocantins", viewValue: "tocantins" }
   ];
 
   constructor(private formBuilder: FormBuilder,
@@ -88,19 +88,45 @@ export class SelecionarEstadoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.allColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
-    this.defaultSelections = ['red', 'green', 'blue'];
+   
+  }
 
-    this.form = this.formBuilder.group({
-      selectedColors: []
-    });
+  ngAfterViewInit() {
+    
+  }
+
+  onClick(event: MouseEvent) {
+    const target = event.target as SVGPathElement;
+    const estadoId = target.parentElement.id;
+
+    if (estadoId) {
+      this.selecionarEstado(estadoId);
+    }
   }
 
   submit(form) {
-    this.dialogRef.close(form.value);
+    //this.dialogRef.close(form.value);
   }
 
   selecionarEstado(estado) {
-    alert(estado);
+    this.estadoSelecionado = estado;
+
+    const estadoElement = document.getElementById(this.estadoSelecionado);
+    let todos = estadoElement.parentElement.querySelectorAll('a');
+
+    todos.forEach((element, indice) => {
+      let estadoTmp = document.getElementById(element.id);
+      estadoTmp.firstElementChild.classList.remove('marcado');
+      estadoTmp.lastElementChild.classList.remove('text-marcado');
+      estadoTmp.children[1].classList.remove('marcado');
+    });
+
+    if (estadoElement) {
+      estadoElement.firstElementChild.classList.add('marcado');
+      estadoElement.lastElementChild.classList.add('text-marcado');
+      estadoElement.querySelector('.circle')?.classList.add('marcado');
+    }
+
+    console.log(`Estado clicado: ${this.estadoSelecionado}`);
   }
 }
