@@ -1,23 +1,27 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { LeitorComponent } from '../shared/modal/leitor/leitor.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MediaService } from 'src/app/services/media.service';
-import { LoaderService } from './loader.service';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { TokenService } from 'src/app/services/auth/token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavegacaoService {
+  tokenService: TokenService = inject(TokenService);
 
   constructor(private router: Router, private dialog: MatDialog, public mediaService: MediaService,
   ) { }
 
   navigateTo(route: string) {
-    localStorage.setItem('rota', route);
-    let arrRoute = route.split('/');
-    this.router.navigate(arrRoute);
+    if (this.tokenService.isLoggedIn()) {
+      alert('oi');
+    } else {
+      localStorage.setItem('rota', route);
+      let arrRoute = route.split('/');
+      this.router.navigate(arrRoute);
+    }
   }
 
   navigateToWithParams(route: string, params: any) {
@@ -54,7 +58,7 @@ export class NavegacaoService {
 
   abrirPdf(pdf_url) {
     // const dialogSpinner = this.dialog.open(SpinnerComponent, {
-      
+
     // });
 
     this.mediaService.isExternalPdf(pdf_url, (response) => {
@@ -76,7 +80,7 @@ export class NavegacaoService {
         this.navigateToExternalUrl(pdf_url);
       }
     });
-    
+
   }
 
   abrirConteudo(url) {

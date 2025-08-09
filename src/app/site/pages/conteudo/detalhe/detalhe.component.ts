@@ -73,7 +73,8 @@ export class DetalheComponent implements AfterViewInit, OnInit {
 
           switch (currentPath) {
             case '/conteudo/detalhe/isencao':
-              this.tipo_conteudo = 'isencao';
+            case '/conteudo/detalhe/53862':
+                this.tipo_conteudo = 'isencao';
               this.busca_permitida = true;
               this.id = 1520;
               this.cdr.detectChanges();

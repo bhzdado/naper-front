@@ -108,7 +108,7 @@
                                 data-bs-toggle="modal" data-bs-target="#searchModal"><i
                                     class="fas fa-search text-primary"></i></button>
 -->
-                            <button *ngIf="usuarioLogado"  style="color: #2A3A54;" [routerLink]="['/admin']"
+                            <button *ngIf="usuarioLogado"  style="color: #2A3A54;"  (click)="abrirRouteInNovaAba('/admin')"
                                 class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto"><i class="fa fa-cogs"
                                     aria-hidden="true"></i></button>
 
@@ -125,8 +125,8 @@
                                         <span class="text-muted">{{usuarioLogado?.papel}}</span>
                                         <hr />
                                         <ng-scrollbar style="height: 140px;" visibility="hover">
-                                            <button mat-menu-item [routerLink]="['/admin/usuarios']"
-                                                [queryParams]="{u: usuarioLogado?.id}" class="dropdown-item">
+                                            <button mat-menu-item (click)="abrirRouteInNovaAba('/admin/usuarios', '?u=' + usuarioLogado?.id)"
+                                                class="dropdown-item">
                                                 <i class="ti ti-settings"></i>
                                                 <span>Minha Conta</span>
                                             </button>

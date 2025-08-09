@@ -68,6 +68,36 @@ a.btn-section:active {
 #svg-map .text-marcado { fill:  #4d6489; font-weight: bold; }
 
 .container-mapa {
-  padding-left: 32px;
   padding-bottom: 27px;
+  text-align: center;
+}
+
+::ng-deep {
+  .mat-mdc-text-field-wrapper {background: #2A3A54!important;}
+  .mdc-floating-label { color: #A9C92F!important; }
+  .mat-mdc-select-min-line { color: #A9C92F!important; }
+  .mat-mdc-select-arrow svg {
+    fill: #A9C92F!important;
+}
+}
+
+.svg-mapa {
+  width: 550px;
+  height: 400px;
+}
+
+.painel-seleciona-estado {
+    width: 800px;
+    max-width: 800px;
+}
+
+@media only screen and (max-width: 500px) {
+  .painel-seleciona-estado {
+    width: 100vw;
+  }
+
+  .svg-mapa {
+    width: 90vw;
+    height: 100vw;
+  }
 }

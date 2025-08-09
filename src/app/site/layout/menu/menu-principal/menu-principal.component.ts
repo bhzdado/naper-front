@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ResponseService } from 'src/app/services/response.service';
 import { LoaderService } from 'src/app/site/services/loader.service';
 import { NavegacaoService } from 'src/app/site/services/navegacao.service';
-import * as $ from 'jquery';
 
 export interface SubmenuItem {
   id: number;

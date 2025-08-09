@@ -39,8 +39,9 @@ export class HomeComponent {
 
   abrirSelecaoEstado() {
     let dialogRef = this.dialog.open(SelecionarEstadoComponent, {
-      width: '60vw',
-      maxWidth: '35vw',
+      panelClass: 'painel-seleciona-estado',
+      // width: '40vw',
+      // maxWidth: '40vw',
     });
     dialogRef.afterClosed().subscribe(result => {
       //alert('chosen colors: ' + JSON.stringify(result.selectedColors));

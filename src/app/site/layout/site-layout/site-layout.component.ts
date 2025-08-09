@@ -6,6 +6,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { interval } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-site-layout',
@@ -62,7 +63,8 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
     private changeDetectorRef: ChangeDetectorRef,
     private authService: AuthService,
-    private elementRef: ElementRef<HTMLElement>
+    private elementRef: ElementRef<HTMLElement>,
+    private router: Router
   ) {
     this.loading = true;
     this.usuarioLogado = authService.getUser();
@@ -107,6 +109,13 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
       this.mostra_telefone();
     }
     this.isHamburguer_menu = !this.isHamburguer_menu;
+  }
+
+  abrirRouteInNovaAba(routePath: string, params = '') {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([routePath])
+    );
+    window.open(url + params, '_blank');
   }
 
   ngOnInit() {
