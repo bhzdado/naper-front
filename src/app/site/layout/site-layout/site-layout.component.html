@@ -34,6 +34,7 @@
                         </button>
 
                         <button (click)="mostra_menu()" class="btn-menu  {{ !isHamburguer_menu ? 'focus' : ''}}"
+                        
                             id="button-menu">
                             <div class="icon-bar" [@hamburguerX]="isHamburguer_menu ? 'hamburguer' : 'topX'"></div>
                             <div class="icon-bar" [@hamburguerX]="isHamburguer_menu ? 'hamburguer' : 'hide'"></div>
@@ -67,11 +68,16 @@
 
                         <div class="content-menu-phone {{ !isHamburguer ? 'show' : ''}}">
                             <div class="flex-menu flex-menu-phone">
-                                <nav>
-                                    <ul id="links" class="navigation-menu">
-                                        <li> <a href="index.html" class="nav-item nav-link active">TELEFONE Um</a></li>
-                                        <li><a href="detail-page.html" class="nav-item nav-link">TELEFONE Dois</a></li>
-                                        <li><a href="404.html" class="nav-item nav-link">TELEFONE Três</a></li>
+                                <nav style="text-align: center; font-size: 16px;">
+                                    <ul>
+                                        <li class="title-phone-1">
+                                            <div class="font-body3 contato-texto">CONSULTORIA</div>
+                                            <a href="tel:3133278413" class="font-body3 contato-numero" style="margin-top: 10px; font-weight: bold;">(31)3327-8413</a>
+                                        </li>
+                                        <li class="title-phone-1">
+                                            <div class="font-body3 contato-texto">GERAL</div>
+                                            <a href="tel:3133278410" class="font-body3 contato-numero" style="margin-top: 10px; font-weight: bold;">(31)3327-8410</a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>

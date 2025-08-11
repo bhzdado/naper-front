@@ -201,6 +201,10 @@ export default class LoginComponent implements OnInit, AfterViewInit {
                   this.router.navigate(["/"]);
                 }
               }, 1000);
+            },
+            (error) => {
+              this.submited = false;
+              this.processando = false;
             });
 
         }

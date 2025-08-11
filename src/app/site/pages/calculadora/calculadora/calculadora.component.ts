@@ -184,7 +184,7 @@ export class CalculadoraComponent {
           draggable: true,
           confirmButtonColor: "#A9C92F",
           cancelButtonColor: "#d33",
-          title: "Oops...",
+          //title: "Oops...",
           //footer: '<a href="#">Why do I have this issue?</a>'
         });
       }
@@ -272,7 +272,7 @@ alert(mensagem);
         draggable: true,
         confirmButtonColor: "#A9C92F",
         cancelButtonColor: "#d33",
-        title: "Oops...",
+        //title: "Oops...",
         //footer: '<a href="#">Why do I have this issue?</a>'
       });
     }

@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     draggable: true,
                     confirmButtonColor: "#A9C92F",
                     cancelButtonColor: "#d33",
-                    title: "Oops...",
+                    //title: "Oops...",
                     //footer: '<a href="#">Why do I have this issue?</a>'
                 }).then((result) => {
                     this.router.navigate(["/auth/logout"]);
@@ -44,7 +44,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     draggable: true,
                     confirmButtonColor: "#A9C92F",
                     cancelButtonColor: "#d33",
-                    title: "Oops...",
+                    //title: "Oops...",
                     //footer: '<a href="#">Why do I have this issue?</a>'
                 });
 
@@ -84,7 +84,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     draggable: true,
                     confirmButtonColor: "#A9C92F",
                     cancelButtonColor: "#d33",
-                    title: "Oops...",
+                    //title: "Oops...",
                     //footer: '<a href="#">Why do I have this issue?</a>'
                 });
 
