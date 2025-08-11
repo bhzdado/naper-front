@@ -4,6 +4,7 @@ import { LeitorComponent } from '../shared/modal/leitor/leitor.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MediaService } from 'src/app/services/media.service';
 import { TokenService } from 'src/app/services/auth/token.service';
+import { AutenticarComponent } from '../shared/modal/autenticar/autenticar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,17 @@ export class NavegacaoService {
 
   navigateTo(route: string) {
     if (this.tokenService.isLoggedIn()) {
-      alert('oi');
+      const dialogRef = this.dialog.open(AutenticarComponent, {
+        width: '350px',
+      });
+      dialogRef.afterClosed().toPromise()
+        .then(result => {
+          if (result) {
+            //router.navigate(['/auth/login']);
+            //router.navigate(['/site']); 
+          }
+          return Promise.resolve(result);
+        });
     } else {
       localStorage.setItem('rota', route);
       let arrRoute = route.split('/');
