@@ -16,7 +16,7 @@ export class NavegacaoService {
   ) { }
 
   navigateTo(route: string) {
-    if (this.tokenService.isLoggedIn()) {
+    if (!this.tokenService.isLoggedIn()) {
       const dialogRef = this.dialog.open(AutenticarComponent, {
         width: '350px',
       });
