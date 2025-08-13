@@ -47,6 +47,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 const materialModules = [
   MatButtonModule,
@@ -95,6 +96,7 @@ const materialModules = [
     NgxMaskDirective, NgxMaskPipe,
     CountdownModule, 
     CarouselModule,
+    FormsModule,
     RouterOutlet, 
     RouterLink, 
     RouterLinkActive,

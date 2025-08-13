@@ -134,12 +134,14 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
           scriptElement.onload = () => {
             scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/owl.carousel.min.js");
             scriptElement.onload = () => {
-              scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/main.js");
-
-              scriptElement.onload = () => {
-                this.loading = false;
-                this.changeDetectorRef.detectChanges();
-              }
+              scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/jquery.dlmenu.js");
+                scriptElement.onload = () => {
+                scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/main.js");
+                scriptElement.onload = () => {
+                  this.loading = false;
+                  this.changeDetectorRef.detectChanges();
+                }
+                }
             }
           }
         }
