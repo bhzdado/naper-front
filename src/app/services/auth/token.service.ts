@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AppComponent } from 'src/app/app.component';
 import { environment } from 'src/environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +45,34 @@ export class TokenService {
   // Remove token
   removeToken() {
     localStorage.removeItem('access_token');
+  }
+
+  verificarToken(): boolean {
+    const accessToken = localStorage.getItem('access_token');
+
+    if (accessToken) {
+      if (this.isTokenExpired(accessToken)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      if (decodedToken && decodedToken.exp) {
+        const expirationDate = new Date(decodedToken.exp * 1000);
+        return expirationDate < new Date();
+      }
+    } catch (error) {
+      // Lidar com erros de decodificação, por exemplo, token inválido
+      console.error('Erro ao decodificar o token:', error);
+      return true; // Considerar expirado em caso de erro
+    }
+    return true; // Considerar expirado se não houver claim 'exp'
   }
 }

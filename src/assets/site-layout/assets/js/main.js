@@ -20,11 +20,13 @@ $(function () {
     const backLabel3 = listWrapper3.querySelector(".back-one-level span");
     const isVisibleClass = "is-visible";
     const isActiveClass = "is-active";
+    const isShow = "show";
 //
     toggleMenu.addEventListener("click", function () {
         $(this).slideDown("slow");
 
         menuWrapper.classList.toggle(isVisibleClass);
+        menuWrapper.classList.toggle(isShow);
         if (!this.classList.contains(isVisibleClass)) {
             listWrapper2.classList.remove(isVisibleClass);
             listWrapper3.classList.remove(isVisibleClass);

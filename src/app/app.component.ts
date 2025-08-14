@@ -15,14 +15,20 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, public authService: AuthService, private token: TokenService) { }
 
   ngOnInit() {
+    if (!this.token.verificarToken()) {
+      localStorage.removeItem('api_token');
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('usuarioAcl');
+    }
+
     // clear alerts on location change
     this.router.events.subscribe(event => {
-      
+
       if (event instanceof NavigationStart) {
         if (event.url.indexOf("/auth/logout") < 0 && event.url.indexOf("/auth/login") < 0) {
           localStorage.setItem('rota', event.url);
           // setTimeout(() => {
-              // this.authService.refreshToken();
+          // this.authService.refreshToken();
           // }, 2000);
         }
       }
@@ -31,7 +37,7 @@ export class AppComponent implements OnInit {
         if (event.url.indexOf("/auth/logout") < 0 && event.url.indexOf("/auth/login") < 0) {
           localStorage.setItem('rota', event.url);
           // setTimeout(() => {
-               //this.authService.refreshToken();
+          //this.authService.refreshToken();
           // }, 2000);
         }
       }

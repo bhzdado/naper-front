@@ -42,8 +42,8 @@
                                     </div>
                                     <div>
                                         <button (click)="mostra_telefone()"
-                                            class="btn {{ !isHamburguer ? 'focus' : ''}}" id="button-telefone" style="top: 3px; position: relative; right: 33px;">
-                                            <mat-icon id="mat-icon-phone"
+                                            class="btn mat-icon-phone" id="button-telefone" style="top: 3px; position: relative; right: 33px;">
+                                            <mat-icon class="mat-icon-phone"
                                                 style="font-size: 32px; color: #2A3A54;">call_quality</mat-icon>
                                         </button>
                                     </div>
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     -->
-                        <div class="content-menu-phone {{ !isHamburguer ? 'show' : ''}}">
+                        <div class="content-menu-phone {{ mostrar_telefone }}" id="content-menu-phone">
                             <div style="float: right; background: #efefef; width: 100%;">
                                 <div mat-dialog-actions style="float: right;">
                                     <button mat-button mat-dialog-close="true" color="success"  (click)="mostra_telefone()"
@@ -260,12 +260,12 @@
                             <a href="detail-page.html" class="menu-superior-item">Videoaulas</a>
                             <a href="detail-page.html" class="menu-superior-item">Tutorial</a>
                         </div>
-                        <div>
+                        <div style="top: 5px; position: relative;">
                             <div class="top-info flex-grow-0 menu-superior-botao">
-                                <button class="btn-icon" style="margin-top: 9px;" *ngIf="!usuarioLogado"><i
+                                <button class="btn-icon" style="margin-top: 1px;" *ngIf="!usuarioLogado"><i
                                         class="fa fa-credit-card"></i> Compre
                                     Agora!</button>
-                                <button class="btn-icon" style="margin-top: 9px;" *ngIf="!usuarioLogado"><i
+                                <button class="btn-icon" style="margin-top: 1px;" *ngIf="!usuarioLogado"><i
                                         class="fa fa-info-circle"></i> Teste
                                     Grátis</button>
 
@@ -274,16 +274,19 @@
                         <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0">
                             <div class="contato" data-modal="contato">
                                 <p class="font-body3 contato-texto" style="margin: 0px;">CONSULTORIA</p>
-                                <p class="font-body3 contato-numero"><a href="tel:40048080"
-                                        style="color: #FFFFFF!important;" class="title-contato-number">(31)3327-8413</a>
+                                <p class="font-body3 contato-numero">
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i> </span>
+                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp" aria-hidden="true"></i> </span>
+                                    <a href="tel:40048080" style="color: #FFFFFF!important;" class="title-contato-number">(31)3327-8413</a>
                                 </p>
                             </div>
 
                             <div class="contato" data-modal="contato">
                                 <p class="font-body3 contato-texto" style="margin: 0px;">GERAL</p>
-                                <p class="font-body3 contato-numero"><a href="tel:40048080"
-                                        style="color: #FFFFFF!important;" class="title-contato-number">
-                                        (31)3327-8410</a></p>
+                                <p class="font-body3 contato-numero">
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i> </span>
+                                    <a href="tel:40048080" style="color: #FFFFFF!important;" class="title-contato-number">(31)3327-8410</a>
+                                </p>
                             </div>
                         </div>
                         <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0 circle-button">
@@ -353,9 +356,9 @@
                 <div class="container px-0 botoes">
                     <div class="topbar-top d-flex justify-content-between flex-lg-wrap">
                         <div class="top-info flex-grow-0" class="menu-superior-botao-mobile">
-                            <button class="button" style=" background-color: #289EBB; " *ngIf="!usuarioLogado">Compre
+                            <button class="button" style=" background-color: #2A3A54; " *ngIf="!usuarioLogado">Compre
                                 Agora!</button>
-                            <button class="button" style="margin-left: 4px; background-color: #289EBB;"
+                            <button class="button" style="margin-left: 4px; background-color: #2A3A54;"
                                 *ngIf="!usuarioLogado">Teste
                                 Grátis</button>
 

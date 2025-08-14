@@ -79,6 +79,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
 
   isHamburguer = true;
   isHamburguer_menu = true;
+  mostrar_telefone = '';
 
   private setCumprimento(hora: number): string {
     if (hora >= 0 && hora < 12) return 'Bom dia'
@@ -87,21 +88,26 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   }
 
   mostra_telefone() {
-    if (!this.isHamburguer_menu) {
-      this.mostra_menu();
-    }
     let elementRef: ElementRef<HTMLElement>
-    const element = document.getElementById("mat-icon-phone");
+    
+    const elemento = document.getElementById('content-menu-phone');
+    const elements = document.getElementsByClassName('mat-icon-phone') as HTMLCollectionOf<HTMLElement>;
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
 
-    if (element.style.display === "none") {
-      $('.icon-bar-telefone').removeClass("icon-bar");
-      element.style.display = "block";
-    } else {
-      $('.icon-bar-telefone').addClass("icon-bar");
-      element.style.display = "none";
+      if (element.style.display === "none") {
+        this.mostrar_telefone = 'none';
+        element.style.display = 'block';
+        elemento.classList.add('show');
+        //this.renderer.setStyle(element, 'display', 'block');
+      } else {
+        element.style.display = 'none';
+        this.mostrar_telefone = 'show';
+        elemento.classList.remove('show');
+        //this.renderer.setStyle(element, 'display', 'none');
+      }
     }
-
-    this.isHamburguer = !this.isHamburguer;
+    this.changeDetectorRef.detectChanges();
   }
 
   mostra_menu() {
@@ -109,6 +115,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
       this.mostra_telefone();
     }
     this.isHamburguer_menu = !this.isHamburguer_menu;
+    this.changeDetectorRef.detectChanges();
   }
 
   abrirRouteInNovaAba(routePath: string, params = '') {

@@ -13,7 +13,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300&subset=latin-ext);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
 
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
 
 body {
   color: #2A3A54;
@@ -100,8 +103,8 @@ $open: 'Open Sans', sans-serif;
 }
 
 .container {
-  padding-left: 0.25rem!important;
-  padding-right: 0.25rem!important;
+  padding-left: 0.25rem !important;
+  padding-right: 0.25rem !important;
   margin-left: auto;
   margin-right: auto;
 }
@@ -344,7 +347,6 @@ $open: 'Open Sans', sans-serif;
 /***************************** menu ********************************/
 
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
 $burgerheight: 5px;
 $burger: #FFF;
 $red: #FF5757;
@@ -426,8 +428,8 @@ $open: 'Open Sans', sans-serif;
   transition: 0.5s;
   background-color: #FAFAFA;
   top: 0px;
-    z-index: 9999999;
-    border-top: 1px solid black;
+  z-index: 9999999;
+  border-top: 1px solid black;
 
   .navigation-menu {
     font: 600 0.875rem / 1.37 "Inter", sans-serif;
@@ -590,8 +592,6 @@ $open: 'Open Sans', sans-serif;
 
 /******************************************************************************/
 
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-@import url("https://fonts.googleapis.com/css?family=Lato");
 
 .bg-dark {
   background: #2A3A54 !important;
@@ -616,15 +616,15 @@ $open: 'Open Sans', sans-serif;
 .submenu-geral {
   top: 71px;
   position: absolute;
-  height: 24px;
+  height: 13px;
   z-index: 9;
   border-bottom: 4px solid #A9C92F;
 }
 
 .submenu-geral-baixo {
-  top: 89px;
+  top: 84px;
   position: absolute;
-  height: 36px;
+  height: 40px;
 }
 
 @media (min-width: 500px) {
@@ -634,6 +634,7 @@ $open: 'Open Sans', sans-serif;
 
   .submenu-geral {
     height: 53px !important;
+    top: 65px;
   }
 
   .menu-superior {
@@ -1158,7 +1159,7 @@ li>a:focus {
 }
 
 .content {
-/*
+  /*
   margin: 0px -185px 0px 36px;
   min-width: 95% !important;
   */
@@ -1183,24 +1184,25 @@ li>a:focus {
   position: relative;
   top: 1px;
   left: 40px;
+  margin-left: 18px;
 }
 
 .contato-numero {
   color: #A9C92F;
   font-weight: 500;
   display: inline-block;
-  width: 120px;
+  width: 160px;
   position: relative;
-  top: -13px;
+  top: -4px;
 }
 
 .contato-texto {
   color: #A9C92F;
-  padding-top: 0px;
+  padding-top: 7px;
 }
 
 .mat-typography p {
-   margin: 0!important;
+  margin: 0 !important;
 }
 
 
@@ -1208,7 +1210,8 @@ li>a:focus {
   .contato {
     display: none !important;
   }
-  .menu-superior-botao{
+
+  .menu-superior-botao {
     display: none !important;
   }
 }
@@ -1242,9 +1245,9 @@ li>a:focus {
 
 ::ng-deep {
   .cdk-overlay-container {
-      position: fixed;
-      z-index: 9999999!important;
-      background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    z-index: 9999999 !important;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 
   .swal2-container {
@@ -1253,25 +1256,26 @@ li>a:focus {
 }
 
 .topbar {
-  padding: 0px!important;
+  padding: 0px !important;
 }
 
 .botoes {
-  position: relative; 
- top: -23px; 
+  position: relative;
+  top: -23px;
 }
 
 @media (max-width: 500px) {
   .botoes {
-    position: relative; 
-   top: -14px; 
+    position: relative;
+    top: -12px;
+    z-index: 99;
   }
 }
 
 .custom-menu-panel .mat-menu-panel {
   max-width: 330px;
   margin-top: 20px;
-  padding: 15px; 
+  padding: 15px;
   min-width: 310px;
 }
 
@@ -1319,10 +1323,11 @@ a {
   color: inherit;
 }
 
+/*
 body {
   font: 20px / 28px "Noto Sans Mono", monospace;
-  background: var(--orange);
 }
+  */
 
 .notification {
   position: fixed;
@@ -1404,6 +1409,7 @@ body {
   height: calc(100vh - 60px);
   overflow: hidden;
   background-color: #FFFFFF;
+  border-top: 2px solid #A9C92F;
 }
 
 .page-header .menu-wrapper.is-visible {
@@ -1434,12 +1440,12 @@ body {
   transform: none;
 }
 
-.page-header .list-wrapper:nth-child(1) > ul > li > .sub-menu,
+.page-header .list-wrapper:nth-child(1)>ul>li>.sub-menu,
 .page-header .list-wrapper:nth-child(2) .level-3 {
   display: none;
 }
 
-.page-header .menu-wrapper li + li {
+.page-header .menu-wrapper li+li {
   margin-top: 20px;
 }
 
@@ -1450,7 +1456,7 @@ body {
 }
 
 .page-header .menu-wrapper a.nested {
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .page-header .menu-wrapper a:hover,
@@ -1509,8 +1515,8 @@ body {
 }
 
 .img-logo {
-    width: 180px;
-    position: sticky;
-    top: 0px;
-    left: 297px;
-  }
+  width: 180px;
+  position: sticky;
+  top: 0px;
+  left: 297px;
+}
