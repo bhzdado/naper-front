@@ -21,10 +21,8 @@ $(function () {
     const isVisibleClass = "is-visible";
     const isActiveClass = "is-active";
     const isShow = "show";
-//
-    toggleMenu.addEventListener("click", function () {
-        $(this).slideDown("slow");
 
+    toggleMenu.addEventListener("click", function () {
         menuWrapper.classList.toggle(isVisibleClass);
         menuWrapper.classList.toggle(isShow);
         if (!this.classList.contains(isVisibleClass)) {

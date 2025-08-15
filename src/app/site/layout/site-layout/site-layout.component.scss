@@ -1418,7 +1418,7 @@ body {
 
 .page-header .list-wrapper {
   height: 100%;
-  padding: 30px 20px;
+  padding: 30px 30px;
   overflow-y: auto;
   background: var(--menu-bg);
 }
@@ -1453,10 +1453,25 @@ body {
   display: inline-block;
   position: relative;
   padding: 5px 0;
+  width: 100%;
 }
 
-.page-header .menu-wrapper a.nested {
-  /* text-decoration: underline; */
+.nested::after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f054";
+  margin-left: 0.375rem;
+  position: absolute;
+  right: 8%;
+}
+
+.separador {
+  border-bottom: 1px dashed #2A3A55;
+  padding-left: 10px;
+}
+
+.menu-mobile-titulo {
+  font-size: larger;
+  font-weight: 700;
 }
 
 .page-header .menu-wrapper a:hover,
@@ -1469,7 +1484,7 @@ body {
   content: "✦";
   position: absolute;
   top: 50%;
-  right: -20px;
+  left: -15px;
   transform: translateY(-50%);
   color: var(--orange);
 }
