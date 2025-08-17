@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,32 +10,33 @@ import { SelecionarEstadoComponent } from '../../shared/modal/selecionar-estado/
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NavegacaoService } from '../../services/navegacao.service';
-
-
-interface Imposto {
-  value: string;
-  viewValue: string;
-}
+import { AtualizacaoComponent } from './atualizacao/atualizacao/atualizacao.component';
+import { ExplicaComponent } from './explica/explica/explica.component';
+import { CommonModule } from '@angular/common';
+import { CarrosselComponent } from '../../shared/carrossel/carrossel/carrossel.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTabsModule, MatListModule, MatDividerModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatTabsModule, MatListModule, 
+    MatDividerModule, AtualizacaoComponent, ExplicaComponent, CarrosselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent {
-  selectedValue: string;
-
-  impostos: Imposto[] = [
-    { value: 'icms', viewValue: 'ICMS' },
-    { value: 'ipi', viewValue: 'IPI' },
-    { value: 'iss', viewValue: 'ISS' },
-  ];
+export class HomeComponent implements OnInit {
+  isMobile: boolean = false;
 
   constructor(public dialog: MatDialog, public navegacaoService: NavegacaoService) { }
+
+  ngOnInit(): void {
+    this.isMobile = false;
+
+    if(window.innerWidth < 1201){
+      this.isMobile = true;
+    }
+  }
 
   abrirSelecaoEstado() {
     let dialogRef = this.dialog.open(SelecionarEstadoComponent, {
@@ -48,6 +49,7 @@ export class HomeComponent {
     });
   }
 
+  
   abrirConteudo(id) {
     this.navegacaoService.navigateTo('conteudo/' + id);
   }

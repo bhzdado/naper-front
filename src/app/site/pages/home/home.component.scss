@@ -261,7 +261,7 @@
 
 
 .conteudo-inicial {
-  padding-top: 0px !important;
+  padding-top: 34px !important;
 }
 
 @media screen and (min-width: 401px) {
@@ -396,24 +396,34 @@
 a.btn-section {
   background-image: url(/assets/site-layout/images/seta.png);
   background-repeat: no-repeat;
-  background-size: 27px;
-  background-position-x: left;
+  background-size: 10px;
+  background-position-x: 5px;
   background-color: white;
   background-position-y: center;
   color: black;
   border: 1px solid #e3e6e9;
-  padding: 10px 20px;
   text-align: center;
   vertical-align: middle;
   text-decoration: none;
   display: inline-block;
   margin: 4px;
-  width: 235px;
   height: 57px;
   font: 11px "Inter", sans-serif;
   padding: 18px;
   cursor: pointer;
-  padding-left: 36px;
+  border-radius: 10px;
+}
+
+.ferramentas  {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+}
+
+@media (max-width: 500px) {
+  .ferramentas  {
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
+      display: grid;
+  }
 }
 
 a.btn-section:hover,

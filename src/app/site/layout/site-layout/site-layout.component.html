@@ -41,8 +41,8 @@
                                             class="img-logo">
                                     </div>
                                     <div>
-                                        <button (click)="mostra_telefone()"
-                                            class="btn mat-icon-phone" id="button-telefone" style="top: 3px; position: relative; right: 33px;">
+                                        <button (click)="mostra_telefone()" class="btn mat-icon-phone"
+                                            id="button-telefone" style="top: 20px; position: fixed; right: 28px;">
                                             <mat-icon class="mat-icon-phone"
                                                 style="font-size: 32px; color: #2A3A54;">call_quality</mat-icon>
                                         </button>
@@ -176,74 +176,57 @@
                             </nav>
                         </header>
 
-                        <!--
-                        <button (click)="mostra_telefone()" class="btn {{ !isHamburguer ? 'focus' : ''}}"
-                            id="button-telefone">
-                            <mat-icon id="mat-icon-phone" style="font-size: 32px;
-                        color: #2A3A54;
-                        position: absolute;
-                        top: 6px;
-                        left: 0px;">call_quality</mat-icon>
-                            <div class="icon-bar-telefone" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'topX'"></div>
-                            <div class="icon-bar-telefone" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'hide'"></div>
-                            <div class="icon-bar-telefone" [@hamburguerX]="isHamburguer ? 'hamburguer' : 'bottomX'">
-                            </div>
-                        </button>
-
-                        <button (click)="mostra_menu()" class="btn-menu  {{ !isHamburguer_menu ? 'focus' : ''}}"
-                            id="button-menu">
-                            <div class="icon-bar" [@hamburguerX]="isHamburguer_menu ? 'hamburguer' : 'topX'"></div>
-                            <div class="icon-bar" [@hamburguerX]="isHamburguer_menu ? 'hamburguer' : 'hide'"></div>
-                            <div class="icon-bar" [@hamburguerX]="isHamburguer_menu ? 'hamburguer' : 'bottomX'"></div>
-                        </button>
-                        
-
-                          
-                        <div class="content-menu {{ !isHamburguer_menu ? 'show' : ''}}">
-                            <div class="flex-menu">
-                                <nav>
-                                    <ul id="links" class="navigation-menu">
-                                        <li class="separador"> <a href="index.html" class="nav-item nav-link active">Menu Um</a></li>
-                                        <li class="separador"><a href="detail-page.html" class="nav-item nav-link">Menu Dois</a></li>
-                                        <li class="separador">
-                                            <div class="nav-item dropdown">
-                                                <a href="#" class="nav-link dropdown-toggle"
-                                                    data-bs-toggle="dropdown">Menu
-                                                    Quatro</a>
-                                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                                    <a href="#" class="dropdown-item">Dropdown 1</a>
-                                                    <a href="#" class="dropdown-item">Dropdown 2</a>
-                                                    <a href="#" class="dropdown-item">Dropdown 3</a>
-                                                    <a href="#" class="dropdown-item">Dropdown 4</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="separador"><a href="404.html" class="nav-item nav-link">Menu Três</a></li>
-                                        <li class="separador"><a href="contact.html" class="nav-item nav-link">Contato</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    -->
                         <div class="content-menu-phone {{ mostrar_telefone }}" id="content-menu-phone">
                             <div style="float: right; background: #efefef; width: 100%;">
                                 <div mat-dialog-actions style="float: right;">
-                                    <button mat-button mat-dialog-close="true" color="success"  (click)="mostra_telefone()"
-                                        cdkFocusInitial><mat-icon>close</mat-icon></button>
+                                    <button mat-button mat-dialog-close="true" color="success"
+                                        (click)="mostra_telefone()" cdkFocusInitial><mat-icon>close</mat-icon></button>
                                 </div>
                             </div>
                             <div class="flex-menu-phone">
+                                <div
+                                    style="width: 39vw; border-bottom: 1px solid #2A3A54; border-top: 1px solid #A9C92F; position: relative; top: 117px;">
+                                </div>
+                                <div
+                                    style="    position: relative; width: 60vw; left: 43vw; top: 58px; font-size: 27px;">
+                                    <img src="/assets/site-layout/images/headphones-with-mic.png" style="width: 54px;">
+                                </div>
+                                <div
+                                    style="width: 40vw; border-bottom: 1px solid #2A3A54; border-top: 1px solid #A9C92F; position: relative; top: 23px; float: right;">
+                                </div>
                                 <nav style="text-align: center; font-size: 16px; width: 100vw; padding-top: 90px;">
                                     <ul>
-                                        <li class="title-phone-1">
+                                        <li style="padding-top: 26px;">
                                             <div class="font-body3 contato-texto">CONSULTORIA</div>
-                                            <a href="tel:3133278413" class="font-body3 contato-numero"
-                                                style="margin-top: 10px; font-weight: bold; width: 100vw;">(31)3327-8413</a>
+                                            <div>
+                                                <a href="tel:3133278413" class="font-body3 contato-numero"
+                                                    style="width: 21px; color: #2A3A54; text-decoration: overline;">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                </a>
+                                                (31)3327-8413
+                                                <a target="_blank"
+                                                    href="https://api.whatsapp.com/send?phone=553133278413&text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Fiscal%203"
+                                                    class="font-body3 contato-numero"
+                                                    style="width: 21px; color: #2A3A54; text-decoration: overline;">
+                                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         </li>
-                                        <li class="title-phone-1">
+                                        <li style="padding-top: 26px;">
                                             <div class="font-body3 contato-texto">GERAL</div>
-                                            <a href="tel:3133278410" class="font-body3 contato-numero"
-                                                style="margin-top: 10px; font-weight: bold; width: 100vw;">(31)3327-8410</a>
+                                            <div>
+                                                <a href="tel:+553133278410" class="font-body3 contato-numero"
+                                                    style="width: 21px; color: #2A3A54; text-decoration: overline;">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                </a>
+                                                (31)3327-8410
+                                                <a target="_blank"
+                                                    href="https://api.whatsapp.com/send?phone=553133278410&text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Fiscal%203"
+                                                    class="font-body3 contato-numero"
+                                                    style="width: 21px; color: #2A3A54; text-decoration: overline;">
+                                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </nav>
@@ -254,7 +237,8 @@
             </div>
             <div class="container-fluid topbar bg-dark d-lg-block submenu-geral">
                 <div class="container px-0">
-                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap" style=" float: right;">
+                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap"
+                        style=" float: right; top: 6px; position: relative;">
                         <div class="top-info flex-grow-0 menu-superior">
                             <a href="index.html" class="menu-superior-item">Cursos</a>
                             <a href="detail-page.html" class="menu-superior-item">Videoaulas</a>
@@ -268,37 +252,34 @@
                                 <button class="btn-icon" style="margin-top: 1px;" *ngIf="!usuarioLogado"><i
                                         class="fa fa-info-circle"></i> Teste
                                     Grátis</button>
-
                             </div>
                         </div>
                         <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0">
                             <div class="contato" data-modal="contato">
                                 <p class="font-body3 contato-texto" style="margin: 0px;">CONSULTORIA</p>
                                 <p class="font-body3 contato-numero">
-                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i> </span>
-                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp" aria-hidden="true"></i> </span>
-                                    <a href="tel:40048080" style="color: #FFFFFF!important;" class="title-contato-number">(31)3327-8413</a>
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp"
+                                            aria-hidden="true"></i> </span>
+                                    <a href="tel:3133278413" style="color: #FFFFFF!important;"
+                                        class="title-contato-number">(31)3327-8413</a>
                                 </p>
                             </div>
 
                             <div class="contato" data-modal="contato">
                                 <p class="font-body3 contato-texto" style="margin: 0px;">GERAL</p>
                                 <p class="font-body3 contato-numero">
-                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i> </span>
-                                    <a href="tel:40048080" style="color: #FFFFFF!important;" class="title-contato-number">(31)3327-8410</a>
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp"
+                                            aria-hidden="true"></i> </span>
+                                    <a href="tel:3133278413" style="color: #FFFFFF!important;"
+                                        class="title-contato-number">(31)3327-8410</a>
                                 </p>
                             </div>
                         </div>
                         <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0 circle-button">
-                            <!--
-                            <button *ngIf="!usuarioLogado" style="color: #2A3A54;"
-                                class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto btn-entrar"
-                                data-bs-toggle="modal" data-bs-target="#searchModal"></button>
-                            <button
-                                class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto"
-                                data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                    class="fas fa-search text-primary"></i></button>
--->
                             <button *ngIf="usuarioLogado" style="color: #2A3A54;"
                                 (click)="abrirRouteInNovaAba('/admin')"
                                 class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto"><i
@@ -327,24 +308,6 @@
                                         <span>Sair</span>
                                     </button>
                                 </span>
-                                <!--
-                                        <h4 class="small" style="font-size: 16px;"> <span class=" text-muted"
-                                                style="font-weight: bold;"> {{usuarioLogado?.nome}}</span> </h4>
-                                        <span class="text-muted">{{usuarioLogado?.papel}}</span>
-                                        <hr />
-                                        <ng-scrollbar style="height: 140px;" visibility="hover">
-                                            <button mat-menu-item (click)="abrirRouteInNovaAba('/admin/usuarios', '?u=' + usuarioLogado?.id)"
-                                                class="dropdown-item">
-                                                <i class="ti ti-settings"></i>
-                                                <span>Minha Conta</span>
-                                            </button>
-                                            <hr />
-                                            <button mat-menu-item [routerLink]="['/auth/logout']" class="dropdown-item">
-                                                <i class="ti ti-logout"></i>
-                                                <span>Sair</span>
-                                            </button>
-                                        </ng-scrollbar>
--->
                             </mat-menu>
                         </div>
                     </div>
@@ -356,46 +319,17 @@
                 <div class="container px-0 botoes">
                     <div class="topbar-top d-flex justify-content-between flex-lg-wrap">
                         <div class="top-info flex-grow-0" class="menu-superior-botao-mobile">
-                            <button class="button" style=" background-color: #2A3A54; " *ngIf="!usuarioLogado">Compre
-                                Agora!</button>
-                            <button class="button" style="margin-left: 4px; background-color: #2A3A54;"
-                                *ngIf="!usuarioLogado">Teste
-                                Grátis</button>
-
+                            <button class="button" style=" background-color: #2A3A54; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado">Compre<br>Agora!</button>
+                            <button class="button" style="margin-left: 4px; background-color: #2A3A54; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado">Teste<br>Grátis</button>
+                            <button class="button"  [routerLink]="['/auth/login']"
+                                style="background-color: #2A3A54; float: right; position: relative; margin-left: 68px; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado"> Área do Cliente</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--
-        <div class="container-fluid topbar-fundo">
-            <div class="container px-0 topbar-fundo-container">
-                <div class="topbar-top d-flex justify-content-between flex-lg-wrap topbar-fundo-texto">
-                    <div class="div-text-rml">
-                        "Eu sou Romilda Alves, especialista e consultora de ICMS, ISS E IPI há 27 anos.
-
-                        Estou aqui para esclarecer as suas dúvidas, por telefone, whatsapp, aulas ao vivo e
-                        videoaulas, sobre:
-                        <ul style="font-size: 14px; text-align: left; padding-top: 10px; padding-left: 180px;">
-                            <li class="separador">ICMS de todos Estados</li>
-                            <li class="separador">ISS de todas as capitais</li>
-                            <li class="separador">IPI"</li>
-                        </ul>
-                    </div>
-                    <div class="div-img-rml">
-                        <img src="/assets/site-layout/images/romilda.png" class="img-rml" id="img_rmld">
-                    </div>
-                    <div class="div-text-direito">
-                        PLANOS IMPERDÍVEIS PARA VOCÊ TER
-                        ACESSO ILIMITADO À CONSULTORIA POR TELEFONE/WHATSAPP E
-                        ACESSO ILIMITADO ÀS CALCULADORAS DO ICMS ST E DIFAL COM GERAÇÃO DE RELATÓRIOS.
-                        <br>
-                        <div style="width: 100%; text-align: right; padding-top: 10px;">Assine Agora</div>
-                    </div>
-                </div>
-                <div class="topbar-top d-flex justify-content-between flex-lg-wrap topbar-fundo-transparente"></div>
-            </div>
-        </div>
-    -->
         </div>
         <!-- Navbar End -->
 
@@ -419,163 +353,7 @@
             </div>
         </div>
 
-        <!-- Modal Search End -->
-        <!--
-    <div class="container-fluid mobile-submenu ">
-        <div class="" style="">
-            <div class="col-lg-12 col-xl-12 mt-0">
-                <div class="top-info flex-grow-0 top-info-buttons">
-                    <a href="https://iob.com.br/iob-online/#planos" target="_blank"
-                        class="button bg-primary font-button">Compre Agora!</a>
-                    <a href="https://iob.com.br/iob-online/#planos" target="_blank"
-                        class="button bg-primary font-button">Teste Grátis</a>
-                    <a href="https://iob.com.br/iob-online/#planos" target="_blank"
-                        class="button bg-primary font-button top-info-buttons-acesso">Acesse <br>Sua Área</a>
-                </div>
-            </div>
-        </div>
-    </div>
--->
-
         <router-outlet></router-outlet>
-        <!--
-    ///CONTEUDO AQUI
--->
-
-        <!-- Footer Start -->
-        <!--
-    <div class="container-fluid bg-dark footer py-5">
-        <div class="container py-5">
-
-            <div class="row g-5">
-                <div class="col-lg-12 col-xl-3">
-                    <div class="footer-item-1">
-                       
-                        <h4 class="mb-4 text-white">Get In Touch</h4>
-                        <p class="text-secondary line-h">Address: <span class="text-white">123 Streat, New York</span>
-                        </p>
-                        <p class="text-secondary line-h">Email: <span class="text-white">Example&#64;gmail.com</span>
-                        </p>
-                        <p class="text-secondary line-h">Phone: <span class="text-white">+0123 4567 8910</span></p>
-                        <div class="d-flex line-h">
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter text-dark"></i></a>
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f text-dark"></i></a>
-                            <a class="btn btn-light me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube text-dark"></i></a>
-                            <a class="btn btn-light btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in text-dark"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-3">
-                    <div class="footer-item-2">
-                        <div class="d-flex flex-column mb-4">
-                            <h4 class="mb-4 text-white">Recent Posts</h4>
-                            <a href="#">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle border border-2 border-primary overflow-hidden">
-                                        <img src="/assets/site-layout/assets/img/footer-1.jpg"
-                                            class="img-zoomin img-fluid rounded-circle w-100" alt="">
-                                    </div>
-                                    <div class="d-flex flex-column ps-4">
-                                        <p class="text-uppercase text-white mb-3">Life Style</p>
-                                        <a href="#" class="h6 text-white">
-                                            Get the best speak market, news.
-                                        </a>
-                                        <small class="text-white d-block"><i class="fas fa-calendar-alt me-1"></i> Dec
-                                            9, 2024</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <a href="#">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle border border-2 border-primary overflow-hidden">
-                                        <img src="/assets/site-layout/assets/img/footer-2.jpg"
-                                            class="img-zoominimg-fluid rounded-circle w-100" alt="">
-                                    </div>
-                                    <div class="d-flex flex-column ps-4">
-                                        <p class="text-uppercase text-white mb-3">Sports</p>
-                                        <a href="#" class="h6 text-white">
-                                            Get the best speak market, news.
-                                        </a>
-                                        <small class="text-white d-block"><i class="fas fa-calendar-alt me-1"></i> Dec
-                                            9, 2024</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-3">
-                    <div class="d-flex flex-column text-start footer-item-3">
-                        <h4 class="mb-4 text-white">Categories</h4>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Sports</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Magazine</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Lifestyle</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Politician</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Technology</a>
-                        <a class="btn-link text-white" href=""><i class="fas fa-angle-right text-white me-2"></i>
-                            Intertainment</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xl-3">
-                    <div class="footer-item-4">
-                        <h4 class="mb-4 text-white">Our Gallary</h4>
-                        <div class="row g-2">
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-1.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-2.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-3.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-4.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-5.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="rounded overflow-hidden">
-                                    <img src="/assets/site-layout/assets/img/footer-6.jpg"
-                                        class="img-zoomin img-fluid rounded w-100" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        -->
-        <!-- Footer End -->
-
     </div>
     <!-- Copyright Start -->
     <footer>

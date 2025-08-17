@@ -17,6 +17,7 @@ import { NgxCaptchaModule, ReCaptcha2Component } from 'ngx-captcha'
 import { environment } from 'src/environments/environment';
 import { LoaderService } from 'src/app/services/loader.service';
 import { EsqueciSenhaComponent } from 'src/app/site/shared/modal/esqueci-senha/esqueci-senha.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -138,77 +139,91 @@ export default class LoginComponent implements OnInit, AfterViewInit {
 
     //   return;
     // } else {
-      this.recaptchaVerificado = false;
+    this.recaptchaVerificado = false;
 
-      this.authService.signin(this.loginForm.value).subscribe(
-        (result) => {
-          localStorage.removeItem('usuario');
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('api_token');
+    this.authService.signin(this.loginForm.value).subscribe(
+      (result) => {
+        localStorage.removeItem('usuario');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('api_token');
 
-          localStorage.setItem('usuario', btoa(JSON.stringify(result.user)));
-          this.responseHandler(result);
+        localStorage.setItem('usuario', btoa(JSON.stringify(result.user)));
+        this.responseHandler(result);
 
-          this.texto_autenticacao = "Credenciais validas.";
+        this.texto_autenticacao = "Credenciais validas.";
 
-          if (this.loginForm.value.remember) {
-            localStorage.setItem('fiscal3.usuario.email', btoa(result.user.email));
-          }
-        },
-        (error) => {
-          this.processando = false;
-          this.kepceHidden = false;
-          this.loginForm.get('recaptcha').setValidators(Validators.required);
-          this.captchaElem.resetCaptcha();
-          this.loginForm.value.recaptcha = "";
-          this.recaptchaVerificado = false;
-          //this.loginForm.reset();
-        },
-        () => {
-          this.authState.setAuthState(true);
+        if (this.loginForm.value.remember) {
+          localStorage.setItem('fiscal3.usuario.email', btoa(result.user.email));
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.processando = false;
+        this.kepceHidden = false;
+        //this.loginForm.get('recaptcha').setValidators(Validators.required);
+        //this.captchaElem.resetCaptcha();
+        this.loginForm.value.recaptcha = "";
+        this.recaptchaVerificado = false;
+        //this.loginForm.reset();
 
-          this.formAuthAntigo.get('email').setValue(this.loginForm.value.email);
-          this.formAuthAntigo.get('password').setValue(this.loginForm.value.password);
+        Swal.fire({
+          icon: "error",
+          text: error,
+          draggable: true,
+          confirmButtonColor: "#A9C92F",
+          cancelButtonColor: "#d33",
+          //title: "Oops...",
+          //footer: '<a href="#">Why do I have this issue?</a>'
+        }).then((result) => {
+          
+        });
 
-          //this.loginForm.reset();
+      },
+      () => {
+        this.authState.setAuthState(true);
 
-          this.texto_autenticacao = "Buscando suas permissões...";
+        this.formAuthAntigo.get('email').setValue(this.loginForm.value.email);
+        this.formAuthAntigo.get('password').setValue(this.loginForm.value.password);
 
-          this.authService.loadAclUser(this.authService.getUser()?.id).subscribe(
-            (resultAcl) => {
-              if (resultAcl.status == 1) {
-                let acl = {
-                  'role': resultAcl.dados.roles,
-                  'permissions': resultAcl.dados.permissions
-                }
+        //this.loginForm.reset();
 
-                localStorage.setItem('usuarioAcl', btoa(JSON.stringify(acl)));
+        this.texto_autenticacao = "Buscando suas permissões...";
+
+        this.authService.loadAclUser(this.authService.getUser()?.id).subscribe(
+          (resultAcl) => {
+            if (resultAcl.status == 1) {
+              let acl = {
+                'role': resultAcl.dados.roles,
+                'permissions': resultAcl.dados.permissions
               }
 
-              const settimeoutErro = setTimeout(() => {
-                this.texto_autenticacao = "Seja bem-vindo...";
-                //(<HTMLFormElement>document.getElementById('formAutenticarAuthAntigo')).submit();
+              localStorage.setItem('usuarioAcl', btoa(JSON.stringify(acl)));
+            }
 
-                let rota = localStorage.getItem('rota');
-                if (rota) {
-                  try {
-                    this.router.navigate([rota]);
-                    localStorage.removeItem('rota');
-                  } catch (e) {
-                    this.router.navigate(["/"]);
-                  }
-                } else {
+            const settimeoutErro = setTimeout(() => {
+              this.texto_autenticacao = "Seja bem-vindo...";
+              //(<HTMLFormElement>document.getElementById('formAutenticarAuthAntigo')).submit();
+
+              let rota = localStorage.getItem('rota');
+              if (rota) {
+                try {
+                  this.router.navigate([rota]);
+                  localStorage.removeItem('rota');
+                } catch (e) {
                   this.router.navigate(["/"]);
                 }
-              }, 1000);
-            },
-            (error) => {
-              this.submited = false;
-              this.processando = false;
-            });
+              } else {
+                this.router.navigate(["/"]);
+              }
+            }, 1000);
+          },
+          (error) => {
+            this.submited = false;
+            this.processando = false;
+          });
 
-        }
-      );
+      }
+    );
     // }
   }
   // Handle response

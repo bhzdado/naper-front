@@ -88,25 +88,12 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   }
 
   mostra_telefone() {
-    let elementRef: ElementRef<HTMLElement>
-    
-    const elemento = document.getElementById('content-menu-phone');
-    const elements = document.getElementsByClassName('mat-icon-phone') as HTMLCollectionOf<HTMLElement>;
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-
-      if (element.style.display === "none") {
-        this.mostrar_telefone = 'none';
-        element.style.display = 'block';
-        elemento.classList.add('show');
-        //this.renderer.setStyle(element, 'display', 'block');
-      } else {
-        element.style.display = 'none';
-        this.mostrar_telefone = 'show';
-        elemento.classList.remove('show');
-        //this.renderer.setStyle(element, 'display', 'none');
-      }
+    if (this.mostrar_telefone === "show") {
+      this.mostrar_telefone = 'none';
+    } else {
+      this.mostrar_telefone = 'show';
     }
+
     this.changeDetectorRef.detectChanges();
   }
 
