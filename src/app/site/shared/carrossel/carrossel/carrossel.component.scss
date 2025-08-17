@@ -4,6 +4,7 @@
     height: 300px;
     transition: all 0.5s ease-in-out;
     border-radius: 10px;
+    border: 1px solid #e3e6e9;
   }
   
   .botoes-controle {
@@ -23,8 +24,7 @@
   }
   
   .botoes-controle button.ativo {
-    background: #ff0000;
+    background: #A9C92F;
     cursor: default;
-    border-radius: 10px;
   }
   
