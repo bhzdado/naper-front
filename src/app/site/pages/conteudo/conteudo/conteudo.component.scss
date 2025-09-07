@@ -2550,3 +2550,150 @@ p#vtip #vtipArrow {
     border: 0;
     padding: 0;
   } 
+
+  
+
+.search-box {
+
+  width: 80%;
+  margin: auto;
+}
+
+.search-box .campo-busca {
+
+  width: 85%;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 8px;
+  float: left;
+  font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+  border: 0;
+  background: #EEE;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .4) inset, 0 1px 0 rgba(255, 255, 255, .2);
+  border-radius: 15px 0 0 15px;
+
+}
+
+.search-box .campo-busca:focus {
+  outline: 0;
+  background: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
+}
+
+.search-box .campo-busca::-webkit-input-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.search-box .campo-busca:-moz-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.search-box .campo-busca:-ms-input-placeholder {
+  color: #999;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.search-box button {
+
+  overflow: visible;
+  position: relative;
+  float: right;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #2A3A54;
+  background: #A9C92F;
+  border-radius: 0 15px 15px 0;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+
+}
+
+.search-box button:hover {
+  background: #A9C92F;
+}
+
+/*
+.search-box button:active,
+.search-box button:focus {
+  background: #202020;
+  outline: 0;
+}
+  */
+
+.search-box button:before {
+  content: '';
+  position: absolute;
+  border-width: 8px 8px 8px 0;
+  border-style: solid solid solid none;
+  border-color: transparent #d0d3c6 transparent;
+  top: 12px;
+  left: -6px;
+}
+
+.search-box button:hover:before {
+  border-right-color: #A9C92F;
+}
+
+/*
+.search-box button:focus:before,
+.search-box button:active:before {
+  border-right-color: #202020;
+}
+*/
+
+.search-box button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 56vw !important;
+  border: 1px solid #2A3A54 !important;
+  border-right: none !important;
+  padding: 5px !important;
+  height: 36px !important;
+  border-radius: 5px 0 0 5px !important;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus {
+  color: #2A3A54;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #2A3A54;
+  background: #2A3A54;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

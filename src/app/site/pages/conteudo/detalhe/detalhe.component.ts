@@ -17,7 +17,7 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
 @Component({
   selector: 'app-detalhe',
   standalone: true,
-  imports: [SafeHtmlPipe, CommonModule, SharedModule,FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule],
+  imports: [SafeHtmlPipe, CommonModule, SharedModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,35 +54,35 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
-    
+
     this.activatedRoute.queryParams
       .subscribe(params => {
         if (params) {
           let queryValue = params['qValue'];
           let query = params['q'];
 
-          if( query) this.atualizaParams('q', query);
-          if(queryValue) this.atualizaParams('qValue', queryValue);
+          if (query) this.atualizaParams('q', query);
+          if (queryValue) this.atualizaParams('qValue', queryValue);
 
-          let currentPath = window.location.pathname;
+          // let currentPath = window.location.pathname;
 
-          switch (currentPath) {
-            case '/conteudo/detalhe/isencao':
-            case '/conteudo/detalhe/53862':
-                this.tipo_conteudo = 'isencao';
-              this.busca_permitida = true;
-              this.id = 1520;
-              this.cdr.detectChanges();
-              break;
-          }
+          // switch (currentPath) {
+          //   case '/conteudo/detalhe/isencao':
+          //   case '/conteudo/detalhe/53862':
+          //       this.tipo_conteudo = 'isencao';
+          //     this.busca_permitida = true;
+          //     this.id = 1520;
+          //     this.cdr.detectChanges();
+          //     break;
+          // }
         }
       }
-    );
+      );
 
     this.cdr.detectChanges();
     this.activatedRoute.params.subscribe(params => {
@@ -92,6 +92,21 @@ export class DetalheComponent implements AfterViewInit, OnInit {
         if (tmp[0] == 'm') {
           this.atualizaParams('m', 1);
           this.id = tmp[1];
+        } else {
+          switch (this.id.toString()) {
+            case 'isencao':
+            case '53862':
+              this.tipo_conteudo = 'isencao';
+              this.busca_permitida = true;
+              this.id = 1520;
+              this.cdr.detectChanges();
+              break;
+            case '58290':
+            case '33529':
+              this.busca_permitida = true;
+              this.cdr.detectChanges();
+              break;
+          }
         }
 
         this.getConteudo(this.id, this.params);
@@ -101,7 +116,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   }
 
   atualizaParams(campo, valor, renovar = false) {
-    if(renovar){
+    if (renovar) {
       this.params = '';
     }
 
@@ -126,12 +141,21 @@ export class DetalheComponent implements AfterViewInit, OnInit {
 
   getConteudo(id, params = '') {
     this.loadingService.setLoading(true);
-    
-    this.conteudoService.getConteudo(id, params, (response) => {
-      this.ultima_atualizacao = response.dados.ultima_atualizacao;
-      this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
-      this.conteudo = this.sanitizer.bypassSecurityTrustHtml(response.dados.conteudo);
 
+    this.conteudoService.getConteudo(id, params, (response) => {
+      let conteudo = "";
+
+      //this.ultima_atualizacao = response.dados.ultima_atualizacao;
+      if (!Array.isArray(response.dados)) {
+        this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
+        conteudo = response.dados.conteudo;
+      } else {
+        response.dados.forEach(element => {
+          conteudo += element.titulo;
+        });
+      }
+
+      this.conteudo = this.sanitizer.bypassSecurityTrustHtml(conteudo);
       this.tratarLinks();
       this.cdr.detectChanges();
       this.loadingService.setLoading(false);
@@ -165,7 +189,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
       .from(document.getElementById('element-to-print').innerHTML)
       .toPdf()
       .save();
-      this.loadingService.setLoading(false);
+    this.loadingService.setLoading(false);
   }
 
   async telaCheia() {

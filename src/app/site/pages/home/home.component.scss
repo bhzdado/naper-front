@@ -409,9 +409,10 @@ a.btn-section {
   margin: 4px;
   height: 57px;
   font: 11px "Inter", sans-serif;
-  padding: 18px;
+  padding: 18px 18px 18px 26px;
   cursor: pointer;
   border-radius: 10px;
+  place-items: center;
 }
 
 .ferramentas  {
@@ -423,6 +424,10 @@ a.btn-section {
   .ferramentas  {
       grid-template-columns: repeat(2, minmax(160px, 1fr));
       display: grid;
+  }
+
+  a.btn-section {
+    padding: 8px 18px 18px 26px;
   }
 }
 

@@ -77,33 +77,13 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
       })
   }
 
-  isHamburguer = true;
-  isHamburguer_menu = true;
-  mostrar_telefone = '';
-
   private setCumprimento(hora: number): string {
     if (hora >= 0 && hora < 12) return 'Bom dia'
     if (hora >= 12 && hora < 18) return 'Boa tarde'
     return 'Boa noite'
   }
 
-  mostra_telefone() {
-    if (this.mostrar_telefone === "show") {
-      this.mostrar_telefone = 'none';
-    } else {
-      this.mostrar_telefone = 'show';
-    }
-
-    this.changeDetectorRef.detectChanges();
-  }
-
-  mostra_menu() {
-    if (!this.isHamburguer) {
-      this.mostra_telefone();
-    }
-    this.isHamburguer_menu = !this.isHamburguer_menu;
-    this.changeDetectorRef.detectChanges();
-  }
+  
 
   abrirRouteInNovaAba(routePath: string, params = '') {
     const url = this.router.serializeUrl(

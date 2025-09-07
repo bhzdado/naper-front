@@ -18,13 +18,15 @@
 
                     <div class="task__list">
 
-                        <div style="padding-left: 30px; padding-bottom: 30px;">
-                            <div class="search-box cf">
-                                <input matInput type="search" [(ngModel)]="textoBusca" class="campo-busca" placeholder="Pesquise aqui..." (search)="buscar()"  [disabled]="carregando" >
-                                <button clas="botao-busca" (click)="buscar();"  [disabled]="carregando">Pesquisar</button>
+                        <div action="?" class="" >
+                            <div class="search">
+                               <input matInput type="search" class="searchTerm" placeholder="Pesquise aqui..."  [(ngModel)]="textoBusca"  (search)="buscar()"  [disabled]="carregando">
+                               <button type="submit" class="searchButton"  (click)="buscar();"  [disabled]="carregando">
+                                 <i class="fa fa-search"></i>
+                              </button>
                             </div>
-                    
-                        </div>
+                         </div>
+
                         <div class="pagination-container" *ngIf="!carregando && getPages()?.length > 1">
                             <a class="pagination-link" *ngIf="currentPage > 1" (click)="listar(currentPage - 1)"><i
                                     class="fa fa-angle-double-left" aria-hidden="true"></i></a>

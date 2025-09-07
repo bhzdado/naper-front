@@ -65,16 +65,38 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
 
     this.loadingService.show();
     this.carregarMenus();
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
 
+  isHamburguer = true;
+  isHamburguer_menu = true;
+  mostrar_telefone = '';
+
+  mostra_telefone() {
+    if (this.mostrar_telefone === "show") {
+      this.mostrar_telefone = 'none';
+    } else {
+      this.mostrar_telefone = 'show';
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  mostra_menu() {
+    if (!this.isHamburguer) {
+      this.mostra_telefone();
+    }
+    this.isHamburguer_menu = !this.isHamburguer_menu;
+    this.cdr.detectChanges();
   }
 
   abrirConteudo(url, event: any) {
     const clickedElement = event.target as HTMLElement;
     const parentElement = clickedElement.closest('.dropdown-menu');
-
     if (parentElement) {
       parentElement.classList.remove('show');
     }
@@ -84,6 +106,15 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
     }
 
     this.cdr.detectChanges();
+  }
+
+  abrirConteudoMobile(url: string) {
+    this.mostra_menu();
+    console.log('ola');
+    // alert(url);
+    // if (url) {
+    //   this.navegacaoService.navigateTo(url);
+    // }
   }
 
   carregarMenus() {

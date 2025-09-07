@@ -979,11 +979,10 @@ p#vtip #vtipArrow {
 }
 
 .conteudo_actions {
-  text-align: right;
   float: right;
   margin-top: 190px;
   position: relative;
-  padding-right: 77px;
+  width: 94vw;
 }
 
 .conteudo_actions h4 {
@@ -1588,6 +1587,36 @@ p#vtip #vtipArrow {
   color: #333 !important;
 }
 
+.complete {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .complete {
+    width: 100vw !important;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid #ccc;
+    padding-left: 0px;
+  }
+
+  .titulo-superior {
+    margin-top: 0px!important;
+  }
+
+  .element-to-print {
+    margin: 12px !important;
+    margin-left: -31px !important;
+    padding: 12px !important;
+    width: 90vw;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 1px solid #ccc;
+  }
+}
+
 .complete .ementa {
   margin-bottom: 20px;
   padding: 15px !important;
@@ -1943,6 +1972,7 @@ a {
   line-height: 1.8rem;
   font-weight: 700;
   margin-bottom: 10px;
+  margin-top: 55px;
 }
 
 table {
@@ -2066,6 +2096,7 @@ td {
 .search-box button:hover {
   background: #A9C92F;
 }
+
 /*
 .search-box button:active,
 .search-box button:focus {
@@ -2098,4 +2129,47 @@ td {
 .search-box button::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 56vw !important;
+  border: 1px solid #2A3A54 !important;
+  border-right: none !important;
+  padding: 5px !important;
+  height: 36px !important;
+  border-radius: 5px 0 0 5px !important;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus {
+  color: #2A3A54;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #2A3A54;
+  background: #2A3A54;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -15,20 +15,23 @@
         <div class="icon-button">
             <i class="fa fa-expand" aria-hidden="true"></i>
         </div>
-        <h4>Visualizar em Tela Cheia</h4>
+        <h4>Tela Cheia</h4>
     </div>
 </div>
 
 <div class="container-fluid py-5 conteudo-inicial">
     <div class="container py-5" style="margin-top: 90px;">
-        <div action="?" class="search-box cf" *ngIf="busca_permitida">
-            <input matInput type="search" [(ngModel)]="textoBusca" class="campo-busca" placeholder="Pesquise aqui..."
-                (search)="buscar()" >
-            <button clas="botao-busca" (click)="buscar();" >Pesquisar</button>
-        </div>
+        <div action="?" class="" *ngIf="busca_permitida">
+            <div class="search">
+               <input matInput type="search" class="searchTerm" placeholder="Pesquise aqui..."  [(ngModel)]="textoBusca"  (search)="buscar()">
+               <button type="submit" class="searchButton"  (click)="buscar();">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+         </div>
+        
 
-        <div class="row g-4" id="container" id="element-to-print"
-            style="margin: 12px!important; padding: 12px!important;">
+        <div class="row g-4 element-to-print" id="container" id="element-to-print">
             <div class="titulo-superior">
                 <div [innerHTML]="titulo"></div>
                 <!--
