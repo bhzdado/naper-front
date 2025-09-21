@@ -19,6 +19,10 @@
         </div>
 
         <div class="row g-4" id="element-to-print">
+            <button class="icon-button-rel">
+                <i class="fas fa-list icon"></i> Meus Relatórios
+              </button>
+
             <div class="titulo-superior">
                 <div [innerHTML]="titulo"></div>
             </div>
@@ -128,27 +132,42 @@
                                                 <div class="form-floating mb-12">
                                                     <table>
                                                         <tbody>
-                                                          <tr  *ngFor="let item of calculadoraItens; let i = index" >
-                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:center; width:50px;"> {{ i + 1 }}</td>
-                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left" [innerHTML]="item.label"></td>
-                                                            <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }" data-label="" style="text-align:left; width:180px;">
-                                                                @if (item.somente_leitura == 1) {
-                                                                    <span id="{{item.alias}}" class="input-field"  style="font-weight: bold;">0,00</span>
-                                                                } @else {
-                                                                    <input matInput id="{{item.alias}}" class="input-field item-calculadora input-field-right" type="text" (blur)="calcular($event)" mask="separator.2" thousandSeparator="" decimalMarker="," reverse="true">
-                                                                }
-                                                            </td>   
-                                                          </tr>
+                                                            <tr *ngFor="let item of calculadoraItens; let i = index">
+                                                                <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }"
+                                                                    data-label=""
+                                                                    style="text-align:center; width:50px;"> {{ i + 1 }}
+                                                                </td>
+                                                                <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }"
+                                                                    data-label="" style="text-align:left"
+                                                                    [innerHTML]="item.label"></td>
+                                                                <td [ngClass]="{'somente-leitura': item.somente_leitura == 1 }"
+                                                                    data-label="" style="text-align:left; width:180px;">
+                                                                    @if (item.somente_leitura == 1) {
+                                                                    <span id="{{item.alias}}" class="input-field"
+                                                                        style="font-weight: bold;">0,00</span>
+                                                                    } @else {
+                                                                    <input matInput id="{{item.alias}}"
+                                                                        class="input-field item-calculadora input-field-right"
+                                                                        type="text" (blur)="calcular($event)"
+                                                                        mask="separator.2" thousandSeparator=""
+                                                                        decimalMarker="," reverse="true">
+                                                                    }
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                         <tfoot>
                                                             <tr>
-                                                                <td class="equacao" data-label="" style="text-align:right!important;" [innerHTML]="equacaoGeral?.label" colspan="2"></td>
-                                                                <td class="equacao" data-label="" style="text-align: right; width: 180px; padding: 14px; padding-right: 28px;">
-                                                                    <span id="equacaoGeral"  style="font-weight: bold; text-align:right;">0,00</span>
+                                                                <td class="equacao" data-label=""
+                                                                    style="text-align:right!important;"
+                                                                    [innerHTML]="equacaoGeral?.label" colspan="2"></td>
+                                                                <td class="equacao" data-label=""
+                                                                    style="text-align: right; width: 180px; padding: 14px; padding-right: 28px;">
+                                                                    <span id="equacaoGeral"
+                                                                        style="font-weight: bold; text-align:right;">0,00</span>
                                                                 </td>
-                                                              </tr>
+                                                            </tr>
                                                         </tfoot>
-                                                      </table>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

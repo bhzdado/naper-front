@@ -1,8 +1,8 @@
-:root{
+:root {
     --primary-color: #F8F7FC;
     --secondary-color: #231E1E;
     --accent-color: #A9C92F;
-  }
+}
 
 .conteudo-inicial {
     padding-top: 120px !important;
@@ -2105,7 +2105,7 @@ td {
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
-.registration-container{
+.registration-container {
     background: #ffffff;
     margin: auto;
     padding: 15px 25px;
@@ -2113,16 +2113,17 @@ td {
     box-shadow: 10px 14px 90px #F5AC6252;
 }
 
-.registration-container .registration-header{
+.registration-container .registration-header {
     padding: 10px;
 
 }
-.registration-header h2{
+
+.registration-header h2 {
     font-size: 20px;
     font-weight: 700;
 }
 
-.registration-header .divider{
+.registration-header .divider {
     display: block;
     width: 15%;
     height: 5px;
@@ -2130,7 +2131,7 @@ td {
     margin-top: 4px;
 }
 
-.registration-body .registration-box{
+.registration-body .registration-box {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -2139,19 +2140,20 @@ td {
     padding: 10px 0px;
 }
 
-.registration-box .input-box{
+.registration-box .input-box {
     position: relative;
     width: 50%;
     justify-content: space-around;
     padding: 5px 10px;
     display: block;
 }
-.registration-box .input-box label{
+
+.registration-box .input-box label {
     font-size: 14px;
     color: var(--secondary-color);
 }
 
-.registration-box .input-field{
+.registration-box .input-field {
     width: 90%;
     height: 36px;
     display: block;
@@ -2162,10 +2164,10 @@ td {
 }
 
 .input-field-right {
-    text-align: right!important;
+    text-align: right !important;
 }
 
-.registration-box .input-field:focus{
+.registration-box .input-field:focus {
     border-radius: 4px;
     border: solid var(--accent-color);
     border-width: 1px 1px 3px 1px;
@@ -2173,8 +2175,8 @@ td {
     padding-top: 8px;
 }
 
-.registration-body .btn-register{
-    margin-top: 20px!important;
+.registration-body .btn-register {
+    margin-top: 20px !important;
     border: 0;
     background: var(--accent-color);
     color: #2A3A54;
@@ -2187,57 +2189,61 @@ td {
     cursor: pointer;
 }
 
-.registration-body .btn-register:hover{
+.registration-body .btn-register:hover {
     background: var(--secondary-color);
     box-shadow: 0px 4px 12px #231E1E90;
     color: var(--primary-color);
 }
 
-.registration-container .registration-footer{
+.registration-container .registration-footer {
     text-align: center;
     padding: 20px;
 }
 
-.registration-footer h3{
+.registration-footer h3 {
     font-size: 16px;
     font-weight: 500;
     color: var(--secondary-color);
 }
 
-.registration-footer a{
+.registration-footer a {
     color: var(--accent-color);
     text-decoration: none;
     font-weight: 700;
 }
 
-.registration-footer a:hover{
+.registration-footer a:hover {
     border-bottom: 2px solid #FC8C1B;
-} 
+}
 
 
-@media screen and (max-width:480px){
-    .registration-container{
+@media screen and (max-width:480px) {
+    .registration-container {
         display: block;
         padding: 10px;
         border-radius: 12px;
         max-width: 400px;
         width: auto !important;
     }
-    .registration-container .registration-header{
+
+    .registration-container .registration-header {
         padding: 10px 0px;
     }
-    .registration-body .registration-box{
+
+    .registration-body .registration-box {
         display: block;
     }
-    .registration-box .input-box{
+
+    .registration-box .input-box {
         width: 100%;
         padding: 05px 0px;
     }
 
-    .registration-box .input-box:focus-within{
+    .registration-box .input-box:focus-within {
         padding: 12px 0px;
     }
-    .registration-body .btn-register{
+
+    .registration-body .btn-register {
         width: 100%;
         margin: auto;
     }
@@ -2251,88 +2257,107 @@ table {
     padding: 0;
     width: 100%;
     table-layout: fixed;
-  }
-  
-  table caption {
+}
+
+table caption {
     font-size: 1.5em;
     margin: .5em 0 .75em;
-  }
-  
-  table tr {
+}
+
+table tr {
     background-color: #f8f8f8;
     border: 1px solid #ddd;
     padding: .35em;
-  }
-  
-  table th,
-  table td {
+}
+
+table th,
+table td {
     padding: .625em;
     text-align: center;
-  }
-  
-  table th {
+}
+
+table th {
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
-  }
-  
-  @media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 600px) {
     table {
-      border: 0;
+        border: 0;
     }
-  
+
     table caption {
-      font-size: 1.3em;
+        font-size: 1.3em;
     }
-    
+
     table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
     }
-    
+
     table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
     }
-    
+
     table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-      width: auto !important;
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+        width: auto !important;
     }
-    
+
     table td::before {
-      /*
+        /*
       * aria-label has no advantage, it won't be read inside a table
       content: attr(aria-label);
       */
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
     }
-    
+
     table td:last-child {
-      border-bottom: 0;
-      width: auto !important;
+        border-bottom: 0;
+        width: auto !important;
     }
-  }
-  
+}
+
 .somente-leitura {
-    background-color: #959daa!important;
+    background-color: #959daa !important;
 }
 
 .equacao {
     font-weight: bold;
     color: #FFFFFF;
-    background-color: #556176!important;
+    background-color: #556176 !important;
+}
+
+.icon-button-rel {
+    width: 180px;
+    border: 1px solid #2A3A54;
+    margin-left: 14px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.icon-button-rel .icon {
+    transition: transform 0.3s ease-in-out;
+    margin-right: 10px;
+    /* Smooth transition */
+}
+
+.icon-button-rel:hover .icon {
+    transform: scale(1.2) rotate(10deg);
+    /* Example: grow and rotate */
 }

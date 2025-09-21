@@ -28,6 +28,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   @ViewChild('titulo') myDivRef!: ElementRef;
 
   public id: number = 0;
+  public modulo_id: number = 0;
   public titulo: SafeHtml = "";
   public ultima_atualizacao: string = "";
   public conteudo: SafeHtml = "";
@@ -54,7 +55,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
   ngAfterViewInit() {
@@ -89,13 +90,14 @@ export class DetalheComponent implements AfterViewInit, OnInit {
       if (params['id']) {
         let tmp = params['id'].split('-');
         this.id = params['id'];
+        
         if (tmp[0] == 'm') {
           this.atualizaParams('m', 1);
           this.id = tmp[1];
         } else {
           switch (this.id.toString()) {
             case 'isencao':
-            case '53862':
+            //case '53862':
               this.tipo_conteudo = 'isencao';
               this.busca_permitida = true;
               this.id = 1520;
@@ -128,11 +130,16 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   }
 
   buscar() {
-    this.atualizaParams('qValue', 'DIGITE');
+    this.atualizaParams('qValue', 'DIGITE', true);
     this.atualizaParams('q', this.textoBusca);
 
+    if(this.modulo_id){
+      this.atualizaParams('cbm', 1);
+    }
+
+    let id = (this.tipo_conteudo != '') ? this.tipo_conteudo : this.modulo_id;
     //?qValue=DIGITE&q=4911.10.10
-    this.getConteudo(this.tipo_conteudo, this.params);
+    this.getConteudo(id, this.params);
   }
 
   voltar(): void {
@@ -145,11 +152,14 @@ export class DetalheComponent implements AfterViewInit, OnInit {
     this.conteudoService.getConteudo(id, params, (response) => {
       let conteudo = "";
 
+      this.busca_permitida = response.dados.buscador??0;
+      this.modulo_id = response.dados.id;
       //this.ultima_atualizacao = response.dados.ultima_atualizacao;
       if (!Array.isArray(response.dados)) {
         this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
         conteudo = response.dados.conteudo;
       } else {
+        this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.titulo_modulo);
         response.dados.forEach(element => {
           conteudo += element.titulo;
         });

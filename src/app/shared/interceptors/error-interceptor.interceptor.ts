@@ -72,7 +72,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                         msg += valor + "\n";
                     });
                 } else {
-                    console.log(err);
                     msg = err.error.message;
                 }
             }

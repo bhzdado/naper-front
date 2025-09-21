@@ -123,7 +123,7 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
     this.conteudoService.getConteudoPorModulo(this.id, { pagina: currentPage, buscar: texto }, (response) => {
       this.error = false;
 
-      if (response.status) {
+      if (response.status == 1) {
         if (response.dados.conteudos) {
           this.titulo = response.dados.modulo;
           this.dataSource = response.dados.conteudos;
@@ -133,13 +133,14 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
           this.abrirDetalhe(response.dados, true);
         }
       } else {
-        Swal.fire({
-          icon: "error",
-          text: response.mensagem,
-          draggable: true,
-          confirmButtonColor: "#A9C92F",
-          cancelButtonColor: "#d33",
-        });
+        // console.log(response.status);
+        // Swal.fire({
+        //   icon: "error",
+        //   text: response.mensagem,
+        //   draggable: true,
+        //   confirmButtonColor: "#A9C92F",
+        //   cancelButtonColor: "#d33",
+        // });
 
         this.error = true;
         this.dataSource = [];
