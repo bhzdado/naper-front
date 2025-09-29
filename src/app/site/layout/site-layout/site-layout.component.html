@@ -1,0 +1,177 @@
+<body>
+    <div style="min-height: 100%;">
+        <!-- Navbar start -->
+        <div *ngIf="loading" class="overlay">
+            <img src="/assets/site-layout/images/logos/logo_animado.gif" alt="">
+            <br>
+            <div class="carregando-texto">Carregando...</div>
+        </div>
+
+        <div class="container-fluid sticky-top px-0 contaner-fluiid-principal">
+            <div class="container-fluid bg-light menu-principal">
+
+                <div class="container px-0">
+                    <nav class="navbar navbar-light navbar-expand-xl">
+                        <a href="{{ environment.urlSite }}" class="navbar-brand mt-3" style="top: -7px; position: relative;">
+                            <p class="text-primary display-6 mb-2" style="line-height: 0;">
+                                <img src="/assets/site-layout/images/logos/logo_transparente.png" class="img-logo">
+                            </p>
+                        </a>
+
+                        <app-menu-principal></app-menu-principal>
+
+                        
+
+                        
+                    </nav>
+                </div>
+            </div>
+            <div class="container-fluid topbar bg-dark d-lg-block submenu-geral">
+                <div class="container px-0">
+                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap"
+                        style=" float: right; top: 6px; position: relative;">
+                        <div class="top-info flex-grow-0 menu-superior">
+                            <a href="index.html" class="menu-superior-item">Cursos</a>
+                            <a href="detail-page.html" class="menu-superior-item">Videoaulas</a>
+                            <a href="detail-page.html" class="menu-superior-item">Tutorial</a>
+                        </div>
+                        <div style="top: 5px; position: relative;">
+                            <div class="top-info flex-grow-0 menu-superior-botao">
+                                <button class="btn-icon" style="margin-top: 1px;" *ngIf="!usuarioLogado"><i
+                                        class="fa fa-credit-card"></i> Compre
+                                    Agora!</button>
+                                <button class="btn-icon" style="margin-top: 1px;" *ngIf="!usuarioLogado"><i
+                                        class="fa fa-info-circle"></i> Teste
+                                    Grátis</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0">
+                            <div class="contato" data-modal="contato">
+                                <p class="font-body3 contato-texto" style="margin: 0px;">CONSULTORIA</p>
+                                <p class="font-body3 contato-numero">
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp"
+                                            aria-hidden="true"></i> </span>
+                                    <a href="tel:3133278413" style="color: #FFFFFF!important;"
+                                        class="title-contato-number">(31)3327-8413</a>
+                                </p>
+                            </div>
+
+                            <div class="contato" data-modal="contato">
+                                <p class="font-body3 contato-texto" style="margin: 0px;">GERAL</p>
+                                <p class="font-body3 contato-numero">
+                                    <span style="padding-right: 6px;"> <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                    <span style="padding-right: 6px;"> <i class="fab fa-whatsapp"
+                                            aria-hidden="true"></i> </span>
+                                    <a href="tel:3133278413" style="color: #FFFFFF!important;"
+                                        class="title-contato-number">(31)3327-8410</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-nowrap border-top pt-3 pt-xl-0 circle-button">
+                            <button *ngIf="usuarioLogado" style="color: #2A3A54;"
+                                (click)="abrirRouteInNovaAba('/admin')"
+                                class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto"><i
+                                    class="fa fa-cogs" aria-hidden="true"></i></button>
+
+                            <button style="color: #2A3A54;"
+                                class="btn-search border border-primary btn-md-square rounded-circle bg-white my-auto"
+                                *ngIf="usuarioLogado" mat-icon-button [matMenuTriggerFor]="menu"
+                                #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()"><i
+                                    class="fa fa-user-circle text-primary"></i></button>
+
+                            <mat-menu #menu="matMenu" [overlapTrigger]="false" panelClass="custom-menu-panel">
+                                <span>
+                                    <h4 class="small" style="font-size: 16px;"> <span class=" text-muted"
+                                            style="font-weight: bold; text-decoration: underline">
+                                            {{usuarioLogado?.nome}}</span> </h4>
+                                    <span class="text-muted papel-desc">{{usuarioLogado?.papel}}</span>
+                                    <hr width="265px" />
+                                    <button mat-menu-item
+                                        (click)="abrirRouteInNovaAba('/admin/usuarios', '?u=' + usuarioLogado?.id)">
+                                        <mat-icon>account_circle</mat-icon>
+                                        <span>Minha Conta</span>
+                                    </button>
+                                    <button mat-menu-item [routerLink]="['/auth/logout']">
+                                        <mat-icon>exit_to_app</mat-icon>
+                                        <span>Sair</span>
+                                    </button>
+                                </span>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-fluid topbar bg-green d-lg-block submenu-geral-baixo">
+                <div class="container px-0 botoes">
+                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap">
+                        <div class="top-info flex-grow-0" class="menu-superior-botao-mobile">
+                            <button class="button" style=" background-color: #2A3A54; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado">Compre<br>Agora!</button>
+                            <button class="button" style="margin-left: 4px; background-color: #2A3A54; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado">Teste<br>Grátis</button>
+                            <button class="button"  [routerLink]="['/auth/login']"
+                                style="background-color: #2A3A54; float: right; position: relative; margin-left: 30px; width: 100px; height: 46px;"
+                                *ngIf="!usuarioLogado"> Área do Cliente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar End -->
+
+
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content rounded-0">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="Buscar Por"
+                                aria-describedby="search-icon-1">
+                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <router-outlet></router-outlet>
+    </div>
+    <!-- Copyright Start -->
+    <footer>
+        <div class="container-fluid copyright bg-dark py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                        <img src="/assets/site-layout/images/logos/logo_fundo_escuro.png" style="width: 352px;
+                    left: -19px;
+                    position: relative;
+                    top: -25px;">
+                    </div>
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <span class="text-light"><a href="#" style="color:#ccc"><i
+                                    class="fas fa-copyright text-light me-2"></i> 2025 FISCAL 3. Todos os direitos
+                                reservados.</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright End -->
+
+
+    <!-- Back to Top 
+    <a class="btn-primary border-2 border-white rounded-circle back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
+
+-->
+</body>

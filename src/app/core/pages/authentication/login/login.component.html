@@ -1,0 +1,81 @@
+<form [formGroup]="formAuthAntigo" novalidate class="form" action="https://romildaalves.com.br/users/login"
+  id="formAutenticarAuthAntigo" method="POST" style="display:none;">
+  <input type="hidden" name="_method" value="POST" />
+  <input type="email" id="username" name="username" [formControl]="formControlAuthAntigo" formControlName="email">
+  <input type="password" id="password" name="password" [formControl]="formControlAuthAntigo" formControlName="password">
+</form>
+
+
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('/assets/site-layout/assets/login/images/bg-01.jpg')">
+    <div class="wrap-login100">
+      <div *ngIf="processando" style="color: #FFFFFF;">
+        <br><br><br>
+        {{ texto_autenticacao }}
+        <mat-progress-bar mode="indeterminate" class="green-progress"></mat-progress-bar>
+      </div>
+
+      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!processando">
+        <span class="login100-form-logo">
+          <a href="{{urlSite}}"><img src="/assets/site-layout/images/logos/logo_fundo_escuro.png" style="width: 360px;"></a>
+        </span>
+
+        <span class="login100-form-title p-b-34 p-t-27">
+          Entre em sua conta
+        </span>
+
+
+        <div class="wrap-input100 validate-input" data-validate="Entre com seu E-mail">
+          <input class="input100" type="text" name="email" placeholder="E-mail" value="" formControlName="email" #email>
+            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <mat-error class="input-error" *ngIf="(loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)) && submited">Informe seu e-mail</mat-error>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter password" style="margin-top: 35px;">
+          <input class="input100" type="password" name="password" placeholder="Senha" id="password" value="" formControlName="password" #password>
+          <span class="focus-input100" data-placeholder="&#xf191;"></span>
+        </div>
+        <mat-error class="input-error" *ngIf="(loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)) && submited">Informe sua senha</mat-error>
+<!--
+        <div class="wrap-input100 validate-input" style="padding: 10px;">
+          <ngx-recaptcha2 #captchaElem [hidden]="kepceHidden" [siteKey]="siteKey" [useGlobalDomain]="false"
+            (success)="handleSuccess($event)" (error)="handleError()" formControlName="recaptcha">
+          </ngx-recaptcha2>
+          <div *ngIf="recaptchaError" style="padding: 5px; font-size: 14px; color: firebrick;">A verificação do captcha
+            é necessária.<br>Clique em 'Não sou um robô' e tente acessar novamente.</div>
+        </div>
+-->
+        <div class="contact100-form-checkbox">
+          <div>
+            <input class="input-checkbox100"  type="checkbox" name="remember-me" id="remember-me" formControlName="remember">
+            <label class="label-checkbox100" for="remember-me">
+              Lembrar usuário
+            </label>
+          </div>
+          <div>
+            <a class="txt1" style="float: right; position: relative; top: -21px; cursor: pointer; color:#FFFFFF;" (click)="esqueciSenha()">
+              Esqueci minha senha
+            </a>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            Entrar
+          </button>
+        </div>
+
+        <div class="text-center p-t-30">
+          <a class="txt1" href="#" >
+            Ainda não verificou sua conta?
+          </a>
+          
+        </div>
+      </form>
+      <hr *ngIf="!processando" />
+    </div>
+  </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>

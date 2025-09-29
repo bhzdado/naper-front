@@ -1,0 +1,40 @@
+<section>
+    <div class="header" style="background-color: #4F90AC; height: 68px;">
+        <h1 mat-dialog-title style="padding-left: 10px;">
+            <mat-icon>edit</mat-icon>
+            
+            <span style="position: absolute; top: 9px; padding-left: 8px; font-size: 15px;">Mudar de categoria</span>
+        </h1>
+    </div>
+    <div mat-dialog-actions class="mat-dialog-footer">
+        <button class="dialog-btn" mat-raised-button type="button" (click)="onNoClick()" style="margin-right: 5px;">Cancelar</button>
+        <button class="dialog-btn" mat-raised-button color="primary" type="button" (click)="change()">Salvar</button>
+    </div>
+    <div mat-dialog-content style="margin: 13px; margin-top: 90px;">
+        <p class="mat-body dialog-message break-line">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <mat-label align="end" style="margin-bottom: 20px;"><b>Categoria Atual: <span style="font-style: italic;">{{ categoria_atual?.nome }}</span></b></mat-label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <mat-label align="end" style="margin-bottom: 20px;"><b>Nome: <span style="font-style: italic;">{{ subCategoria?.nome }}</span></b></mat-label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-floating mb-3">
+                    <mat-select class="form-control" placeholder="Selecione uma nova categoria"  [(ngModel)]="novaCategoriaForm.categoria_id" >
+                        <mat-option [value]="categoria.id" *ngFor="let categoria of categorias">{{ categoria.nome }}</mat-option>
+                    </mat-select>
+                    <label for="floatingInput">Nova Categoria</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

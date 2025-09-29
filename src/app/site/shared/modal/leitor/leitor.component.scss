@@ -1,0 +1,56 @@
+
+.btn {
+  width: 120px;
+  height: 40px;
+  cursor: pointer;
+  background: #D3EAFD;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+  margin-left: 12px;
+}
+
+.pdf-viewer-container {
+  margin-left: 12px;
+}
+
+.mat-mdc-dialog-inner-container {
+  display: flex
+;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  height: 100%;
+  opacity: 0;
+  transition: opacity linear var(--mat-dialog-transition-duration, 0ms);
+  max-height: inherit;
+  min-height: inherit;
+  /* min-width: inherit; */
+  max-width: 100%!important;
+}
+
+.close-button{
+  float: right;
+  top:-6px;
+  right:5px;
+  background-color: #E6E5E9;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-52px;
+  right:-52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+ overflow: unset
+}

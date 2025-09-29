@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+
+label {
+    color: #262b31 !important;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.area_botao {
+    border-top: 1px solid #EEF2F6 !important;
+    padding-top: 10px;
+}
+
+.break-line {
+    white-space: pre-wrap;
+}
+
+.header {
+    color: #FFFFFF;
+}
+
+.header mat-icon {
+        margin-top: 13px;
+}
+
+.mat-dialog-footer {
+    position: absolute;
+    height: 52px;
+    text-align: right;
+    background: #8F9FAC;
+    padding: 8px;
+    padding-right: 36px;
+    width: 100%;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 400px !important;
+}
+
+.ck-placeholder {
+    display: none;
+}
+
+.ck-editor__editable_inline {
+    width: 400px;
+}
+
+.ck-editor__editable {
+    width: 500px;
+}

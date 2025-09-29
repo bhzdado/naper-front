@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Categorias">
+      <div style="width: 100%; float: right; text-align: right;">
+        <button mat-button class="btn btn-three" (click)="addCategoria()" style="width: 140px;">Nova Categoria</button>
+      </div>
+      <br><br>
+      <hr>
+      <mat-icon class="tab-icon" (click)="refresh_grid()" style="cursor: pointer;">rotate_right</mat-icon>
+      <gui-grid #grid id="agile-grid" [columns]="columns" [theme]="'generic'" [source]="categorias" [sorting]="sorting"
+        [paging]="false" [verticalGrid]="true" [horizontalGrid]="true" [cellEditing]="true" [rowHeight]="50"
+        [loading]="loading" [localization]="localization" [searching]="searching" [virtualScroll]="true"
+        (sourceEdited)="afterEditCell($event)">
+
+        <gui-grid-column header="Código" [field]="'id'" type="string" view="text" [cellEditing]="false" width="140">
+          <ng-template let-value="value" let-item="item" let-index="index">
+            <label *ngIf="item.parent != 0" (click)="moverSubCategoria(item.id, item.parent)" style="cursor: pointer;"><mat-icon>move_up</mat-icon></label>
+            <label class="{{ item.parent == 0 ? 'categoria' : 'subcategoria' }} {{ item.parent != 0 ? 'subcategoria-id' : '' }}">{{ value }} </label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Categoria/Subcategoria" [field]="'nome'" type="string" view="text" width="100%"
+          [cellEditing]="true">
+          <ng-template let-value="value" let-item="item" let-index="index">
+            <label class="{{ item.parent == 0 ? 'categoria' : 'subcategoria' }}">{{ value }} </label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Ações" [cellEditing]="false" [sorting]="false" width="120" *ngIf="actions?.length > 0"  style="text-align: right;">
+          <ng-template let-value="value" let-item="item">
+
+            <button style="border: 0 !important; background-color: transparent;" mat-menu-item [disabled]="false" (click)="acao(action.click, item)"
+            [hidden]="action.hidden(item)??false" *ngFor="let action of actions; index as i">
+            <mat-icon style="font-size: 20px;">{{ action.icon }}</mat-icon>
+          </button>
+
+            <!--
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="background: transparent;">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [disabled]="false" (click)="acao(action.click, item)"
+                [hidden]="action.hidden(item)??false" *ngFor="let action of actions; index as i">
+                <mat-icon>{{ action.icon }}</mat-icon>
+                <span>{{ action.label }}</span>
+              </button>
+            </mat-menu>
+-->
+          </ng-template>
+        </gui-grid-column>
+
+      </gui-grid>
+
+    </app-card>
+  </div>
+</div>

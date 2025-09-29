@@ -1,0 +1,74 @@
+<div class="container-fluid py-5 conteudo-inicial">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div id="divDocumentoIntegraproc" class="full">
+
+                <div class="container-artigo">
+                    <div class="titulo-superior">
+                        <h2>
+                            {{ titulo }}
+
+                            <div class="social-share">
+                                <div id="shareRoundIcons" class="round-shares">
+                                    <div id="share"></div>
+                                </div>
+                            </div>
+                        </h2>
+                    </div>
+
+                    <div class="task__list">
+
+                        <div action="?" class="" >
+                            <div class="search">
+                               <input matInput type="search" class="searchTerm" placeholder="Pesquise aqui..."  [(ngModel)]="textoBusca"  (search)="buscar()"  [disabled]="carregando">
+                               <button type="submit" class="searchButton"  (click)="buscar();"  [disabled]="carregando">
+                                 <i class="fa fa-search"></i>
+                              </button>
+                            </div>
+                         </div>
+
+                        <div class="pagination-container" *ngIf="!carregando && getPages()?.length > 1">
+                            <a class="pagination-link" *ngIf="currentPage > 1" (click)="listar(currentPage - 1)"><i
+                                    class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+
+                            <a class="pagination-link" *ngFor="let page of getPages()"
+                                [class.active]="currentPage === page" (click)="listar(page)">
+                                {{ page }}
+                            </a>
+
+                            <a class="pagination-link" *ngIf="currentPage < totalPages"
+                                (click)="listar(currentPage + 1)"><i class="fa fa-angle-double-right"
+                                    aria-hidden="true"></i></a>
+                        </div>
+
+
+                        <div style="
+                        text-align: center;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;" *ngIf="carregando">
+                            <div style="color: #A9C92F" class="la-ball-clip-rotate-pulse la-2x">
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!carregando">
+                            <div class="container-list">
+                                <div *ngIf="error" style="    margin-left: 40px;
+                                font-style: normal;
+                                font-size: 15px;">
+                                </div>
+                                <ul class="responsive-table">
+                                    <li class="table-row icon-seta" *ngFor="let item of dataSource; let i = index"
+                                        [innerHTML]="item.titulo" (click)="abrirDetalhe(item);">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

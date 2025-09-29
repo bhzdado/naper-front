@@ -1,0 +1,64 @@
+<form [formGroup]="formAuthAntigo" novalidate class="form" action="https://romildaalves.com.br/users/login"
+  id="formAutenticarAuthAntigo" method="POST" style="display:none;">
+  <input type="hidden" name="_method" value="POST" />
+  <input type="email" id="username" name="username" [formControl]="formControlAuthAntigo" formControlName="email">
+  <input type="password" id="password" name="password" [formControl]="formControlAuthAntigo" formControlName="password">
+</form>
+
+<div class="login_form">
+    <div *ngIf="processando" style="color: #2A3A54;">
+        <br><br><br>
+        {{ texto_autenticacao }}
+        <mat-progress-bar mode="indeterminate" class="green-progress"></mat-progress-bar>
+      </div>
+      
+    <!-- Login form container -->
+    <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!processando">
+      <h3>Área Restrita. Autentique-se</h3>
+      <!-- Email input box -->
+      <div class="input_box">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="Informe seu e-mail" required formControlName="email"/>
+      </div>
+      <!-- Paswwrod input box -->
+      <div class="input_box">
+        <div class="password_title">
+          <label for="password">Senha</label>
+          <a (click)="esqueciSenha()">Esqueceu sua senha?</a>
+        </div>
+        <input type="password" id="password" placeholder="Informe sua senha" required formControlName="password"/>
+      </div>
+      <!--
+      <div class="wrap-input100 validate-input" style="padding-bottom: 10px;">
+        <ngx-recaptcha2 #captchaElem [hidden]="kepceHidden" [siteKey]="siteKey" [useGlobalDomain]="false"
+          (success)="handleSuccess($event)" (error)="handleError()" formControlName="recaptcha">
+        </ngx-recaptcha2>
+        <div *ngIf="recaptchaError" style="padding: 5px; font-size: 14px; color: firebrick;">A verificação do captcha
+          é necessária.<br>Clique em 'Não sou um robô' e tente acessar novamente.</div>
+      </div>
+      -->
+       <!-- Login button -->
+       <button type="submit">Entrar</button>
+       <!-- Login option separator -->
+      <p class="separator">
+        <span>ou</span>
+      </p>
+      <div class="login_option">
+        <!-- Google button -->
+        <div class="option">
+          <a href="#">
+            <i class="fab fa-google-plus-square"><span style="padding-left: 15px;">Google</span></i>
+          </a>
+        </div>
+        <!-- Apple button -->
+        <div class="option">
+          <a href="#">
+            <i class="fab fa-facebook-square"><span style="padding-left: 15px;">Facebook</span></i>
+          </a>
+        </div>
+      </div>
+      <!--
+      <p class="sign_up">Don't have an account? <a href="#">Sign up</a></p>
+      -->
+    </form>
+  </div>

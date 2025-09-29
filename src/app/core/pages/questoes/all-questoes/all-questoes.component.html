@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Questões">
+      <div style="width: 100%; float: right; text-align: right;">
+        <button mat-button class="btn btn-three" (click)="addQuestao()" style="width: 140px;">Nova Questão</button>
+      </div>
+      <br><br>
+      <hr>
+      <mat-icon class="tab-icon" (click)="refresh_grid()" style="cursor: pointer;">rotate_right</mat-icon>
+      <gui-grid #grid id="agile-grid" [columns]="columns" [theme]="'generic'" [source]="questoes" [sorting]="sorting"
+        [paging]="false" [verticalGrid]="true" [horizontalGrid]="true" [rowHeight]="50"
+        [loading]="loading" [localization]="localization" [searching]="searching" [virtualScroll]="true"  [rowSelection]="true"
+        [rowHeight]="150"
+        class="gui-structure">
+
+        <gui-grid-column header="Código" type="string" [field]="'id'" [cellEditing]="false" width="140"
+          class="gui-user-wrapper">
+          <ng-template let-value="value" let-item="item" let-index="index">
+              <label class="" >{{ getValueCell(index, item, 'id') }} </label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Categoria" type="string" [field]="'categoria'" [cellEditing]="false" width="140" class="gui-user-wrapper">
+          <ng-template let-value="value" let-item="item" let-index="index">
+              <label class="" >{{ item.categoria.nome }} </label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Questão" type="string" [field]="'nome'" type="string" view="text" width="100%" [cellEditing]="true">
+          <ng-template let-value="value" let-item="item" let-index="index">
+            <div gui-structure-cell="" class="gui-cell gui-structure-cell ng-star-inserted" style="width: 100%;">
+              <span class="gui-generic" style="margin-top: 22px;">
+                <span> <label [innerHTML]="trataContudo(value)"></label> </span>
+              </span>
+            </div>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Ações" [cellEditing]="false" [sorting]="false" width="120" *ngIf="actions?.length > 0">
+          <ng-template let-value="value" let-item="item">
+
+            <button style="border: 0 !important; background-color: transparent;" mat-menu-item [disabled]="action.disabled(item)??false" (click)="acao(action.click, item)"
+            [hidden]="action.hidden(item)??false" *ngFor="let action of actions; index as i">
+            <mat-icon style="font-size: 20px;">{{ action.icon }}</mat-icon>
+          </button>
+
+          <!--
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="background: transparent;">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [disabled]="false" (click)="acao(action.click, item)"
+                [hidden]="action.hidden(item)??false" *ngFor="let action of actions; index as i">
+                <mat-icon>{{ action.icon }}</mat-icon>
+                <span>{{ action.label }}</span>
+              </button>
+            </mat-menu>
+-->
+          </ng-template>
+        </gui-grid-column>
+
+      </gui-grid>
+
+    </app-card>
+  </div>
+</div>
+
+<!--
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Questaos">
+      <div style="width: 100%; float: right; text-align: right;">
+        <button mat-button class="btn btn-three" (click)="addQuestao()" style="width: 140px;">Nova Questão</button>
+      </div>
+      <br><br>
+      <hr>
+
+      <gui-grid #grid id="agile-grid" [columns]="columns" [theme]="'generic'" [source]="questoes" [sorting]="sorting"
+        [paging]="false" [verticalGrid]="true" [horizontalGrid]="true" [cellEditing]="false" [rowHeight]="50"
+        [loading]="loading" [localization]="localization" [searching]="searching" [virtualScroll]="true">
+
+        <gui-grid-column header="Código" [field]="'id'" type="string" view="text" [cellEditing]="false" width="140">
+          <ng-template let-value="value" let-item="item" let-index="index">
+            <label>{{ getValueCell(index, item, 'id') }} </label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Questão" [field]="'questao'" type="string" view="text"  style="height: 100px;">
+          <ng-template let-value="value" let-item="item" let-index="index">
+            <label  [innerHTML]="value"></label>
+          </ng-template>
+        </gui-grid-column>
+
+        <gui-grid-column header="Ações" [cellEditing]="false" [sorting]="false" width="100" *ngIf="actions?.length > 0">
+          <ng-template let-value="value" let-item="item">
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="background: transparent;">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [disabled]="false" (click)="acao(action.click, item)"
+                [hidden]="action.hidden(item)??false" *ngFor="let action of actions; index as i">
+                <mat-icon>{{ action.icon }}</mat-icon>
+                <span>{{ action.label }}</span>
+              </button>
+            </mat-menu>
+
+          </ng-template>
+        </gui-grid-column>
+
+      </gui-grid>
+
+    </app-card>
+  </div>
+</div>
+-->
