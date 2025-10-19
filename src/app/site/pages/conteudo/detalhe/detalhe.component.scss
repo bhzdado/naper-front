@@ -3,6 +3,19 @@
   width: 86%;
 }
 
+.conteudo-inicial-modal {
+  padding-top: 0px !important;
+  width: 100%!important;
+}
+
+.conteudo-inicial-container {
+  margin-top: 90px
+}
+
+.conteudo-inicial-container-modal {
+  padding-top: 0px !important;
+}
+
 .default-btn,
 .btn-table {
   height: 30px;
@@ -983,6 +996,10 @@ p#vtip #vtipArrow {
   margin-top: 190px;
   position: relative;
   width: 94vw;
+}
+
+.conteudo_actions-modal {
+  margin-top: 10px;
 }
 
 .conteudo_actions h4 {

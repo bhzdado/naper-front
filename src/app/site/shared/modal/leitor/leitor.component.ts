@@ -31,31 +31,36 @@ export class LeitorComponent {
   public errorTemplate = false;
   public tipoConteudo = '';
   public conteudo = '';
+  safeUrl: SafeResourceUrl | undefined;
+  isModal: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<LeitorComponent>,
     public mediaService: MediaService,
     private dialog: MatDialog,
-    private http: HttpClient,
+    private http: HttpClient, private sanitizer: DomSanitizer, 
     @Inject(MAT_DIALOG_DATA) public data: ModalData) {
 
     //this.loadingPdf = true;
     this.tipoConteudo = data.tipoConteudo;
-    this.conteudo = data.conteudo;
-    // if (this.tipoConteudo == 'pdf') {
-    //   this.mediaService.getPdf(data.url, (response) => {
-    //     if (response.status) {
-    //       this.url = response.pdf;
-    //       this.loadingPdf = false;
-    //     } else {
-    //       this.dialogRef.close({
-    //         status: 0
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   this.conteudo = data.conteudo;
-    //   this.loadingPdf = false;
-    // }
+    this.isModal = false;
+
+    if (this.tipoConteudo == 'load') {
+      this.loadingPdf = true;
+      this.isModal = true;
+      
+      let url = data.url;
+      if (data.url.includes('?')) {
+        url += "&mdl=true";
+      } else {
+        url += "?mdl=true";
+      }
+
+      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+      this.loadingPdf = false;
+    } else {
+      this.conteudo = data.conteudo;
+    }
   }
 
   fechar() {

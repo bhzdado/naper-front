@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, EventEmitter, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ConteudoService } from '../conteudo.service';
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
+import { HeaderService } from 'src/app/site/services/header.service';
 
 @Component({
   selector: 'app-detalhe',
@@ -24,8 +25,10 @@ import { AngularMaterialModule } from 'src/app/angular-material.module';
   templateUrl: './detalhe.component.html',
   styleUrl: './detalhe.component.scss'
 })
-export class DetalheComponent implements AfterViewInit, OnInit {
+export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked {
   @ViewChild('titulo') myDivRef!: ElementRef;
+  @Output() setConteudoModal = new EventEmitter<boolean>(false);
+  @ViewChildren('.aLinkButtonOpenModal') elementosOpenModal!: QueryList<ElementRef>;
 
   public id: number = 0;
   public modulo_id: number = 0;
@@ -39,6 +42,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
   textoBusca: string = '';
   busca_permitida: boolean = false;
   tipo_conteudo: string = '';
+  isModal: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,15 +51,14 @@ export class DetalheComponent implements AfterViewInit, OnInit {
     private location: Location,
     public conteudoService: ConteudoService,
     public navegacaoService: NavegacaoService,
-    private sanitizer: DomSanitizer,
-    private elementRef: ElementRef,
-    private router: Router
+    private sanitizer: DomSanitizer, private router: Router, private renderer: Renderer2, 
+    private elementRef: ElementRef, private headerService: HeaderService
   ) {
     this.busca_permitida = false;
   }
 
   ngOnInit() {
-    
+
   }
 
   ngAfterViewInit() {
@@ -66,10 +69,14 @@ export class DetalheComponent implements AfterViewInit, OnInit {
         if (params) {
           let queryValue = params['qValue'];
           let query = params['q'];
+          this.isModal = params['mdl'] ?? false;
 
           if (query) this.atualizaParams('q', query);
           if (queryValue) this.atualizaParams('qValue', queryValue);
 
+          this.headerService.toggleHeader(this.isModal);
+
+          this.cdr.detectChanges();
           // let currentPath = window.location.pathname;
 
           // switch (currentPath) {
@@ -90,14 +97,14 @@ export class DetalheComponent implements AfterViewInit, OnInit {
       if (params['id']) {
         let tmp = params['id'].split('-');
         this.id = params['id'];
-        
+
         if (tmp[0] == 'm') {
           this.atualizaParams('m', 1);
           this.id = tmp[1];
         } else {
           switch (this.id.toString()) {
             case 'isencao':
-            //case '53862':
+              //case '53862':
               this.tipo_conteudo = 'isencao';
               this.busca_permitida = true;
               this.id = 1520;
@@ -133,7 +140,7 @@ export class DetalheComponent implements AfterViewInit, OnInit {
     this.atualizaParams('qValue', 'DIGITE', true);
     this.atualizaParams('q', this.textoBusca);
 
-    if(this.modulo_id){
+    if (this.modulo_id) {
       this.atualizaParams('cbm', 1);
     }
 
@@ -146,23 +153,28 @@ export class DetalheComponent implements AfterViewInit, OnInit {
     this.location.back();
   }
 
+
   getConteudo(id, params = '') {
     this.loadingService.setLoading(true);
 
     this.conteudoService.getConteudo(id, params, (response) => {
       let conteudo = "";
 
-      this.busca_permitida = response.dados.buscador??0;
+      this.busca_permitida = response.dados.buscador ?? 0;
       this.modulo_id = response.dados.id;
       //this.ultima_atualizacao = response.dados.ultima_atualizacao;
-      if (!Array.isArray(response.dados)) {
-        this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
-        conteudo = response.dados.conteudo;
+      if (response.dados != '') {
+        if (!Array.isArray(response.dados)) {
+          this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
+          conteudo = response.dados.conteudo;
+        } else {
+          this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.titulo_modulo);
+          response.dados.forEach(element => {
+            conteudo += element.titulo;
+          });
+        }
       } else {
-        this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.titulo_modulo);
-        response.dados.forEach(element => {
-          conteudo += element.titulo;
-        });
+        this.router.navigate(['/pagina-nao-encontrada'], { skipLocationChange: true });
       }
 
       this.conteudo = this.sanitizer.bypassSecurityTrustHtml(conteudo);
@@ -181,6 +193,26 @@ export class DetalheComponent implements AfterViewInit, OnInit {
       element.removeAttribute('href');
       element.addEventListener('click', _ => { this.abrirConteudo(url) }, false);
     }
+  }
+
+  ngAfterViewChecked(): void {
+    const elementos = document.querySelectorAll('.aLinkButtonOpenModal');
+
+    elementos.forEach((element: Element) => {
+      this.renderer.listen(element, 'click', (evento) => {
+        this.navegacaoService.abrirModalByUrl(element.getAttribute('endereco'));
+        this.cdr.detectChanges();
+      });
+    });
+
+    // const button = this.elementRef.nativeElement.querySelector('.aLinkButtonOpenModal');
+    // if (button && !button.hasEventListener) { // Check if listener already attached
+    //   button.addEventListener('click', (event) => {
+    //     this.navegacaoService.abrirModalByUrl(button.getAttribute('endereco'));
+    //     this.cdr.detectChanges();
+    //   });
+    //   button.hasEventListener = true; // Mark that listener is attached
+    // }
   }
 
   abrirConteudo(url) {

@@ -1,13 +1,13 @@
 <body>
     <div style="min-height: 100%;">
         <!-- Navbar start -->
-        <div *ngIf="loading" class="overlay">
+        <div *ngIf="loading" class="overlay" [ngClass]="{'no-visible-conteudo': showHeader}">
             <img src="/assets/site-layout/images/logos/logo_animado.gif" alt="">
             <br>
             <div class="carregando-texto">Carregando...</div>
         </div>
 
-        <div class="container-fluid sticky-top px-0 contaner-fluiid-principal">
+        <div class="container-fluid sticky-top px-0 contaner-fluiid-principal" [ngClass]="{'no-visible-conteudo': showHeader}">
             <div class="container-fluid bg-light menu-principal">
 
                 <div class="container px-0">
@@ -19,9 +19,6 @@
                         </a>
 
                         <app-menu-principal></app-menu-principal>
-
-                        
-
                         
                     </nav>
                 </div>
@@ -144,10 +141,10 @@
             </div>
         </div>
 
-        <router-outlet></router-outlet>
+        <router-outlet ></router-outlet>
     </div>
     <!-- Copyright Start -->
-    <footer>
+    <footer [ngClass]="{'no-visible-conteudo': showHeader}">
         <div class="container-fluid copyright bg-dark py-4">
             <div class="container">
                 <div class="row">

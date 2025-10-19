@@ -11,7 +11,11 @@
             class="tab-icon">close</mat-icon></button>
             -->
 </div>
-<div class="pdf-viewer-container">
+
+<iframe [src]="safeUrl" width="100%" height="100%" frameborder="0" *ngIf="isModal"></iframe>
+
+
+<div class="pdf-viewer-container" *ngIf="!isModal">
     <div *ngIf="loadingPdf"
         style="width: 100%; float: right; text-align: center; margin-bottom: 17px; padding-top: 12px;">
         <img src="/assets/site-layout/images/logos/logo_animado.gif" alt="">

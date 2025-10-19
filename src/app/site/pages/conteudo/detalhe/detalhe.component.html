@@ -1,4 +1,4 @@
-<div class="conteudo_actions">
+<div class="conteudo_actions" [ngClass]="{'conteudo_actions-modal': isModal}"  *ngIf="!isModal">
     <div class="menu-icone-document" id="print-pdf" (click)="voltar()">
         <div class="icon-button">
             <i class="fa fa-reply" aria-hidden="true"></i>
@@ -19,8 +19,8 @@
     </div>
 </div>
 
-<div class="container-fluid py-5 conteudo-inicial">
-    <div class="container py-5" style="margin-top: 90px;">
+<div class="container-fluid py-5 conteudo-inicial" [ngClass]="{'conteudo-inicial-modal': isModal}">
+    <div class="container py-5" [ngClass]="{'conteudo-inicial-container': !isModal, 'conteudo-inicial-container-modal': isModal}">
         <div action="?" class="" *ngIf="busca_permitida">
             <div class="search">
                <input matInput type="search" class="searchTerm" placeholder="Pesquise aqui..."  [(ngModel)]="textoBusca"  (search)="buscar()">

@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { interval } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { HeaderService } from '../../services/header.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -57,6 +58,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   usuarioLogado = null;
   public cumprimento: string = 'Bom dia';
   public environment = environment;
+  showHeader: boolean = true;
 
   constructor(
     private renderer: Renderer2,
@@ -64,7 +66,7 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     private authService: AuthService,
     private elementRef: ElementRef<HTMLElement>,
-    private router: Router
+    private router: Router, private headerService: HeaderService
   ) {
     this.loading = true;
     this.usuarioLogado = authService.getUser();
@@ -83,8 +85,6 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
     return 'Boa noite'
   }
 
-  
-
   abrirRouteInNovaAba(routePath: string, params = '') {
     const url = this.router.serializeUrl(
       this.router.createUrlTree([routePath])
@@ -93,7 +93,9 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
+    this.headerService.showHeader$.subscribe(show => {
+      this.showHeader = show;
+    });
   }
 
   ngAfterViewInit() {
@@ -109,13 +111,13 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
             scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/owl.carousel.min.js");
             scriptElement.onload = () => {
               scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/jquery.dlmenu.js");
-                scriptElement.onload = () => {
+              scriptElement.onload = () => {
                 scriptElement = this.loadJsScript(this.renderer, "/assets/site-layout/assets/js/main.js");
                 scriptElement.onload = () => {
                   this.loading = false;
                   this.changeDetectorRef.detectChanges();
                 }
-                }
+              }
             }
           }
         }

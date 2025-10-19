@@ -67,6 +67,20 @@ export class NavegacaoService {
     });
   }
 
+  abrirModalByUrl(url) {
+    const dialogRef = this.dialog.open(LeitorComponent, {
+      maxWidth: '90vw',
+      maxHeight: '90vh',
+      height: '90%',
+      width: '90%',
+      data: {
+        tipoConteudo: 'load',
+        url: url
+      },
+    });
+  }
+
+
   abrirPdf(pdf_url) {
     // const dialogSpinner = this.dialog.open(SpinnerComponent, {
 
