@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "skipLibCheck": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -23,8 +24,10 @@
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
+      "es2015.iterable",
       "dom",
-      "ES2015", "dom.iterable"
+      "ES2015", "dom.iterable",
+      "es2015.collection", "esnext"
     ],
   },
   "angularCompilerOptions": {

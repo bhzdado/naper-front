@@ -22,7 +22,7 @@
 }
 
 
-.submenuItem{
+.submenuItem {
   display: block;
   color: #2A3A54;
   font-size: 14px;
@@ -37,7 +37,7 @@
 
 .col-sm-6 {
   flex: 0 0 auto;
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .py-3 {
@@ -55,27 +55,34 @@
 .dropdown-menu a .d-flex {
   transition: all 0.5s;
 }
+
 .dropdown-menu .col-sm-6:nth-child(1) a:mouseover .d-flex {
   background-color: var(--bs-warning-bg-subtle);
 }
+
 .dropdown-menu .col-sm-6:nth-child(2) a:mouseover .d-flex {
   background-color: var(--bs-danger-bg-subtle);
 }
+
 .dropdown-menu .col-sm-6:nth-child(3) a:mouseover .d-flex {
   background-color: var(--bs-success-bg-subtle);
 }
+
 .dropdown-menu .col-sm-6:nth-child(4) a:mouseover .d-flex {
   background-color: var(--bs-secondary-bg-subtle);
 }
+
 .dropdown-menu .col-sm-6:nth-child(5) a:mouseover .d-flex {
   background-color: var(--bs-tertiary-bg);
 }
+
 .dropdown-menu .col-sm-6:nth-child(6) a:mouseover .d-flex {
   background-color: var(--bs-info-bg-subtle);
 }
+
 .nav-link {
   padding: 0px 30px 0px 10px !important;
-  color: #2A3A54;
+  color: #2A3A54!important;
   font-size: 20px;
   font-weight: 500;
   font: 600 0.875rem / 1.37 "Inter", sans-serif;
@@ -86,14 +93,15 @@
 }
 
 .nav-link:hover {
-  color: #A9C92F!important;
+  color: #A9C92F !important;
 }
 
 @media only screen and (min-width: 992px) {
- 
+
   .dropdown:mouseover .dropdown-menu {
     display: flex;
   }
+
   .dropdown-menu.show {
     display: flex;
   }
@@ -101,7 +109,7 @@
 
 .col-sm-6 {
   flex: 0 0 auto;
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .py-3 {
@@ -113,10 +121,11 @@ nav {
   text-align: left;
 }
 
-.row .mega-links li{
+.row .mega-links li {
   padding: 8px 15px;
 }
-.row .mega-links li a{
+
+.row .mega-links li a {
   padding: 0px;
 }
 
@@ -385,6 +394,7 @@ $open: 'Open Sans', sans-serif;
   .foto-rmld {
     display: flex;
   }
+
   .conteudo-inicial {
     padding-top: 258px !important;
   }
@@ -737,9 +747,25 @@ $open: 'Open Sans', sans-serif;
   right: 14px !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 700px) {
   .menu-superior {
     display: none !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1200px) {
+  .menu-superior {
+    color: #ff0000 !important;
+  }
+
+  .topbar-top {
+    float: left !important;
+    width: 100%;
+  }
+
+  .menu-superior-item {
+    color: #2A3A55 !important;
+    font-weight: bold !important;
   }
 }
 
@@ -1533,10 +1559,10 @@ li>a:focus {
 
 @media (max-width: 1200px) {
   .navbar-expand-lg {
-      display:none!important;
+    display: none !important;
   }
 }
 
 .submenuItem:hover {
-     color: #A9C92F;
+  color: #A9C92F;
 }

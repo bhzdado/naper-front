@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/dialog-modal.component';
+import { AutenticarComponent } from 'src/app/site/shared/modal/autenticar/autenticar.component';
 // User interface
 export class User {
   name!: String;
@@ -24,7 +25,7 @@ export class AuthService {
   public reiniciarToken: boolean = false;
   private _dataInicial: number = new Date().getTime();
 
-  constructor(private http: HttpClient, private token: TokenService, private router: Router, private dialog: MatDialog) { }
+  constructor(private http: HttpClient, public token: TokenService, private router: Router, private dialog: MatDialog) { }
   // User registration
   register(user: User): Observable<any> {
     return this.http.post(environment.urlApi + 'auth/register', user);
@@ -43,13 +44,13 @@ export class AuthService {
   }
 
   getUser(): any {
-    if(!localStorage.getItem('usuario')){
+    if (!localStorage.getItem('usuario')) {
       return null;
     }
 
-    if(localStorage.getItem('usuario')){
+    if (localStorage.getItem('usuario')) {
       let usuario = localStorage.getItem('usuario') ?? "";
-      if(usuario){
+      if (usuario) {
         return JSON.parse(atob(usuario));
       }
     }
@@ -62,41 +63,50 @@ export class AuthService {
   }
 
   refresh(): any {
-    return this.http.post<any>(environment.urlApi + 'auth/refresh', null);
+    return this.http.post(environment.urlApi + 'auth/refresh', []).subscribe(
+      (response: any) => {
+        if (response.status == 401) {
+          this.operModalAutenticar();
+          return false;
+        } else {
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('api_token');
+          this.token.handleData(response.authorization.access_token);
+          localStorage.setItem('api_token', response.authorization.api_token);
+          localStorage.setItem('access_token', response.authorization.access_token);
+        }
+        return response.authorization;
+      },
+      (error) => {
+        console.log('Erro ao atualizar token:', error);
+        this.operModalAutenticar();
+        return false;
+      });
   }
 
-  loadAclUser(id: number): any{
+  operModalAutenticar() {
+    const dialogRef = this.dialog.open(AutenticarComponent, {
+      width: '350px',
+    });
+    dialogRef.afterClosed().toPromise()
+      .then(result => {
+        if (result) {
+          this.router.navigate(['/auth/login']);
+        }
+        return Promise.resolve(result);
+      });
+  }
+
+  loadAclUser(id: number): any {
     return this.http.get(environment.urlApi + 'usuarios/acl/' + id);
   }
 
+  getAccessToken() {
+    return this.token.getToken();
+  }
 
   refreshToken() {
-    this.refresh().subscribe(
-      (data) => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('api_token');
-        this.token.handleData(data.authorization.access_token);
-        localStorage.setItem('api_token', data.authorization.api_token);
-      },
-      (error) => {
-        if (error.status == 401) {
-          this.stopRefreshTokenTimer();
-          // const dialogRef = this.dialog.open(DialogModalComponent, {
-          //   width: '400px',
-          //   data: {
-          //     titulo: 'ERRO',
-          //     conteudo: error.message,
-          //     tipo: "erro"
-          //   },
-          // });
-          // dialogRef.afterClosed().toPromise()
-          //   .then(result => {
-          //     //window.location.href = "auth/login";
-          //     this.router.navigate(["/auth/login"]);
-          //     return Promise.resolve(result);
-          //   });
-        }
-      });
+    return this.refresh();
   }
 
 
@@ -110,11 +120,11 @@ export class AuthService {
 
     this.iniciaTempoOciosidade();
     this.refreshTokenTimeout = setInterval(() => {
-      if (this._segundosPassados == 0 ) {
+      if (this._segundosPassados == 0) {
         this._segundosPassados++;
         this.refreshToken();
-      } else if(this._segundosPassados > this.tempoSegundos){
-          this.stopRefreshTokenTimer();
+      } else if (this._segundosPassados > this.tempoSegundos) {
+        this.stopRefreshTokenTimer();
       } else {
         this._segundosPassados++;
       }

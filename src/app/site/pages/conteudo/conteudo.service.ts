@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ConteudoService {
 
   constructor(
-    private httpClient: HttpClient, 
+    private httpClient: HttpClient,
     private dialog: MatDialog,
     private respose: ResponseService,
     private router: Router) { }
@@ -30,7 +30,9 @@ export class ConteudoService {
           callback({ status: 0 });
         }
 
-        this.respose.treatResponseError(error, callback);
+        if (error) {
+          this.respose.treatResponseError(error, callback);
+        }
         return false;
       });
   }

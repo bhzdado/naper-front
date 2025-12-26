@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogModalComponent } from '../dialog-modal/dialog-modal/dialog-modal.component';
 import { AuthStateService } from 'src/app/services/auth/auth-state.service';
@@ -20,24 +20,31 @@ export class ErrorInterceptor implements HttpInterceptor {
             let msg = '';
             if ([401].includes(err.status)) {
                 this.loaderService.setLoading(false);
+                this.router.events.subscribe(event => {
+                    if (event instanceof NavigationStart) {
+                        if (event.url.indexOf("/auth/logout") < 0 && event.url.indexOf("/auth/login") < 0) {
+                            localStorage.setItem('rota', event.url);
+                        }
+                    }
+                });
 
-                this.router.navigate(["/auth/logout"]);
-                Swal.fire({
-                    icon: "error",
-                    text: err.error.message,
-                    draggable: true,
-                    confirmButtonColor: "#A9C92F",
-                    cancelButtonColor: "#d33",
-                    //title: "Oops...",
-                    //footer: '<a href="#">Why do I have this issue?</a>'
-                }).then((result) => {
-                    this.router.navigate(["/auth/logout"]);
-                  });
+                this.router.navigate(["/auth/logout"], { queryParams: { addroute: 'true' } });
+                // Swal.fire({
+                //     icon: "error",
+                //     text: err.error.message,
+                //     draggable: true,
+                //     confirmButtonColor: "#A9C92F",
+                //     cancelButtonColor: "#d33",
+                //     //title: "Oops...",
+                //     //footer: '<a href="#">Why do I have this issue?</a>'
+                // }).then((result) => {
+                //     this.router.navigate(["/auth/logout"]);
+                //   });
 
                 return throwError(() => error);
             } else if ([403].includes(err.status)) {
-                console.log(err);
                 let mensagem = (err.error.mensagem) ? err.error.mensagem : err.error.message;
+                console.log(mensagem);
                 Swal.fire({
                     icon: "error",
                     text: mensagem,
@@ -49,7 +56,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 });
 
                 this.loaderService.setLoading(false);
-                return throwError(() => error);
+                return throwError(() => mensagem);
             } else if ([404].includes(err.status)) {
                 msg = err.error.mensagem;
             } else if ([412].includes(err.status)) {

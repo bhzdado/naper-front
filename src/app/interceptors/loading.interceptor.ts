@@ -21,7 +21,9 @@ export class RequestInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.loadingService.setLoading(true);
+    if (request.url.indexOf('modulo/conteudos') < 0) {
+      this.loadingService.setLoading(true);
+    }
 
     return next.handle(request).pipe(
       finalize(() => {

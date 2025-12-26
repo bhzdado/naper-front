@@ -1,3 +1,9 @@
+// Source - https://stackoverflow.com/a
+// Posted by Vedran, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-11-29, License - CC BY-SA 4.0
+
+
+
 :root {
     --primary-color: #F8F7FC;
     --secondary-color: #231E1E;
@@ -2361,4 +2367,50 @@ table th {
 .icon-button-rel:hover .icon {
     transform: scale(1.2) rotate(10deg);
     /* Example: grow and rotate */
+}
+
+.expansion-action-buttons {
+  padding-bottom: 20px;
+}
+
+.expansion-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expansion-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+.loading-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 9999;
+}
+
+.loading-overlay span {
+  margin-left: 10px;
+}
+
+.custom-spinner-container ::ng-deep .mat-progress-spinner circle,
+.custom-spinner-container ::ng-deep .mat-spinner circle {
+  stroke: #ff0000; /* Your desired color (e.g., red) */
+}
+
+.panel-header {
+    background-color: #959faf!important;
+    margin-bottom: 20px;
+}
+
+em {
+  /* Remove o itálico padrão da tag em, se preferir */
+  font-style: normal;
+  /* Define a cor, tamanho e margem para parecer uma dica */
+  color: #888; /* Um cinza claro */
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: block; /* Para ocupar sua própria linha, se necessário */
 }

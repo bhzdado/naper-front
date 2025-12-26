@@ -27,6 +27,7 @@ import { LeitorComponent } from 'src/app/site/shared/modal/leitor/leitor.compone
 import { MediaService } from 'src/app/services/media.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { ConsoleEventLogger } from '@generic-ui/hermes/core/infrastructure/logger/event/console.event.logger';
 
 export interface listagem {
   id: number;
@@ -51,12 +52,19 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
 
   public titulo: string = "";
   dataSource: any[] = [];
+  listagem: boolean = false;
 
   currentPage = 1;
-  totalPages = 10;
+  pageSize = 10;
+  totalItems = 0;
+  totalPages = 0;
+  goToPageNumber: number;
+  sem_registros: boolean = false;
   carregando: boolean = false;
 
   textoBusca: string = '';
+  conteudo: string = '';
+  tipo_conteudo: string = 'listagem';
 
   error: boolean = false;
   mensagem_erro: string = "";
@@ -92,7 +100,7 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
 
     this.params = this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      
+
       this.listar(1);
     });
 
@@ -100,15 +108,6 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
     // let container = document.getElementById('container');
     // let elements = this.myDivRef.nativeElement.getElementsByTagName('a');
     // console.log(elements.length);
-  }
-
-  getPages() {
-    let pages = [];
-    for (let i = 1; i <= this.totalPages; i++) {
-      pages.push(i);
-    }
-
-    return pages;
   }
 
   buscar() {
@@ -124,11 +123,65 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
       this.error = false;
 
       if (response.status == 1) {
+        this.sem_registros = false;
         if (response.dados.conteudos) {
+          let tabela = '';
+          let lista = '<table>';
+          let url = "url";
+          let ds = [];
+
+          response.dados.conteudos.forEach((element, index) => {
+            let rest = element.titulo.substr(0, 6);
+
+            if (rest != '<table') {
+              this.tipo_conteudo = 'tabela';
+              let tag_a = (element.titulo.substr(0, 2) == '<a') ? 1 : 0;
+              element.tag_a = tag_a;
+
+              if (tag_a == 1) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(element.titulo, 'text/html');
+                const elementFromParser = doc.body.firstChild as HTMLElement;
+                let href = elementFromParser.getAttribute('href');
+
+                let novotitulo = "";
+                if (href && href.indexOf('.pdf') > -1) {
+                  elementFromParser.removeAttribute('href');
+                  element.is_pdf = true;
+                  element.pdf_url = href.replace('?mdl=1', '&mdl=1');
+
+                  novotitulo = elementFromParser.outerHTML.replace("<a", "<span").replace("</a", "</span");
+                  novotitulo = novotitulo.replace('?mdl=1', '&mdl=1');
+                  //novotitulo = this.inserirTexto(elementFromParser.outerHTML, " onclick='abrirDetalhe(item)' ", 2);
+
+                } else {
+                  novotitulo = this.inserirTexto(element.titulo, " target='_blank' ", 2);
+                  novotitulo = novotitulo.replace('?mdl=1', '&mdl=1');
+                }
+                element.titulo = novotitulo;
+              }
+              ds.push(element);
+
+              //lista += "<tr><td style=''><mat-icon>add</mat-icon></td><td><a (click)='abrirDetalhe(item)'> " + element.titulo + " </a></td></tr>";
+            } else {
+              if (this.id == 1665 || this.id == 1667 || this.id == 1520 || this.id == 1610 || this.id == 1611 || this.id == 1615 || this.id == 2320) {
+                tabela += "<br>" + element.titulo + " ";
+              } else {
+                tabela += "<br><a (click)='abrirDetalhe(item)'>" + element.titulo + " </a>";
+              }
+            }
+          });
+
+          //this.conteudo = tabela + lista;
+
           this.titulo = response.dados.modulo;
-          this.dataSource = response.dados.conteudos;
-          this.currentPage = response.dados.conteudos.current_page;
-          this.totalPages = response.dados.conteudos.last_page;
+          this.dataSource = ds;
+          this.listagem = response.dados.listagem;
+
+          this.totalItems = response.totalItems;
+          this.totalPages = response.totalPages;
+          this.currentPage = response.currentPage;
+          this.goToPageNumber = this.currentPage;
         } else {
           this.abrirDetalhe(response.dados, true);
         }
@@ -142,11 +195,13 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
         //   cancelButtonColor: "#d33",
         // });
 
+        this.sem_registros = true;
         this.error = true;
         this.dataSource = [];
         this.currentPage = 1;
         this.totalPages = 0;
       }
+
       this.carregando = false;
       this.cdr.detectChanges();
     });
@@ -154,11 +209,77 @@ export class ConteudoComponent implements AfterViewInit, OnInit {
     // }
   }
 
+  inserirTexto(stringOriginal: string, textoAInserir: string, indice: number): string {
+    if (indice > 0 && indice < stringOriginal.length) {
+      // Pega a parte antes do índice especificado
+      const parte1 = stringOriginal.slice(0, indice);
+      // Pega a parte depois do índice especificado
+      const parte2 = stringOriginal.slice(indice);
+
+      // Concatena as partes com o novo texto
+      return parte1 + textoAInserir + parte2;
+    } else if (indice === 0) {
+      // Caso especial: inserir no início
+      return textoAInserir + stringOriginal;
+    } else if (indice >= stringOriginal.length) {
+      // Caso especial: inserir no final
+      return stringOriginal + textoAInserir;
+    }
+    return stringOriginal; // Retorna original se o índice for inválido
+  }
+
+  nextPage(page: number): void {
+    page++;
+    this.onPageChange(page);
+  }
+
+  previousPage(page: number): void {
+    page--;
+    this.onPageChange(page);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    if (page >= 1 && page <= this.totalPages) {
+      this.listar(page);
+    }
+  }
+
+  goToPage(): void {
+    if (this.goToPageNumber >= 1 && this.goToPageNumber <= this.totalPages) {
+      // mat-paginator uses 0-based index
+      this.currentPage = this.goToPageNumber;
+      this.listar(this.currentPage);
+    } else {
+      alert('Invalid page number');
+    }
+  }
+
+  get visiblePages(): number[] {
+    const pages: number[] = [];
+    const maxPages = 5; // Número máximo de botões de página visíveis
+    let startPage = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
+    let endPage = Math.min(this.totalPages, startPage + maxPages - 1);
+
+    if (endPage - startPage + 1 < maxPages) {
+      startPage = Math.max(1, endPage - maxPages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  abrirPdfModal(url: string) {
+    this.navegacaoService.abrirPdf(url);
+  }
+
   abrirDetalhe(item, modulo = false) {
     if (item.pdf) {
       this.navegacaoService.abrirPdf(item.pdf_url);
     } else {
-      if(modulo){
+      if (modulo) {
         window.location.href = environment.urlSite + 'conteudo/detalhe/m-' + item.id;
       } else {
         this.navegacaoService.navigateTo('conteudo/detalhe/' + item.id);

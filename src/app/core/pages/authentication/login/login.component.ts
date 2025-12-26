@@ -157,7 +157,6 @@ export default class LoginComponent implements OnInit, AfterViewInit {
         }
       },
       (error) => {
-        console.log(error);
         this.processando = false;
         this.kepceHidden = false;
         //this.loginForm.get('recaptcha').setValidators(Validators.required);
@@ -207,8 +206,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
               let rota = localStorage.getItem('rota');
               if (rota) {
                 try {
-                  this.router.navigate([rota]);
-                  localStorage.removeItem('rota');
+                  this.router.navigate([rota.split('#')[0]]);
                 } catch (e) {
                   this.router.navigate(["/"]);
                 }

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, Input, OnInit, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MenuService } from 'src/app/core/pages/menus/menu.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ResponseService } from 'src/app/services/response.service';
+import { HeaderService } from 'src/app/site/services/header.service';
 import { LoaderService } from 'src/app/site/services/loader.service';
 import { NavegacaoService } from 'src/app/site/services/navegacao.service';
 
@@ -43,11 +44,13 @@ export interface Menu {
   encapsulation: ViewEncapsulation.None
 })
 export class MenuPrincipalComponent implements OnInit, AfterViewInit {
+
   ELEMENT_DATA: Menu[] = [];
 
   dataSource = [];
   usuarioLogado = null;
   currentRoute = '';
+  showHeader: boolean = true;
 
   constructor(private loadingService: LoaderService, private router: Router,
     private dialog: MatDialog, private authService: AuthService, private activatedRoute: ActivatedRoute,
@@ -55,12 +58,16 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
     public cdr: ChangeDetectorRef,
     public navegacaoService: NavegacaoService,
     private menuService: MenuService,
-    private elRef: ElementRef
+    private elRef: ElementRef, private headerService: HeaderService
   ) {
     this.usuarioLogado = authService.getUser();
   }
 
   ngOnInit(): void {
+   this.headerService.showHeader$.subscribe(show => {
+      this.showHeader = show;
+    });
+
     this.currentRoute = this.router.url;
 
     this.loadingService.show();
@@ -110,64 +117,61 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
 
   abrirConteudoMobile(url: string) {
     this.mostra_menu();
-    console.log('ola');
-    // alert(url);
-    // if (url) {
-    //   this.navegacaoService.navigateTo(url);
-    // }
   }
 
   carregarMenus() {
     this.loadingService.show();
     this.cdr.detectChanges();
 
-    this.menuService.getTodosMenus((response) => {
-      let data = [];
+    if (this.showHeader) {
+      this.menuService.getTodosMenus((response) => {
+        let data = [];
 
-      if (response.status == 0) {
+        if (response.status == 0) {
 
-      } else {
-        response.dados.forEach((menu: any, iMenu: number) => {
-          let submenus = [];
-          if (menu.submenus) {
-            menu.submenus.forEach((submenu: any, iSubmenu: number) => {
-              let submenuItens = [];
-              if (submenu.submenuItens) {
-                submenu.submenuItens.forEach((submenuItem: any, iSubmenuItem: number) => {
-                  submenuItens.push({
-                    id: submenuItem.id,
-                    titulo: submenuItem.titulo,
-                    descricao: submenuItem.descricao,
-                    ordem: Number(iSubmenuItem) + 1,
-                    link: submenuItem.link,
-                    icone: submenuItem.icone
+        } else {
+          response.dados.forEach((menu: any, iMenu: number) => {
+            let submenus = [];
+            if (menu.submenus) {
+              menu.submenus.forEach((submenu: any, iSubmenu: number) => {
+                let submenuItens = [];
+                if (submenu.submenuItens) {
+                  submenu.submenuItens.forEach((submenuItem: any, iSubmenuItem: number) => {
+                    submenuItens.push({
+                      id: submenuItem.id,
+                      titulo: submenuItem.titulo,
+                      descricao: submenuItem.descricao,
+                      ordem: Number(iSubmenuItem) + 1,
+                      link: submenuItem.link,
+                      icone: submenuItem.icone
+                    });
                   });
+                }
+                submenus.push({
+                  id: submenu.id,
+                  titulo: submenu.titulo,
+                  ordem: Number(iSubmenu) + 1,
+                  tipo: submenu.tipo,
+                  link: submenu.link,
+                  submenuItens: submenuItens
                 });
-              }
-              submenus.push({
-                id: submenu.id,
-                titulo: submenu.titulo,
-                ordem: Number(iSubmenu) + 1,
-                tipo: submenu.tipo,
-                link: submenu.link,
-                submenuItens: submenuItens
               });
-            });
-          }
-          data.push({
-            id: menu.id,
-            titulo: menu.titulo,
-            ordem: Number(iMenu) + 1,
-            classe: menu.classe,
-            link: menu.link,
-            submenus: submenus
-          })
-        });
+            }
+            data.push({
+              id: menu.id,
+              titulo: menu.titulo,
+              ordem: Number(iMenu) + 1,
+              classe: menu.classe,
+              link: menu.link,
+              submenus: submenus
+            })
+          });
 
-        this.dataSource = data;
-        this.loadingService.hide();
-        this.cdr.detectChanges();
-      }
-    });
+          this.dataSource = data;
+          this.loadingService.hide();
+          this.cdr.detectChanges();
+        }
+      });
+    }
   }
 }

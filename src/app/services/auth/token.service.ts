@@ -11,7 +11,7 @@ export class TokenService {
   private issuer = {
     login: environment.urlApi + 'auth/login',
     register: environment.urlApi + 'auth/register',
-    refresh: environment.urlApi + 'auth/refresh',
+    refresh: environment.urlApi + 'auth/refresh123',
   };
   constructor() { }
   handleData(token: any) {

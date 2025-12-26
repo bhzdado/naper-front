@@ -65,37 +65,37 @@ export class ResponseService {
   }
 
   treatResponseError(error, callback: Function = null) {
-    
-  //   if (
-  //     error.status == HttpStatusCode.NoContent ||
-  //     error.status == HttpStatusCode.InternalServerError
-  //   ) {
-  //     const dialogRef = this.dialog.open(DialogModalComponent, {
-  //       width: '400px',
-  //       data: {
-  //         titulo: '',
-  //         conteudo: error.message,
-  //         tipo: "erro"
-  //       },
-  //     });
-  //   } else if (error.status == HttpStatusCode.Unauthorized) {
-  //     window.location.href = "?" + (new Date()).getTime();
-  //   } else {
-  //     let erro_msg = error.message ? 'Erro na comunicação com a API. Tente novamente e caso persista o erro entre em contato com o administrador.\n\n [' +
-  //       error.message +
-  //       ']' : error.mensagem;
 
-  //     const dialogRef = this.dialog.open(DialogModalComponent, {
-  //       width: '400px',
-  //       data: {
-  //         titulo: '',
-  //         conteudo: erro_msg,
-  //         tipo: "erro"
-  //       },
-  //     });
-  //   }
-  //   return throwError(error);
-  // })
+    //   if (
+    //     error.status == HttpStatusCode.NoContent ||
+    //     error.status == HttpStatusCode.InternalServerError
+    //   ) {
+    //     const dialogRef = this.dialog.open(DialogModalComponent, {
+    //       width: '400px',
+    //       data: {
+    //         titulo: '',
+    //         conteudo: error.message,
+    //         tipo: "erro"
+    //       },
+    //     });
+    //   } else if (error.status == HttpStatusCode.Unauthorized) {
+    //     window.location.href = "?" + (new Date()).getTime();
+    //   } else {
+    //     let erro_msg = error.message ? 'Erro na comunicação com a API. Tente novamente e caso persista o erro entre em contato com o administrador.\n\n [' +
+    //       error.message +
+    //       ']' : error.mensagem;
+
+    //     const dialogRef = this.dialog.open(DialogModalComponent, {
+    //       width: '400px',
+    //       data: {
+    //         titulo: '',
+    //         conteudo: erro_msg,
+    //         tipo: "erro"
+    //       },
+    //     });
+    //   }
+    //   return throwError(error);
+    // })
 
 
     if (error && error.message) {
@@ -111,14 +111,17 @@ export class ResponseService {
       const erros: Array<string> = [];
       Object.values(error.errors).forEach((value: any) => value.forEach((_: any) => erros.push(_)))
 
-      const dialogRef = this.dialog.open(DialogModalComponent, {
-        width: '400px',
-        data: {
-          titulo: '',
-          conteudo: erros.toString().replace(new RegExp(',', 'g'), '\n'),
-          tipo: "erro"
-        },
-      });
+      console.log(error);
+      if (erros.length > 0 && erros.toString() != '' && erros !== undefined) {
+        const dialogRef = this.dialog.open(DialogModalComponent, {
+          width: '400px',
+          data: {
+            titulo: '',
+            conteudo: erros.toString().replace(new RegExp(',', 'g'), '\n'),
+            tipo: "erro"
+          },
+        });
+      }
     }
 
     if (callback) {

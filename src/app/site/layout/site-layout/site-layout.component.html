@@ -1,32 +1,45 @@
 <body>
+    <div class="header-modal" *ngIf="!showHeader" >
+        <nav>
+            <a href="{{ environment.urlSite }}" style="position: relative;">
+                <p class="text-primary display-6 mb-2" style="line-height: 0;">
+                    <img src="/assets/site-layout/images/logos/logo_fundo_escuro.png" class="img-logo" style="left: 40%!important;">
+                </p>
+            </a>
+        </nav>
+    </div>
+
     <div style="min-height: 100%;">
         <!-- Navbar start -->
-        <div *ngIf="loading" class="overlay" [ngClass]="{'no-visible-conteudo': showHeader}">
+        <div *ngIf="loading" class="overlay" [ngClass]="{'no-visible-conteudo': !showHeader}">
             <img src="/assets/site-layout/images/logos/logo_animado.gif" alt="">
             <br>
             <div class="carregando-texto">Carregando...</div>
         </div>
 
-        <div class="container-fluid sticky-top px-0 contaner-fluiid-principal" [ngClass]="{'no-visible-conteudo': showHeader}">
+
+        <div class="container-fluid sticky-top px-0 contaner-fluiid-principal"
+            [ngClass]="{'no-visible-conteudo': !showHeader}">
             <div class="container-fluid bg-light menu-principal">
 
                 <div class="container px-0">
                     <nav class="navbar navbar-light navbar-expand-xl">
-                        <a href="{{ environment.urlSite }}" class="navbar-brand mt-3" style="top: -7px; position: relative;">
+                        <a href="{{ environment.urlSite }}" class="navbar-brand mt-3"
+                            style="top: -7px; position: relative;">
                             <p class="text-primary display-6 mb-2" style="line-height: 0;">
                                 <img src="/assets/site-layout/images/logos/logo_transparente.png" class="img-logo">
                             </p>
                         </a>
 
-                        <app-menu-principal></app-menu-principal>
-                        
+                        <div>
+                            <app-menu-principal></app-menu-principal>
+                        </div>
                     </nav>
                 </div>
             </div>
             <div class="container-fluid topbar bg-dark d-lg-block submenu-geral">
                 <div class="container px-0">
-                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap"
-                        style=" float: right; top: 6px; position: relative;">
+                    <div class="topbar-top d-flex justify-content-between flex-lg-wrap">
                         <div class="top-info flex-grow-0 menu-superior">
                             <a href="index.html" class="menu-superior-item">Cursos</a>
                             <a href="detail-page.html" class="menu-superior-item">Videoaulas</a>
@@ -109,9 +122,10 @@
                         <div class="top-info flex-grow-0" class="menu-superior-botao-mobile">
                             <button class="button" style=" background-color: #2A3A54; width: 100px; height: 46px;"
                                 *ngIf="!usuarioLogado">Compre<br>Agora!</button>
-                            <button class="button" style="margin-left: 4px; background-color: #2A3A54; width: 100px; height: 46px;"
+                            <button class="button"
+                                style="margin-left: 4px; background-color: #2A3A54; width: 100px; height: 46px;"
                                 *ngIf="!usuarioLogado">Teste<br>Grátis</button>
-                            <button class="button"  [routerLink]="['/auth/login']"
+                            <button class="button" [routerLink]="['/auth/login']"
                                 style="background-color: #2A3A54; float: right; position: relative; margin-left: 30px; width: 100px; height: 46px;"
                                 *ngIf="!usuarioLogado"> Área do Cliente</button>
                         </div>
@@ -141,10 +155,10 @@
             </div>
         </div>
 
-        <router-outlet ></router-outlet>
+        <router-outlet></router-outlet>
     </div>
     <!-- Copyright Start -->
-    <footer [ngClass]="{'no-visible-conteudo': showHeader}">
+    <footer [ngClass]="{'no-visible-conteudo': !showHeader}">
         <div class="container-fluid copyright bg-dark py-4">
             <div class="container">
                 <div class="row">
@@ -157,6 +171,7 @@
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         <span class="text-light"><a href="#" style="color:#ccc"><i
                                     class="fas fa-copyright text-light me-2"></i> 2025 FISCAL 3. Todos os direitos
+                                [{{showHeader}}]
                                 reservados.</a></span>
                     </div>
                 </div>
@@ -171,4 +186,7 @@
             class="fa fa-arrow-up"></i></a>
 
 -->
+                        <app-scroll-to-top></app-scroll-to-top>
+
+
 </body>

@@ -45,7 +45,6 @@ export class Interceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         request = this.getCabecalho(request);
-
         let segundosRestantes = 0;
         if (request.url.indexOf('auth/login') < 0) {
             if (!this.authService.dataUltimaTarefa) {

@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { HeaderService } from 'src/app/site/services/header.service';
+import { Item } from '@generic-ui/ngx-grid/core/structure/source/src/api/item/item';
 
 @Component({
   selector: 'app-detalhe',
@@ -25,7 +26,7 @@ import { HeaderService } from 'src/app/site/services/header.service';
   templateUrl: './detalhe.component.html',
   styleUrl: './detalhe.component.scss'
 })
-export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked {
+export class DetalheComponent implements AfterViewInit, OnInit {
   @ViewChild('titulo') myDivRef!: ElementRef;
   @Output() setConteudoModal = new EventEmitter<boolean>(false);
   @ViewChildren('.aLinkButtonOpenModal') elementosOpenModal!: QueryList<ElementRef>;
@@ -35,7 +36,7 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
   public titulo: SafeHtml = "";
   public ultima_atualizacao: string = "";
   public conteudo: SafeHtml = "";
-  params: string = '';
+  params: any[] = []
   modulo: boolean = false;
   queryValue: string = '';
   query: string = '';
@@ -43,6 +44,7 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
   busca_permitida: boolean = false;
   tipo_conteudo: string = '';
   isModal: boolean = false;
+  urlCompleta: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,14 +53,13 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
     private location: Location,
     public conteudoService: ConteudoService,
     public navegacaoService: NavegacaoService,
-    private sanitizer: DomSanitizer, private router: Router, private renderer: Renderer2, 
+    private sanitizer: DomSanitizer, private router: Router, private renderer: Renderer2,
     private elementRef: ElementRef, private headerService: HeaderService
   ) {
     this.busca_permitida = false;
   }
 
   ngOnInit() {
-
   }
 
   ngAfterViewInit() {
@@ -74,7 +75,7 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
           if (query) this.atualizaParams('q', query);
           if (queryValue) this.atualizaParams('qValue', queryValue);
 
-          this.headerService.toggleHeader(this.isModal);
+          this.headerService.toggleHeader(!this.isModal);
 
           this.cdr.detectChanges();
           // let currentPath = window.location.pathname;
@@ -93,6 +94,9 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
       );
 
     this.cdr.detectChanges();
+
+    this.urlCompleta = this.router.url;
+
     this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
         let tmp = params['id'].split('-');
@@ -104,10 +108,10 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
         } else {
           switch (this.id.toString()) {
             case 'isencao':
-              //case '53862':
               this.tipo_conteudo = 'isencao';
               this.busca_permitida = true;
               this.id = 1520;
+              this.params.push({ campo: 'cbm', valor: 1 });
               this.cdr.detectChanges();
               break;
             case '58290':
@@ -118,21 +122,21 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
           }
         }
 
-        this.getConteudo(this.id, this.params);
+        this.params.push({ campo: 'mdl', valor: this.isModal ? '1' : '0' });
+        this.getConteudo(this.id);
       }
     });
+
     this.cdr.detectChanges();
   }
 
   atualizaParams(campo, valor, renovar = false) {
     if (renovar) {
-      this.params = '';
+      this.params = [];
     }
 
-    if (this.params == '') {
-      this.params = "?" + campo + "=" + valor;
-    } else {
-      this.params += "&" + campo + "=" + valor;
+    if (this.params.findIndex((item) => item[campo] !== undefined) < 0) {
+      this.params.push({ campo: campo, valor: valor });
     }
   }
 
@@ -141,12 +145,15 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
     this.atualizaParams('q', this.textoBusca);
 
     if (this.modulo_id) {
-      this.atualizaParams('cbm', 1);
+      //this.atualizaParams('cbm', 1);
+    }
+
+    if (this.isModal) {
+      this.atualizaParams('mdl', 1);
     }
 
     let id = (this.tipo_conteudo != '') ? this.tipo_conteudo : this.modulo_id;
-    //?qValue=DIGITE&q=4911.10.10
-    this.getConteudo(id, this.params);
+    this.getConteudo(id);
   }
 
   voltar(): void {
@@ -154,16 +161,22 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
   }
 
 
-  getConteudo(id, params = '') {
+  getConteudo(id) {
     this.loadingService.setLoading(true);
 
-    this.conteudoService.getConteudo(id, params, (response) => {
+    const qs =
+      '?' +
+      Object.values(this.params)
+        .map((key, value) => `${key.campo}=${key.valor}`)
+        .join('&')
+
+    this.conteudoService.getConteudo(id, qs, (response) => {
       let conteudo = "";
 
-      this.busca_permitida = response.dados.buscador ?? 0;
       this.modulo_id = response.dados.id;
       //this.ultima_atualizacao = response.dados.ultima_atualizacao;
       if (response.dados != '') {
+        this.busca_permitida = response.dados.buscador ?? 0;
         if (!Array.isArray(response.dados)) {
           this.titulo = this.sanitizer.bypassSecurityTrustHtml(response.dados.titulo);
           conteudo = response.dados.conteudo;
@@ -174,11 +187,17 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
           });
         }
       } else {
-        this.router.navigate(['/pagina-nao-encontrada'], { skipLocationChange: true });
+        this.titulo = "";
+        conteudo = '<p>Conteúdo não encontrado.</p>';
+        //this.router.navigate(['/pagina-nao-encontrada'], { skipLocationChange: true });
       }
 
       this.conteudo = this.sanitizer.bypassSecurityTrustHtml(conteudo);
       this.tratarLinks();
+
+      this.cdr.detectChanges();
+      this.atribuirAcaoLink();
+
       this.cdr.detectChanges();
       this.loadingService.setLoading(false);
     });
@@ -195,7 +214,7 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
     }
   }
 
-  ngAfterViewChecked(): void {
+  atribuirAcaoLink(): void {
     const elementos = document.querySelectorAll('.aLinkButtonOpenModal');
 
     elementos.forEach((element: Element) => {
@@ -205,14 +224,14 @@ export class DetalheComponent implements AfterViewInit, OnInit, AfterViewChecked
       });
     });
 
-    // const button = this.elementRef.nativeElement.querySelector('.aLinkButtonOpenModal');
-    // if (button && !button.hasEventListener) { // Check if listener already attached
-    //   button.addEventListener('click', (event) => {
-    //     this.navegacaoService.abrirModalByUrl(button.getAttribute('endereco'));
-    //     this.cdr.detectChanges();
-    //   });
-    //   button.hasEventListener = true; // Mark that listener is attached
-    // }
+    const elementosAnchor = document.querySelectorAll('.GoToAnchor');
+
+    elementosAnchor.forEach((element: Element) => {
+      this.renderer.listen(element, 'click', (evento) => {
+        this.navegacaoService.goToAnchor(element.getAttribute('hrefGoToAnchor'), this.urlCompleta);
+        this.cdr.detectChanges();
+      });
+    });
   }
 
   abrirConteudo(url) {

@@ -4,8 +4,8 @@
 }
 
 .conteudo-inicial-modal {
-  padding-top: 0px !important;
-  width: 100%!important;
+  padding: 40px !important;
+  width: 100% !important;
 }
 
 .conteudo-inicial-container {
@@ -13,7 +13,8 @@
 }
 
 .conteudo-inicial-container-modal {
-  padding-top: 0px !important;
+  padding-top: 40px !important;
+  padding-bottom: 0rem !important;
 }
 
 .default-btn,
@@ -1619,7 +1620,7 @@ p#vtip #vtipArrow {
   }
 
   .titulo-superior {
-    margin-top: 0px!important;
+    margin-top: 0px !important;
   }
 
   .element-to-print {
@@ -1974,6 +1975,7 @@ strong {
   color: #2A3A54 !important;
   padding-top: 20px;
   margin: 0px;
+  font-size: 17px;
 }
 
 h2,
@@ -1985,7 +1987,7 @@ a {
 
 .titulo-superior {
   padding-bottom: 10px;
-  font-size: 1.5rem;
+  font-size: 17px !important;
   line-height: 1.8rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -2021,12 +2023,6 @@ td {
   padding: 10px 15px;
   position: relative;
   transition: all 300ms;
-}
-
-.conteudo-inicial a {
-  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1)) !important;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 
@@ -2189,4 +2185,41 @@ td {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+a {
+  color: #577fbf !important;
+  /* Cor padrão do link */
+  text-decoration: none;
+  /* Remove o sublinhado padrão */
+  transition: color 0.3s ease;
+  /* Adiciona uma transição suave (opcional) */
+  font-weight: bold !important;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #A9C92F !important;
+  /* Cor ao passar o mouse */
+  text-decoration: none;
+  /* Adiciona sublinhado ao passar o mouse */
+  transition: color 0.3s ease;
+  /* Adiciona uma transição suave (opcional) */
+  font-weight: bold !important;
+}
+
+@media (min-width: 1200px) {
+  .menu-superior-item {
+    color: antiquewhite !important;
+    font-weight: normal !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth!important;
+}
+
+:target {
+  scroll-margin-top: 400px!important;
+  background-color: gold!important;
 }

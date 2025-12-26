@@ -54,3 +54,25 @@
 ::ng-deep .icon-outside .mat-dialog-container {
  overflow: unset
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0px;
+}
+
+.pagination li a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  border: 1px solid gray;
+  color: black;  
+  margin: 0 4px;
+  border-radius: 5px;
+}
+
+.pagination li a.active {
+  background-color: #4CAF50;
+  color: white;
+}

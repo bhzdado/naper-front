@@ -15,6 +15,7 @@ import { CalculadoraComponent } from './site/pages/calculadora/calculadora/calcu
 import Error404Component from './core/default/erros/error404/error404.component';
 
 const routerOptions: ExtraOptions = {
+  anchorScrolling: 'enabled',
   scrollPositionRestoration: 'enabled',
   // outras opções aqui
 };

@@ -651,11 +651,7 @@ $open: 'Open Sans', sans-serif;
   right: 14px !important;
 }
 
-@media (max-width: 1200px) {
-  .menu-superior {
-    display: none !important;
-  }
-}
+
 
 .menu-superior {
   width: 25%;
@@ -681,9 +677,7 @@ $open: 'Open Sans', sans-serif;
 }
 
 @media screen and (max-width: 1199px) {
-  .menu-superior-botao {
-    display: none;
-  }
+  
 
   .menu-principal {
     height: 138px;
@@ -1361,4 +1355,21 @@ body {
 
 .no-visible-conteudo {
   display: none;
+}
+
+.topbar-top {
+  float: right; top: 6px; position: relative;
+}
+
+.header-modal {
+  background-color: #2A3A54;
+}
+
+html {
+  scroll-behavior: smooth!important;
+}
+ 
+:target {
+  scroll-margin-top: 15.8em!important;
+  background-color: gold!important;
 }

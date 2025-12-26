@@ -43,6 +43,8 @@ File: style.css
 @import url('scss/fonts/berry/berry-icons.css'); /** custom font icons - berry **/
 @import 'scss/fonts/tabler-icons.min.css';
 
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

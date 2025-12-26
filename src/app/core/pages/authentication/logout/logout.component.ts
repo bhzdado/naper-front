@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -12,11 +12,21 @@ export class LogoutComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
+    private activatedRoute: ActivatedRoute,
   ) {
-    //localStorage.removeItem('rota');
+    let manterRota = false;
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        manterRota = params['addroute'] === 'true';
+      }
+    )
+
+    if(!manterRota  ){
+      localStorage.removeItem('rota');
+    }
+
     this.authService.stopRefreshTokenTimer();
     localStorage.removeItem('usuario');
-    localStorage.removeItem('rota');
     localStorage.removeItem('usuarioAcl');
     localStorage.removeItem('access_token');
     localStorage.removeItem('api_token');

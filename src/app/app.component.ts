@@ -27,9 +27,6 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationStart) {
         if (event.url.indexOf("/auth/logout") < 0 && event.url.indexOf("/auth/login") < 0) {
           localStorage.setItem('rota', event.url);
-          // setTimeout(() => {
-          // this.authService.refreshToken();
-          // }, 2000);
         }
       }
 

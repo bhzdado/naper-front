@@ -117,6 +117,7 @@
     letter-spacing: 1px;
     display: flex;
     align-items: center;
+    padding-top: 10px;
 }
 
 .topbar .top-link {

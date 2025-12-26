@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderService {
   // Inicializa com um valor padrão (cabeçalho visível)
-  private showHeaderSource = new BehaviorSubject<boolean>(true);
+  private showHeaderSource = new BehaviorSubject<boolean>(false);
   
   // Cria um Observable público para que outros componentes possam se inscrever
   showHeader$ = this.showHeaderSource.asObservable();

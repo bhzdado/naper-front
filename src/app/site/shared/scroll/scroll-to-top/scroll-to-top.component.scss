@@ -1,0 +1,30 @@
+.scroll-to-top {
+  position: fixed; /* Posição fixa na tela */
+  bottom: 20px; /* Distância da parte inferior */
+  right: 20px; /* Distância da parte direita */
+  z-index: 9999999999999; /* Garante que o botão fique acima de outros elementos */
+  cursor: pointer;
+  
+  /* Estilo do botão */
+  background-color: #2A3A54;
+  color: white;
+  border-radius: 50%;
+  padding: 15px 20px;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  
+  /* Efeito de opacidade para a transição */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-to-top.show-scrollTop {
+  opacity: 1;
+}
+
+.scroll-to-top:hover {
+  background-color: #2A3A54;
+}
+
+.arrow-up {
+  font-size: 20px;
+}

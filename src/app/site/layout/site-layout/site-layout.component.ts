@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule, DOCUMENT, NgFor } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Inject, inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Inject, inject, Input, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import * as $ from 'jquery';
 import { LoaderService } from '../../services/loader.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -53,7 +53,7 @@ import { HeaderService } from '../../services/header.service';
   ],
 })
 export class SiteLayoutComponent implements OnInit, AfterViewInit {
-  loading: boolean;
+ loading: boolean;
   isMenuOpen = false;
   usuarioLogado = null;
   public cumprimento: string = 'Bom dia';
@@ -96,6 +96,9 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
     this.headerService.showHeader$.subscribe(show => {
       this.showHeader = show;
     });
+
+    this.headerService.toggleHeader(true);
+    this.changeDetectorRef.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -123,8 +126,6 @@ export class SiteLayoutComponent implements OnInit, AfterViewInit {
         }
       }
     }
-
-
   }
 
   navegacaoService(url) {

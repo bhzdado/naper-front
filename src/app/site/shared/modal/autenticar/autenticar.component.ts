@@ -153,7 +153,7 @@ export class AutenticarComponent implements OnInit {
                 let rota = localStorage.getItem('rota');
                 
                 if (rota) {
-                  window.location.href = environment.urlSite + rota;
+                  window.location.href = environment.urlSite + rota.split('#')[0];
                   // try {
                   //   this.router.navigate([rota]);
                   //   localStorage.removeItem('rota');

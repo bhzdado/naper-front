@@ -48,6 +48,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { TokenInterceptor } from './shared/interceptors/tokenInterceptor';
+import { ScrollToTopComponent } from './site/shared/scroll/scroll-to-top/scroll-to-top.component';
 
 const materialModules = [
   MatButtonModule,
@@ -65,6 +67,7 @@ const materialModules = [
 @NgModule({
   declarations: [
     AppComponent,
+    ScrollToTopComponent,
     AdminComponent,
     AreaAlunoLayoutComponent,
     SiteLayoutComponent,
@@ -112,8 +115,9 @@ const materialModules = [
   ],
   providers: [
     NavigationItem, provideNgxMask(), 
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     //{ provide: LocationStrategy,  useClass: HashLocationStrategy},
     provideAnimationsAsync(),
   ],
