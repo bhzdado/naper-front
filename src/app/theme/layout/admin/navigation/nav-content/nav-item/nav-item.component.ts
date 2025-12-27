@@ -3,11 +3,14 @@ import { Component, Input } from '@angular/core';
 
 // Project import
 import { NavigationItem } from '../../navigation';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav-item',
   templateUrl: './nav-item.component.html',
-  styleUrls: ['./nav-item.component.scss']
+  styleUrls: ['./nav-item.component.scss'],
+  imports: [CommonModule, RouterModule]
 })
 export class NavItemComponent {
   // public props

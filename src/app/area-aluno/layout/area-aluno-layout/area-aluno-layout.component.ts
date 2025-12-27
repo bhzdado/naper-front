@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-area-aluno-layout',
+  standalone: false,
   templateUrl: './area-aluno-layout.component.html',
   styleUrl: './area-aluno-layout.component.scss'
 })

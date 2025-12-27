@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
+  standalone: false,
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })

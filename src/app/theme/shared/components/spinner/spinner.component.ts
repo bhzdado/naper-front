@@ -1,7 +1,7 @@
 // Angular import
 import { Component, Input, OnDestroy, Inject, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { NgxSpinnerService } from "ngx-spinner";
 
 // project import
@@ -12,7 +12,8 @@ import { LoaderService } from 'src/app/services/loader.service';
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss', './spinkit-css/sk-line-material.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule]
 })
 export class SpinnerComponent {
   public texto: string = '';

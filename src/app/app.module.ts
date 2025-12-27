@@ -20,10 +20,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModalComponent } from './shared/dialog-modal/dialog-modal/dialog-modal.component';
-import {MatDividerModule} from '@angular/material/divider';
-import { MatTableModule } from '@angular/material/table'  
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table'
 import { InterceptorModule } from './shared/interceptors/interceptor.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -47,9 +47,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './shared/interceptors/tokenInterceptor';
 import { ScrollToTopComponent } from './site/shared/scroll/scroll-to-top/scroll-to-top.component';
+import { CardComponent } from './theme/shared/components/card/card.component';
+import { BreadcrumbsComponent } from './theme/shared/components/breadcrumbs/breadcrumbs.component';
+import { NgbCollapseModule, NgbDropdownModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { GridComponent } from './shared/grid/grid/grid.component';
 
 const materialModules = [
   MatButtonModule,
@@ -74,37 +79,59 @@ const materialModules = [
     SpinnerComponent,
     NavBarComponent,
     NavLeftComponent,
-    NavRightComponent,
-    NavigationComponent,
-    NavLogoComponent,
-    NavContentComponent,
-    NavGroupComponent,
-    NavItemComponent,
-    NavCollapseComponent,
-    ConfigurationComponent,
-    DialogModalComponent,
-    MenuPrincipalComponent
+    NavRightComponent
   ],
-  exports: [FlexLayoutModule, MatListModule, ],
+  exports: [FlexLayoutModule, MatListModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CardComponent,
+    BreadcrumbsComponent,
+    SpinnerComponent,
+    NgbModule,
+    NgbDropdownModule,
+    NgbNavModule,
+    NgbCollapseModule,
+    NgScrollbarModule,
+    GridComponent
+  ],
   imports: [
-    CommonModule,  
-    BrowserModule, 
-    RouterModule, 
-    AppRoutingModule, 
-    SharedModule, 
-    BrowserAnimationsModule, 
-    HttpClientModule, 
-    InterceptorModule, 
-    materialModules,
+    CommonModule,
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CardComponent,
+    BreadcrumbsComponent,
+    NgbDropdownModule,
+    NgbNavModule,
+    NgbModule,
+    NgbCollapseModule,
+    NgScrollbarModule,
+    GridComponent,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    InterceptorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     NgxMaskDirective, NgxMaskPipe,
-    CountdownModule, 
+    CountdownModule,
     CarouselModule,
     FormsModule,
-    RouterOutlet, 
-    RouterLink, 
+    RouterOutlet,
+    RouterLink,
     RouterLinkActive,
-    FlexLayoutModule, MatListModule, 
-    MatButtonModule, MatMenuModule, MatIconModule, 
+    FlexLayoutModule, MatListModule,
+    MatButtonModule, MatMenuModule, MatIconModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',
@@ -114,7 +141,7 @@ const materialModules = [
     SweetAlert2Module.forRoot()
   ],
   providers: [
-    NavigationItem, provideNgxMask(), 
+    NavigationItem, provideNgxMask(),
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
@@ -124,4 +151,4 @@ const materialModules = [
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

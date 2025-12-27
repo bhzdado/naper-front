@@ -30,7 +30,7 @@ import { DialogSelectComponent } from 'src/app/shared/dialog-modal/dialog-select
 @Component({
   selector: 'app-add-provas',
   standalone: true,
-  imports: [AngularMaterialModule, FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, SharedModule, CdkDropListGroup, CdkDropList, CdkDrag],
+  imports: [AngularMaterialModule, FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, SharedModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [provideNativeDateAdapter()],
   changeDetection: ChangeDetectionStrategy.OnPush,

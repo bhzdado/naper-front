@@ -22,10 +22,6 @@ import { evaluate, number, parse } from 'mathjs';
 import Swal from 'sweetalert2';
 import { DateTime } from 'luxon';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
-import { ConsoleCommandLogger } from '@generic-ui/hermes/core/infrastructure/logger/command/console.command.logger';
-import { provideLuxonDateAdapter } from '@angular/material-luxon-adapter';
-import { mmYYYYValidator } from 'src/app/shared/date.validator';
-import { MatNativeDateModule } from '@angular/material/core';
 import { DatepickerMonthYearComponent } from './datepicker-month-year/datepicker-month-year.component';
 import { DatepickerFullDateComponent } from './datepicker-full-date/datepicker-full-date.component';
 import { NgxCurrencyDirective, NgxCurrencyInputMode, provideEnvironmentNgxCurrency } from "ngx-currency";
@@ -78,7 +74,7 @@ const Estados = [
 @Component({
   selector: 'app-calculadora',
   standalone: true,
-  imports: [SafeHtmlPipe, CommonModule, SharedModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule, ReactiveFormsModule, NgxMaskDirective,
+  imports: [CommonModule, SharedModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule, ReactiveFormsModule, NgxMaskDirective,
     MatTableModule,
     MatSortModule,
     MatTableResponsiveModule,

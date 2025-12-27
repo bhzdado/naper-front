@@ -19,7 +19,6 @@ import Utils from 'src/app/shared/utils';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
 import { MatRadioChange } from '@angular/material/radio';
-import { SafeHtmlPipe } from 'src/app/shared/pipes/SafeHtml.pipe';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -34,7 +33,7 @@ export interface QuestaoAtual {
   selector: 'app-avaliacao',
   standalone: true,
   imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule, AngularMaterialModule, ReactiveFormsModule,
-    MatFormFieldModule, MatInputModule, CommonModule, CommonModule, MatSlideToggleModule, RouterLink, MatStepperModule, SafeHtmlPipe],
+    MatFormFieldModule, MatInputModule, CommonModule, CommonModule, MatSlideToggleModule, RouterLink, MatStepperModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './avaliacao.component.html',
   styleUrl: './avaliacao.component.scss',

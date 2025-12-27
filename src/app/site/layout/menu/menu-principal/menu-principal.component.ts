@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, Input, OnInit, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MenuService } from 'src/app/core/pages/menus/menu.service';
@@ -41,6 +43,7 @@ export interface Menu {
   selector: 'app-menu-principal',
   templateUrl: './menu-principal.component.html',
   styleUrl: './menu-principal.component.scss',
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatDialogModule, RouterModule],
   encapsulation: ViewEncapsulation.None
 })
 export class MenuPrincipalComponent implements OnInit, AfterViewInit {

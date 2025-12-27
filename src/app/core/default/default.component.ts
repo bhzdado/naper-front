@@ -12,7 +12,7 @@ import { DefaultService } from './default.service';
 @Component({
   selector: 'app-default',
   standalone: true,
-  imports: [CommonModule, SharedModule, BajajChartComponent, BarChartComponent, ChartDataMonthComponent],
+  imports: [CommonModule, SharedModule],
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.scss']
 })

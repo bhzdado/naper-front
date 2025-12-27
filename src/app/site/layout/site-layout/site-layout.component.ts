@@ -14,6 +14,7 @@ import { HeaderService } from '../../services/header.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './site-layout.component.html',
   styleUrl: './site-layout.component.scss',
+  standalone: false,
   animations: [
     trigger('hamburguerX', [
       /*

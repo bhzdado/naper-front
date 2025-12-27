@@ -27,7 +27,6 @@ import { LeitorComponent } from 'src/app/site/shared/modal/leitor/leitor.compone
 import { MediaService } from 'src/app/services/media.service';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
-import { ConsoleEventLogger } from '@generic-ui/hermes/core/infrastructure/logger/event/console.event.logger';
 
 export interface listagem {
   id: number;

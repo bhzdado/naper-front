@@ -9,6 +9,7 @@ import { DialogModalComponent } from 'src/app/shared/dialog-modal/dialog-modal/d
 
 @Component({
   selector: 'app-nav-right',
+  standalone: false,
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss'],
 })

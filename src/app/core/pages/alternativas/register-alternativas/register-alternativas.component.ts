@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-register-alternativas',
   standalone: true,
-  imports: [AngularMaterialModule, FormsModule, SharedModule, NgxMaskDirective, NgxMaskPipe, CKEditorModule],
+  imports: [AngularMaterialModule, FormsModule, SharedModule, CKEditorModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './register-alternativas.component.html',
   styleUrl: './register-alternativas.component.scss'

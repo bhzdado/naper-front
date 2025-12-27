@@ -36,7 +36,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   selector: 'app-add-usuarios',
   standalone: true,
   imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule,
-    NgxMaskDirective, NgxMaskPipe, AngularMaterialModule],
+    NgxMaskDirective, AngularMaterialModule],
   providers: [provideNgxMask()],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './add-usuarios.component.html',

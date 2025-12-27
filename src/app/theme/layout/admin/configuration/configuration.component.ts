@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { BerryConfig } from 'src/app/app-config';
 
 @Component({
   selector: 'app-configuration',
   templateUrl: './configuration.component.html',
-  styleUrls: ['./configuration.component.scss']
+  styleUrls: ['./configuration.component.scss'],
+  imports: [CommonModule],
 })
 export class ConfigurationComponent implements OnInit {
   // public method

@@ -3,9 +3,11 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { timer } from 'rxjs';
 import { AuthService } from './services/auth/auth.service';
 import { TokenService } from './services/auth/token.service';
+import { SpinnerComponent } from './site/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

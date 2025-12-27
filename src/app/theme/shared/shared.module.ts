@@ -27,7 +27,8 @@ import { NgbDropdownModule, NgbNavModule, NgbModule, NgbCollapseModule } from '@
     NgbModule,
     NgbCollapseModule,
     NgScrollbarModule,
-    GridComponent
+    GridComponent,
+    SpinnerComponent
   ],
   exports: [
     CommonModule,
@@ -43,6 +44,6 @@ import { NgbDropdownModule, NgbNavModule, NgbModule, NgbCollapseModule } from '@
     NgScrollbarModule,
     GridComponent
   ],
-  declarations: [SpinnerComponent]
+  declarations: []
 })
 export class SharedModule {}

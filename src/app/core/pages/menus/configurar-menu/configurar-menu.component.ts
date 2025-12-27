@@ -40,7 +40,7 @@ export interface SubmenuItem {
   selector: 'app-configurar-menu',
   standalone: true,
   providers: [provideNgxMask()],
-  imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule, AngularMaterialModule, AsyncPipe,
+  imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule, AngularMaterialModule,
     AutocompleteLibModule, MatDatepickerModule, ReactiveFormsModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule, DragDropModule,
     CdkDrag, CdkDropList, MatTabsModule],
   templateUrl: './configurar-menu.component.html',

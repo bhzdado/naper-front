@@ -14,12 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { HeaderService } from 'src/app/site/services/header.service';
-import { Item } from '@generic-ui/ngx-grid/core/structure/source/src/api/item/item';
 
 @Component({
   selector: 'app-detalhe',
   standalone: true,
-  imports: [SafeHtmlPipe, CommonModule, SharedModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule],
+  imports: [CommonModule, SharedModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, AngularMaterialModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

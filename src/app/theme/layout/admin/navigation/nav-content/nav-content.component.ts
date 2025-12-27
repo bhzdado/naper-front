@@ -5,11 +5,16 @@ import { Location, LocationStrategy } from '@angular/common';
 // project import
 import { NavigationItem } from '../navigation';
 import { environment } from 'src/environments/environment';
+import { NavItemComponent } from './nav-item/nav-item.component';
+import { NavGroupComponent } from './nav-group/nav-group.component';
+import { NgScrollbar } from 'ngx-scrollbar';
+import { NavCollapseComponent } from './nav-collapse/nav-collapse.component';
 
 @Component({
-  selector: 'app-nav-content',
+  selector: 'app-nav-content', 
   templateUrl: './nav-content.component.html',
-  styleUrls: ['./nav-content.component.scss']
+  styleUrls: ['./nav-content.component.scss'],
+  imports: [NavItemComponent, NavGroupComponent, NgScrollbar, NavCollapseComponent]
 })
 export class NavContentComponent implements OnInit {
   // public props

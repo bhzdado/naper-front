@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, HostListener, inject } from '@angular/cor
 
 @Component({
   selector: 'app-scroll-to-top',
+  standalone: false,
   templateUrl: './scroll-to-top.component.html',
   styleUrl: './scroll-to-top.component.scss'
 })

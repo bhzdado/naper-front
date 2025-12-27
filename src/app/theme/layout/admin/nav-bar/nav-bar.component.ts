@@ -4,6 +4,7 @@ import { BerryConfig } from '../../../../app-config';
 
 @Component({
   selector: 'app-nav-bar',
+  standalone: false,
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })

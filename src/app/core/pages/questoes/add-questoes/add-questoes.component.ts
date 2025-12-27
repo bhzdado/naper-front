@@ -30,7 +30,7 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-add-questoes',
   standalone: true,
-  imports: [AngularMaterialModule, FormsModule, SharedModule, NgxMaskDirective, NgxMaskPipe, CKEditorModule],
+  imports: [AngularMaterialModule, FormsModule, SharedModule, CKEditorModule],
   providers: [provideNgxMask()],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './add-questoes.component.html',

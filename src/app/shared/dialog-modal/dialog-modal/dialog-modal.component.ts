@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogRef,
   MatDialogModule,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 export interface ModalData {
   titulo: string,
   conteudo: string,
@@ -20,6 +22,7 @@ export interface ModalData {
 
 @Component({
   selector: 'app-dialog-modal',
+  imports: [MatIconModule, MatButtonModule, MatDialogModule],
   templateUrl: './dialog-modal.component.html',
   styleUrls: ['./dialog-modal.component.scss']
 })

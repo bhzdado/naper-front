@@ -30,7 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-add-turmas',
   standalone: true,
-  imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule, AngularMaterialModule, AsyncPipe, 
+  imports: [MatButtonModule, FormsModule, MatProgressBarModule, MatMenuModule, SharedModule, AngularMaterialModule, 
     AutocompleteLibModule, MatDatepickerModule, ReactiveFormsModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule],
   providers: [provideNgxMask()],
   templateUrl: './add-turmas.component.html',
